@@ -13,6 +13,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'benmills/vimux'
+Plugin 'Valloric/YouCompleteMe'
 
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
@@ -68,6 +69,7 @@ set number
 set whichwrap+=<,>,h,l,[,]
 set vb t_vb=
 set clipboard=unnamed
+set backspace=2
 " set expandtab ts=4 sw=4 ai
 
 set mouse=a
@@ -77,6 +79,8 @@ set ts=4
 set autoindent
 set smartindent
 filetype indent on
+
+set pumheight=10
 
 syntax on
 colorscheme moriarty

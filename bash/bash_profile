@@ -59,3 +59,9 @@ fi
 
 alias ls="ls -G"
 
+vimBrew=/usr/local/Cellar/vim/8.0.0596/bin/vim
+alias vim7="/usr/bin/vim"
+alias vim8="$vimBrew"
+# function vim() { tmux new-session -d '/usr/local/Cellar/vim/8.0.0596/bin/vim $@';tmux a ;}
+
+function vim() { tmux new-session -d "$vimBrew $@";tmux a ;}
