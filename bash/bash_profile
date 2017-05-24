@@ -3,6 +3,8 @@
 # The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO;killall Finder"
 
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES;killall Finder"
@@ -26,9 +28,40 @@ alias killIcons2="cd /Users/cooperanderson/Google\ Drive/GitHub;find . -name 'Ic
 alias killBluetooth="sudo rm -R /Library/Preferences/com.apple.bluetooth.plist"
 
 # alias gitFiles="cd /Users/cooperanderson/Google\ Drive/GitHub"
-alias gh="cd ~/Github"
+
+fd() {
+	local dir
+	dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
+	cd "$dir"
+}
+
+gh() {
+	cd ~/GitHub;
+	fd;
+}
+
+# alias gh="cd ~/Github"
 
 alias ipython="ipython --no-banner"
+
+alias cc-emu="lua /Users/cooperanderson/Library/Application\ Support/cc-emu/cli.lua /Users/cooperanderson/Library/Application\ Support/cc-emu/computers/0"
+
+alias colortest='for i in {0..255} ; do
+    printf "\x1b[38;5;${i}m%3d " "${i}"
+    if (( $i == 15 )) || (( $i > 15 )) && (( ($i-15) % 12 == 0 )); then
+        echo;
+    fi
+done'
+
+# alias vim="/usr/local/Cellar/vim/8.0.0600/bin/vim"
+# alias vim7="/usr/bin/vim"
+vim() {
+	$(brew --prefix vim)/bin/vim $@; # /usr/local/Cellar/vim/8.0.0600/bin/vim $@;
+}
+
+vim7() {
+	/usr/bin/vim $@;
+}
 
 # EMOJI_LIST=(🐙 🎹 😀 👾 👌 🎩 🐽 🚀 ⌚️ 🕹 💻);
 # RANDOM_EMOJI=${EMOJI_LIST[$((RANDOM%${#EMOJI_LIST[@]}))]};
@@ -59,9 +92,9 @@ fi
 
 alias ls="ls -G"
 
-vimBrew=/usr/local/Cellar/vim/8.0.0596/bin/vim
-alias vim7="/usr/bin/vim"
-alias vim8="$vimBrew"
+# vimBrew=/usr/local/Cellar/vim/8.0.0596/bin/vim
+# alias vim7="/usr/bin/vim"
+# alias vim8="$vimBrew"
 # function vim() { tmux new-session -d '/usr/local/Cellar/vim/8.0.0596/bin/vim $@';tmux a ;}
 
-function vim() { tmux new-session -d "$vimBrew $@";tmux a ;}
+# function vim() { tmux new-session -d "$vimBrew $@";tmux a ;}
