@@ -5,6 +5,11 @@ PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+[ -z "$TMUX" ] && export TERM="xterm-256color"
+# export TERM=screen-256color
+# alias tmux='tmux -2'  # for 256color
+# alias tmux='tmux -u'  # to get rid of unicode rendering problem
+
 alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO;killall Finder"
 
 alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES;killall Finder"
@@ -89,6 +94,8 @@ fi
 # eval $(/usr/libexec/path_helper -s)
 
 . /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+
+defaults write org.python.python ApplePersistenceIgnoreState NO
 
 alias ls="ls -G"
 

@@ -13,22 +13,28 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'benmills/vimux'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-scripts/HJKL'
+Plugin 'chrisbra/Colorizer'
+
+" Syntax Plugins
+Plugin 'vim-scripts/brainfuck-syntax'
 
 " Colorschemes
 Plugin 'aliou/moriarty.vim'
-Plugin 'nightsense/vim-crunchbang'
-Plugin 'NewProggie/NewProggie-Color-Scheme'
-Plugin 'carakan/new-railscasts-theme'
 Plugin 'tomasiser/vim-code-dark'
-Plugin 'danilo-augusto/vim-afterglow'
 Plugin 'Blevs/vim-dzo'
 Plugin 'chriskempson/base16-vim'
-Plugin 'davidklsn/vim-sialoquent'
 Plugin 'dikiaap/minimalist'
-Plugin 'kamwitsta/mythos'
 Plugin 'josuegaleas/jay'
 Plugin 'dracula/vim'
+Plugin 'sjl/badwolf'
+Plugin 'morhetz/gruvbox'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'jacoborus/tender.vim'
+Plugin 'zeis/vim-kolor'
+
 
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
@@ -38,9 +44,15 @@ let g:Powerline_symbols = 'fancy'
 
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
-set term=xterm-256color
-set t_Co=256
-set t_ut=
+if 1
+	if empty($TMUX)
+		set term=xterm-256color
+	else
+		set term=screen-256color
+	endif
+	set t_Co=256
+	set t_ut=
+endif
 set termencoding=utf-8
 
 if has("gui_running")
@@ -77,6 +89,10 @@ if 1
 	nmap <Backspace> h
 endif
 
+" Vimux control commands
+nnoremap <F5> :w<CR>:call VimuxOpenRunner()<CR>:call VimuxRunCommand("clear; ./" . bufname("."))<CR>:<BACKSPACE>
+nnoremap <F6> :call VimuxCloseRunner()<CR>
+
 command! -nargs=1 Silent
 \   execute 'silent !' . <q-args>
 \ | execute 'redraw!'
@@ -110,27 +126,28 @@ set whichwrap+=<,>,h,l,[,]
 set vb t_vb=
 set clipboard=unnamed
 set backspace=2
-nnoremap j gj
-nnoremap k gk
-nnoremap <down> gj
-nnoremap <up> gk
-" set expandtab ts=4 sw=4 ai
+" nnoremap j gj
+" nnoremap k gk
+" inoremap <down> gj
+" inoremap <up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
 
 set mouse=a
-
-set shiftwidth=4
-set ts=4
-set autoindent
-set smartindent
 filetype indent on
+filetype plugin on
+autocmd VimEnter * set autoindent smartindent noexpandtab tabstop=4 shiftwidth=4
+" set expandtab
+" set shiftwidth=4
+" set tabstop=4
+" set autoindent
+" set smartindent
 set selection=exclusive
 " Disable arrow keys in normal mode
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
-" Stop move cursor back when leaving insert
-" inoremap <silent> <Esc> <C-O>:stopinsert<CR>
 " Show keystrokes
 set showcmd
 
@@ -140,6 +157,9 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 
 " Remove MacVim scrollbars, if I ever decide to use MacVim
 set guioptions=
+
+" NERDCommenter add space after comment
+let g:NERDSpaceDelims = 1
 
 " Switch iTerm Cursor mode in Insert mode
 if 0 && !has('gui')
@@ -153,4 +173,5 @@ if 0 && !has('gui')
 endif
 
 syntax on
-colorscheme moriarty
+set background=dark
+colorscheme tjay
