@@ -34,6 +34,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'jacoborus/tender.vim'
 Plugin 'zeis/vim-kolor'
+Plugin 'cooper-anderson/tjay.vim'
 
 
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}

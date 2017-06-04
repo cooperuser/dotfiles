@@ -20,8 +20,6 @@ alias asar="/Users/cooperanderson/node_modules/asar/bin/asar"
 
 alias editProfile="open -a TextEdit ~/.bash_profile"
 
-alias electron="/Applications/Electron.app/Contents/MacOS/Electron"
-
 alias blockade="/Users/cooperanderson/Google\ Drive/Other/Programming/JetBrains/WebStorm/Blockade/run.sh"
 
 alias blessed="/Users/cooperanderson/Google\ Drive/Other/Programming/JetBrains/WebStorm/blessed-test/run.sh"
@@ -51,12 +49,14 @@ alias ipython="ipython --no-banner"
 
 alias cc-emu="lua /Users/cooperanderson/Library/Application\ Support/cc-emu/cli.lua /Users/cooperanderson/Library/Application\ Support/cc-emu/computers/0"
 
-alias colortest='for i in {0..255} ; do
-    printf "\x1b[38;5;${i}m%3d " "${i}"
-    if (( $i == 15 )) || (( $i > 15 )) && (( ($i-15) % 12 == 0 )); then
-        echo;
-    fi
-done'
+# alias colortest='for i in {0..255} ; do
+#     printf "\x1b[38;5;${i}m%3d " "${i}"
+#    if (( $i == 15 )) || (( $i > 15 )) && (( ($i-15) % 12 == 0 )); then
+#        echo;
+#    fi
+#done'
+
+alias selfbot="cd /Users/cooperanderson/Library/Application\ Support/SelfBot;npm start"
 
 # alias vim="/usr/local/Cellar/vim/8.0.0600/bin/vim"
 # alias vim7="/usr/bin/vim"
@@ -64,9 +64,9 @@ vim() {
 	$(brew --prefix vim)/bin/vim $@; # /usr/local/Cellar/vim/8.0.0600/bin/vim $@;
 }
 
-vim7() {
-	/usr/bin/vim $@;
-}
+# vim7() {
+# 	/usr/bin/vim $@;
+# }
 
 # EMOJI_LIST=(🐙 🎹 😀 👾 👌 🎩 🐽 🚀 ⌚️ 🕹 💻);
 # RANDOM_EMOJI=${EMOJI_LIST[$((RANDOM%${#EMOJI_LIST[@]}))]};

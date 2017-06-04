@@ -1,11 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/cooperanderson/Google Drive/Other'
-let g:netrw_dirhist_2='/Users/cooperanderson/Google Drive/Other/Programming'
-let g:netrw_dirhist_3='/Users/cooperanderson/Google Drive/Other'
-let g:netrw_dirhist_4='/Users/cooperanderson/Google Drive'
-let g:netrw_dirhist_5='/Users/cooperanderson'
-let g:netrw_dirhist_6='/Users'
-let g:netrw_dirhist_7='/Users/cooperanderson'
-let g:netrw_dirhist_8='/Users/cooperanderson/Desktop'
-let g:netrw_dirhist_9='/Users/cooperanderson'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='scp://root@192.168.2.2//home/'
+let g:netrw_dirhist_2='scp://root@192.168.2.2//usr/'
+let g:netrw_dirhist_3='scp://root@192.168.2.2//root/'
