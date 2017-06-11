@@ -1,51 +1,51 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+set rtp+=~/.fzf
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'benmills/vimux'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-scripts/HJKL'
-Plugin 'chrisbra/Colorizer'
+" Begin vim-plug with set directory
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-commentary'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'benmills/vimux'
+Plug 'Valloric/YouCompleteMe', { 'for': 'python' }
+" Plug 'scrooloose/nerdcommenter'
+Plug 'vim-scripts/HJKL'
+Plug 'chrisbra/Colorizer'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf.vim'
+Plug 'katono/rogue.vim'
+" Plug 'ScrollColors'
 
 " Syntax Plugins
-Plugin 'vim-scripts/brainfuck-syntax'
+Plug 'vim-scripts/brainfuck-syntax'
 
 " Colorschemes
-Plugin 'aliou/moriarty.vim'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'Blevs/vim-dzo'
-Plugin 'chriskempson/base16-vim'
-Plugin 'dikiaap/minimalist'
-Plugin 'josuegaleas/jay'
-Plugin 'dracula/vim'
-Plugin 'sjl/badwolf'
-Plugin 'morhetz/gruvbox'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'jacoborus/tender.vim'
-Plugin 'zeis/vim-kolor'
-Plugin 'cooper-anderson/tjay.vim'
+Plug 'aliou/moriarty.vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'Blevs/vim-dzo'
+Plug 'dikiaap/minimalist'
+Plug 'josuegaleas/jay'
+Plug 'dracula/vim'
+Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'jacoborus/tender.vim'
+Plug 'zeis/vim-kolor'
+Plug 'cooper-anderson/tjay.vim'
 
-
-" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
+" Initialize vim-plug system
+call plug#end()
 
 set guifont=Inconsolata\ for\ Powerline:h15
 let g:Powerline_symbols = 'fancy'
 
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
-if 1
+if 0
 	if empty($TMUX)
 		set term=xterm-256color
 	else
@@ -64,13 +64,9 @@ if has("gui_running")
 endif
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-" filetype plugin indent on    " required
+" !call vundle#end() " End vundle 
 
 set rtp+=/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/vim
-
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 
 " Always show statusline
 set laststatus=2
@@ -79,6 +75,8 @@ set timeoutlen=1000
 set ttimeoutlen=0
 " Allow selecting \n character
 set virtualedit=onemore
+" Keep cursor away from top and bottom edges
+set scrolloff=1
 " No moving the cursor when leaving insert mode
 autocmd InsertLeave * normal `^
 " Grady's selecting \n when pressing h to go up a line
@@ -149,6 +147,17 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^>
+set hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+noremap <silent> <F10> :NERDTreeToggle<Bar>:echo<CR>
+" Stop copy on delete
+nnoremap c "_c
+vnoremap c "_c
 " Show keystrokes
 set showcmd
 
@@ -156,11 +165,11 @@ set pumheight=10
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 
+noremap <C-t> :Files<CR>
+let g:fzf_files_options = '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+
 " Remove MacVim scrollbars, if I ever decide to use MacVim
 set guioptions=
-
-" NERDCommenter add space after comment
-let g:NERDSpaceDelims = 1
 
 " Switch iTerm Cursor mode in Insert mode
 if 0 && !has('gui')
@@ -176,3 +185,4 @@ endif
 syntax on
 set background=dark
 colorscheme tjay
+

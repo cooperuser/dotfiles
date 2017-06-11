@@ -2,8 +2,31 @@
 # Setting PATH for Python 2.7
 # The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+alias ipython="ipython -i --no-banner"
+alias bpython="bpython -iq"
+
+mini() {
+	/usr/bin/osascript -e 'tell application "System Events" to click (first button of (every window of (application process "'"$*"'")) whose role description is "minimize button")';
+}
+
+alert() {
+	osascript -e 'tell app "System Events" to display dialog "'"$*"'"'
+}
+
+notify() {
+	osascript -e 'display notification "'"$*"'" with title "Alert"'
+}
+
+app() {
+ 	open -a $*
+}
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export FZF_DEFAULT_OPTS='
+	--color fg:242,bg:233,hl:65,fg+:15,bg+:234,hl+:108
+	--color info:108,prompt:109,spinner:108,pointer:168,marker:168
+'
 
 [ -z "$TMUX" ] && export TERM="xterm-256color"
 # export TERM=screen-256color
@@ -43,9 +66,20 @@ gh() {
 	fd;
 }
 
+vgh() {
+	cd ~/GitHub;
+	vim $(fzf);
+}
+
+vot() {
+	CURRENT_DIRECTORY=$(pwd);
+	cd ~/.config;
+	vim $(fzf);
+	cd $CURRENT_DIRECTORY;
+}
+
 # alias gh="cd ~/Github"
 
-alias ipython="ipython --no-banner"
 
 alias cc-emu="lua /Users/cooperanderson/Library/Application\ Support/cc-emu/cli.lua /Users/cooperanderson/Library/Application\ Support/cc-emu/computers/0"
 
@@ -64,19 +98,19 @@ vim() {
 	$(brew --prefix vim)/bin/vim $@; # /usr/local/Cellar/vim/8.0.0600/bin/vim $@;
 }
 
+vimc() { 
+	vim -u ~/.config/vim/vimrc;
+}
+
+vimstartup() {
+	vim --startuptime .log +q; tail -n 1 .log; rm .log;
+}
+
 # vim7() {
 # 	/usr/bin/vim $@;
 # }
 
-# EMOJI_LIST=(🐙 🎹 😀 👾 👌 🎩 🐽 🚀 ⌚️ 🕹 💻);
-# RANDOM_EMOJI=${EMOJI_LIST[$((RANDOM%${#EMOJI_LIST[@]}))]};
-# PS1="\[$(tput setaf 3)\]\w\[$(tput sgr0)\]\n$RANDOM_EMOJI  \$ "
 
-export PATH
-
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH
 
 # The next line updates PATH for the Google Cloud SDK.
