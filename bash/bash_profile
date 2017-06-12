@@ -78,6 +78,15 @@ vot() {
 	cd $CURRENT_DIRECTORY;
 }
 
+appear() {
+	CURRENT_DIRECTORY=$(pwd);
+	cd /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources;
+	sudo rm SystemAppearance.car;
+	sudo cp $(fzf) SystemAppearance.car
+	cd $CURRENT_DIRECTORY;
+	killall Finder;
+}
+
 # alias gh="cd ~/Github"
 
 
@@ -133,9 +142,5 @@ defaults write org.python.python ApplePersistenceIgnoreState NO
 
 alias ls="ls -G"
 
-# vimBrew=/usr/local/Cellar/vim/8.0.0596/bin/vim
-# alias vim7="/usr/bin/vim"
-# alias vim8="$vimBrew"
-# function vim() { tmux new-session -d '/usr/local/Cellar/vim/8.0.0596/bin/vim $@';tmux a ;}
+export MPLBACKEND="module://itermplot"
 
-# function vim() { tmux new-session -d "$vimBrew $@";tmux a ;}

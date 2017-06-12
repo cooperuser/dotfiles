@@ -1,5 +1,4 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
 
 set rtp+=~/.fzf
 
@@ -11,8 +10,7 @@ Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'benmills/vimux'
-Plug 'Valloric/YouCompleteMe', { 'for': 'python' }
-" Plug 'scrooloose/nerdcommenter'
+Plug 'Valloric/YouCompleteMe', { 'for': ['python', 'javascript'] }
 Plug 'vim-scripts/HJKL'
 Plug 'chrisbra/Colorizer'
 Plug 'christoomey/vim-tmux-navigator'
@@ -40,10 +38,8 @@ Plug 'cooper-anderson/tjay.vim'
 " Initialize vim-plug system
 call plug#end()
 
-set guifont=Inconsolata\ for\ Powerline:h15
-let g:Powerline_symbols = 'fancy'
-
 set encoding=utf-8
+set termencoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
 if 0
 	if empty($TMUX)
@@ -54,18 +50,15 @@ if 0
 	set t_Co=256
 	set t_ut=
 endif
-set termencoding=utf-8
 
 if has("gui_running")
    let s:uname = system("uname")
    if s:uname == "Darwin\n"
-      set guifont=Inconsolata\ for\ Powerline:h15
+	   set guifont=Hasklig:h13
    endif
 endif
 
-
-" !call vundle#end() " End vundle 
-
+" Load Powerline
 set rtp+=/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/vim
 
 " Always show statusline
@@ -100,20 +93,10 @@ command! -nargs=1 Silent
 set path+=**
 set wildmenu
 
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-" set t_Co=256
-
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
+if (empty($TMUX)) && 0
   if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
   if (has("termguicolors"))
     set termguicolors
   endif
@@ -125,49 +108,40 @@ set whichwrap+=<,>,h,l,[,]
 set vb t_vb=
 set clipboard=unnamed
 set backspace=2
-" nnoremap j gj
-" nnoremap k gk
-" inoremap <down> gj
-" inoremap <up> gk
-" inoremap <Down> <C-o>gj
-" inoremap <Up> <C-o>gk
 
 set mouse=a
 filetype indent on
 filetype plugin on
 autocmd VimEnter * set autoindent smartindent noexpandtab tabstop=4 shiftwidth=4
-" set expandtab
-" set shiftwidth=4
-" set tabstop=4
-" set autoindent
-" set smartindent
 set selection=exclusive
 " Disable arrow keys in normal mode
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+" Allow Ctrl-hjlk to move in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
+" Highlight search results
 set hlsearch
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 noremap <silent> <F10> :NERDTreeToggle<Bar>:echo<CR>
-" Stop copy on delete
+" Stop copy on change motion
 nnoremap c "_c
 vnoremap c "_c
 " Show keystrokes
 set showcmd
-
+" Set max height for autocomplete popup
 set pumheight=10
-
+" Set YCM to close window after completion
 let g:ycm_autoclose_preview_window_after_completion = 1
-
+" Show fzf in current directory with ctrl-t
 noremap <C-t> :Files<CR>
+" Show fzf preview
 let g:fzf_files_options = '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
-
 " Remove MacVim scrollbars, if I ever decide to use MacVim
 set guioptions=
 
