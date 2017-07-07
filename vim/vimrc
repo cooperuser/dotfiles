@@ -5,35 +5,29 @@ set rtp+=~/.fzf
 " Begin vim-plug with set directory
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree' ", { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'benmills/vimux'
-Plug 'Valloric/YouCompleteMe', { 'for': ['python', 'javascript'] }
+Plug 'Valloric/YouCompleteMe', { 'for': ['python', 'javascript', 'go'] }
 Plug 'vim-scripts/HJKL'
-Plug 'chrisbra/Colorizer'
+Plug 'chrisbra/Colorizer', { 'on': 'ColorToggle' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
-Plug 'katono/rogue.vim'
-" Plug 'ScrollColors'
+Plug 'vim-scripts/npm.vim'
 
 " Syntax Plugins
+Plug 'pangloss/vim-javascript'
 Plug 'vim-scripts/brainfuck-syntax'
 
 " Colorschemes
 Plug 'aliou/moriarty.vim'
 Plug 'tomasiser/vim-code-dark'
-Plug 'Blevs/vim-dzo'
-Plug 'dikiaap/minimalist'
 Plug 'josuegaleas/jay'
 Plug 'dracula/vim'
 Plug 'sjl/badwolf'
-Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim'
-Plug 'jacoborus/tender.vim'
-Plug 'zeis/vim-kolor'
 Plug 'cooper-anderson/tjay.vim'
+Plug 'wesgibbs/vim-irblack'
 
 " Initialize vim-plug system
 call plug#end()
@@ -41,15 +35,16 @@ call plug#end()
 set encoding=utf-8
 set termencoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
-if 0
-	if empty($TMUX)
-		set term=xterm-256color
-	else
-		set term=screen-256color
-	endif
-	set t_Co=256
-	set t_ut=
-endif
+
+" if 0
+" 	if empty($TMUX)
+" 		set term=xterm-256color
+" 	else
+" 		set term=screen-256color
+" 	endif
+" 	set t_Co=256
+" 	set t_ut=
+" endif
 
 if has("gui_running")
    let s:uname = system("uname")
@@ -63,7 +58,9 @@ set rtp+=/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-pa
 
 " Always show statusline
 set laststatus=2
+" Hide current mode
 set noshowmode
+" Something about hitting escape?
 set timeoutlen=1000
 set ttimeoutlen=0
 " Allow selecting \n character
@@ -93,14 +90,14 @@ command! -nargs=1 Silent
 set path+=**
 set wildmenu
 
-if (empty($TMUX)) && 0
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+" if (empty($TMUX)) && 0
+"   if (has("nvim"))
+"     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"   endif
+"   if (has("termguicolors"))
+"     set termguicolors
+"   endif
+" endif
 
 set cursorline
 set number
@@ -119,6 +116,11 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+" Disable Arrow keys in Insert mode
+" imap <up> <nop>
+" imap <down> <nop>
+" imap <left> <nop>
+" imap <right> <nop>
 " Allow Ctrl-hjlk to move in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
@@ -142,6 +144,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 noremap <C-t> :Files<CR>
 " Show fzf preview
 let g:fzf_files_options = '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+" Hide npm output
+let g:npm_background = 1
 " Remove MacVim scrollbars, if I ever decide to use MacVim
 set guioptions=
 

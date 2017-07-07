@@ -17,8 +17,16 @@ notify() {
 	osascript -e 'display notification "'"$*"'" with title "Alert"'
 }
 
+volume() {
+	osascript -e 'set Volume '$*;
+}
+
 app() {
  	open -a $*
+}
+
+message() {
+	afplay /Applications/Discord.app/Contents/Resources/audio/message1.mp3
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -87,6 +95,10 @@ appear() {
 	killall Finder;
 }
 
+ipy() {
+	ipython $@;
+}
+
 # alias gh="cd ~/Github"
 
 
@@ -132,10 +144,6 @@ if [ -f /Users/cooperanderson/Downloads/google-cloud-sdk/completion.bash.inc ]; 
   source '/Users/cooperanderson/Downloads/google-cloud-sdk/completion.bash.inc'
 fi
 
-# added by Anaconda2 4.2.0 installer
-# export PATH="/Users/cooperanderson/Library/Preferencess/anaconda2/bin:$PATH"
-# eval $(/usr/libexec/path_helper -s)
-
 . /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 defaults write org.python.python ApplePersistenceIgnoreState NO
@@ -144,3 +152,5 @@ alias ls="ls -G"
 
 export MPLBACKEND="module://itermplot"
 
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
