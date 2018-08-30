@@ -1,5 +1,10 @@
 #!/bin/bash
 
+sudo apt update
+sudo apt install git
+sudo apt install curl
+sudo apt install neovim
+
 mkdir ~/.install
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.install/fzf
