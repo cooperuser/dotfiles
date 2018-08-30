@@ -27,10 +27,6 @@ vim() {
 	nvim $@;
 }
 
-# tmux() {
-# 	tmux -f ~/.config/tmux/tmux.conf;
-# }
-
 vot() {
 	CURRENT_DIRECTORY=$(pwd);
 	cd ~/.config;

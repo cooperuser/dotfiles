@@ -37,3 +37,5 @@ alias btc="coinmon -p .config/coinmon/portfolio.json -s 0,1,2,3,4,7"
 
 alias alacritty="/Applications/Alacritty.app/Contents/MacOS/alacritty"
 
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+
