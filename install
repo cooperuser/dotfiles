@@ -7,6 +7,10 @@ sudo apt install neovim
 sudo apt install gcc
 sudo apt install make
 sudo apt install zlib1g-dev
+sudo apt install libffi-dev
+sudo apt install libreadline-dev
+sudo apt install libssl-dev
+sudo apt install bzip2
 
 mkdir ~/.install
 
