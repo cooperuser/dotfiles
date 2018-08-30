@@ -1,2 +1,15 @@
-nvim/plugged/
 .DS_Store
+nvim/plugged/
+
+alacritty/
+configstore/
+crypto/
+menus/
+mpv/
+NuGet/
+pyenv/
+rtv/
+StardewValley/
+stetic/
+tudu/
+xbuild/
