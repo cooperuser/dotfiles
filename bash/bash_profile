@@ -1,176 +1,71 @@
+#!/bin/bash
+
+# Setting PATH for Python 3.7
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+export PATH
 
 # Setting PATH for Python 2.7
-# The orginal version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-alias ipython="ipython -i --no-banner"
-alias bpython="bpython -iq"
+# The original version is saved in .bash_profile.pysave
+# PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+# export PATH
 
-mini() {
-	/usr/bin/osascript -e 'tell application "System Events" to click (first button of (every window of (application process "'"$*"'")) whose role description is "minimize button")';
-}
+# Setting path for Butler
+export PATH="$PATH:~/Library/Application Support/itch/bin"
 
-alert() {
-	osascript -e 'tell app "System Events" to display dialog "'"$*"'"'
-}
+# Setup pyenv
+# eval "$(pyenv init -)"
+hash pyenv 2> /dev/null && export PYENV_ROOT="$HOME/.config/pyenv" && export PATH="$PYENV_ROOT/shims:${PATH}"
 
-notify() {
-	osascript -e 'display notification "'"$*"'" with title "Alert"'
-}
-
-volume() {
-	osascript -e 'set Volume '$*;
-}
-
-app() {
-	open -a $*
-}
-
-message() {
-	afplay /Applications/Discord.app/Contents/Resources/audio/message1.mp3
-}
-
-setuptry() {
-	setupgo;
-	go get github.com/zachlatta/try/cmd/try;
-}
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Setup rust
+export PATH="$HOME/.cargo/bin:$PATH"
+export OUT_DIR="out"
+export RUST_SRC_PATH="$HOME/.cargo/rust/src"
 
 # Setting some fzf options like color
-export FZF_DEFAULT_OPTS='
-	--color fg:242,bg:233,hl:65,fg+:15,bg+:234,hl+:108
-	--color info:108,prompt:109,spinner:108,pointer:168,marker:168
-'
+# export FZF_DEFAULT_OPTS='
+# 	--color fg:242,bg:233,hl:65,fg+:15,bg+:234,hl+:108
+# 	--color info:108,prompt:109,spinner:108,pointer:168,marker:168
+# '
 
 # Make the man command use vim instead
 # Reminder: if this for some reason stops working, try adding `let $PAGER=''` to the .vimrc
 export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-	vim -R -c 'set ft=man nomod nolist nonumber linebreak' -c 'map q :q<CR>' \
+	nvim -R -c 'set ft=man nomod nolist nonumber linebreak' -c 'map q :q<CR>' \
 	-c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
 	-c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
-[ -z "$TMUX" ] && export TERM="xterm-256color"
-# export TERM=screen-256color
-# alias tmux='tmux -2'  # for 256color
-# alias tmux='tmux -u'  # to get rid of unicode rendering problem
+# [ -z "$TMUX" ] && export TERM="xterm-256color" # If Vim stops working,
 
-alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO;killall Finder"
+export EDITOR=nvim
 
-alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES;killall Finder"
+# Set HJKL as movement in my programs
+export HJKL=1
 
-alias fixTwitch="echo '\$(\"div#ember2659>div>div.flex__item.flex--verticalCenter\").remove()' | pbcopy"
+PROMPT=0; _update_ps1() { # if PROMPT 0: Default, 1: Force Powerline, 2: Force Normal, 3: Disable
+	EXIT=$?; if [ $(uname -s) = Darwin ] || [ $PROMPT -eq 1 ] && [ ! $PROMPT -ge 2 ] && [ -f ~/.config/bash/bash_prompt ]; then
+		. ~/.config/bash/bash_prompt $EXIT
+	elif [ $PROMPT -ne 3 ]; then
+		PS1='${debian_chroot:+($debian_chroot)}\[\033[01;'$([ $USER = root ] && echo 31 || echo 32)'m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w'$([ $EXIT -ne 0 ] && echo "\[\033[01;31m\] $EXIT\[\033[01;34m\]")' \$\[\033[00m\] ';
+	fi; }; PROMPT_COMMAND="_update_ps1";
 
-alias asar="/Users/cooperanderson/node_modules/asar/bin/asar"
+export LS_COLORS=$LS_COLORS:'di=0;34:ex=0;92:ln=0;96:cd=0;93:bd=0;93:';
 
-alias editProfile="open -a TextEdit ~/.bash_profile"
+# Setup powerline
+# . /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
-alias blockade="/Users/cooperanderson/Google\ Drive/Other/Programming/JetBrains/WebStorm/Blockade/run.sh"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-alias blessed="/Users/cooperanderson/Google\ Drive/Other/Programming/JetBrains/WebStorm/blessed-test/run.sh"
-
-alias killIcons="cd /Users/cooperanderson/Google\ Drive/Programming;find . -name 'Icon*' -type f -delete"
-
-alias killIcons2="cd /Users/cooperanderson/Google\ Drive/GitHub;find . -name 'Icon*' -type f -delete"
-
-alias killBluetooth="sudo rm -R /Library/Preferences/com.apple.bluetooth.plist"
-
-# alias gitFiles="cd /Users/cooperanderson/Google\ Drive/GitHub"
-
-fd() {
-	local dir
-	dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
-	cd "$dir"
-}
-
-gh() {
-	cd ~/GitHub;
-	fd;
-}
-
-vgh() {
-	cd ~/GitHub;
-	vim $(fzf);
-}
-
-vot() {
-	CURRENT_DIRECTORY=$(pwd);
-	cd ~/.config;
-	vim $(fzf);
-	cd $CURRENT_DIRECTORY;
-}
-
-appear() {
-	CURRENT_DIRECTORY=$(pwd);
-	cd /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources;
-	sudo rm SystemAppearance.car;
-	sudo cp $(fzf) SystemAppearance.car
-	cd $CURRENT_DIRECTORY;
-	killall Finder;
-}
-
-ipy() {
-	ipython $@;
-}
-
-# alias gh="cd ~/Github"
-
-
-alias cc-emu="lua /Users/cooperanderson/Library/Application\ Support/cc-emu/cli.lua /Users/cooperanderson/Library/Application\ Support/cc-emu/computers/0"
-
-# alias colortest='for i in {0..255} ; do
-#     printf "\x1b[38;5;${i}m%3d " "${i}"
-#    if (( $i == 15 )) || (( $i > 15 )) && (( ($i-15) % 12 == 0 )); then
-#        echo;
-#    fi
-#done'
-
-alias selfbot="cd /Users/cooperanderson/Library/Application\ Support/SelfBot;npm start"
-
-# alias vim="/usr/local/Cellar/vim/8.0.0600/bin/vim"
-# alias vim7="/usr/bin/vim"
-vim() {
-	nvim $@;
-}
-vvim() {
-	$(brew --prefix vim)/bin/vim $@; # /usr/local/Cellar/vim/8.0.0600/bin/vim $@;
-}
-
-vimc() {
-	vim -u ~/.config/vim/vimrc;
-}
-
-vimstartup() {
-	vim --startuptime .log +q; tail -n 1 .log; rm .log;
-}
-
-# vim7() {
-#	/usr/bin/vim $@;
+# secure_ssh() {
+# 	TEST=$(osascript -e 'display dialog "Incoming SSH connection:\n'"$SSH_CONNECTION"'" buttons {"Deny", "Allow"} with icon note')
+# 	echo $TEST
 # }
 
-export GOPATH=/Users/cooperanderson;
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOPATH/bin;
-export EDITOR=vim
-export PATH
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/cooperanderson/Downloads/google-cloud-sdk/path.bash.inc ]; then
-  source '/Users/cooperanderson/Downloads/google-cloud-sdk/path.bash.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f /Users/cooperanderson/Downloads/google-cloud-sdk/completion.bash.inc ]; then
-  source '/Users/cooperanderson/Downloads/google-cloud-sdk/completion.bash.inc'
-fi
-
-. /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-defaults write org.python.python ApplePersistenceIgnoreState NO
-
-alias ls="ls -G"
-
-export MPLBACKEND="module://itermplot"
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-stty -ixon
+# if [ -n "$SSH_CLIENT" ]; then
+# 	trap '' 2
+# 	osascript -e 'tell app "System Events" to display dialog "Incoming SSH connection:\n'"$SSH_CLIENT"'\n'"$SSH_TTY"'" giving up after 30' >> /dev/null
+# 	if [ $? -eq 1 ]; then
+# 		echo "Denied."
+# 		logout;
+# 	fi
+# fi
