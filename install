@@ -1,24 +1,25 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt install git
-sudo apt install curl
-sudo apt install neovim
-sudo apt install gcc
-sudo apt install make
-sudo apt install zlib1g-dev
-sudo apt install libffi-dev
-sudo apt install libreadline-dev
-sudo apt install libssl-dev
-sudo apt install bzip2
+cp -r ~/.config ~/.config_old
+rm ~/.config/alacritty; ln -s alacritty/ ~/.config/alacritty
+rm ~/.config/bash; ln -s bash/ ~/.config/bash
+rm ~/.config/compton; ln -s compton/ ~/.config/compton
+rm ~/.config/fish; ln -s fish/ ~/.config/fish
+rm ~/.config/git; ln -s git/ ~/.config/git
+rm ~/.config/htop; ln -s htop/ ~/.config/htop
+rm ~/.config/i3; ln -s i3/ ~/.config/i3
+rm ~/.config/nvim; ln -s nvim/ ~/.config/nvim
+rm ~/.config/ptpython; ln -s ptpython/ ~/.config/ptpython
+rm ~/.config/rofi; ln -s rofi/ ~/.config/rofi
+rm ~/.config/tmux; ln -s tmux/ ~/.config/tmux
 
 mkdir ~/.install
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.install/fzf
-~/.install/fzf/install
+# git clone --depth 1 https://github.com/junegunn/fzf.git ~/.install/fzf
+# ~/.install/fzf/install
 
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+# 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-git clone https://github.com/pyenv/pyenv.git ~/.install/pyenv
+# git clone https://github.com/pyenv/pyenv.git ~/.install/pyenv
 
