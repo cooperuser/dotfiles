@@ -1,17 +1,17 @@
 #!/bin/bash
 
 cp -r ~/.config ~/.config_old
-rm ~/.config/alacritty; ln -s alacritty/ ~/.config/alacritty
-rm ~/.config/bash; ln -s bash/ ~/.config/bash
-rm ~/.config/compton; ln -s compton/ ~/.config/compton
-rm ~/.config/fish; ln -s fish/ ~/.config/fish
-rm ~/.config/git; ln -s git/ ~/.config/git
-rm ~/.config/htop; ln -s htop/ ~/.config/htop
-rm ~/.config/i3; ln -s i3/ ~/.config/i3
-rm ~/.config/nvim; ln -s nvim/ ~/.config/nvim
-rm ~/.config/ptpython; ln -s ptpython/ ~/.config/ptpython
-rm ~/.config/rofi; ln -s rofi/ ~/.config/rofi
-rm ~/.config/tmux; ln -s tmux/ ~/.config/tmux
+rm -rf ~/.config/alacritty; ln -s $(pwd)/alacritty/ ~/.config/alacritty
+rm -rf ~/.config/bash; ln -s $(pwd)/bash/ ~/.config/bash
+rm -rf ~/.config/compton; ln -s $(pwd)/compton/ ~/.config/compton
+rm -rf ~/.config/fish; ln -s $(pwd)/fish/ ~/.config/fish
+rm -rf ~/.config/git; ln -s $(pwd)/git/ ~/.config/git
+rm -rf ~/.config/htop; ln -s $(pwd)/htop/ ~/.config/htop
+rm -rf ~/.config/i3; ln -s $(pwd)/i3/ ~/.config/i3
+rm -rf ~/.config/nvim; ln -s $(pwd)/nvim/ ~/.config/nvim
+rm -rf ~/.config/ptpython; ln -s $(pwd)/ptpython/ ~/.config/ptpython
+rm -rf ~/.config/rofi; ln -s $(pwd)/rofi/ ~/.config/rofi
+rm -rf ~/.config/tmux; ln -s $(pwd)/tmux/ ~/.config/tmux
 
 mkdir ~/.install
 
