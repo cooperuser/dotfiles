@@ -1,75 +1,16 @@
 #!/bin/bash
 
-# Setting PATH for Python 3.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
-export PATH
+export EDITOR=nvim # Set the editor to neovim
+export HJKL=1 # Controls the movement keys in my programs
+# export LS_COLORS=$LS_COLORS'di=0;34:ex=0;92:ln=0;96:cd=0;93:bd=0;93:';
+# export LS_COLORS=$LS_COLORS:'di=0;34:ex=0;163:ln=0;96:cd=0;93:bd=0;93:';
+# export LS_COLORS='di=0;163:ex=0;163:ln=0;163:cd=0;163:bd=0;163:';
 
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-# PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-# export PATH
-
-# Setting path for Butler
-export PATH="$PATH:~/Library/Application Support/itch/bin"
-
-# Setup pyenv
-# eval "$(pyenv init -)"
 if [ -d ~/.install/pyenv ]; then
 	export PYENV_ROOT="$HOME/.install/pyenv";
 	export PATH="$PYENV_ROOT/bin:${PATH}";
 	export PATH="$PYENV_ROOT/shims:${PATH}";
 fi
 
-# Setup rust
-export PATH="$HOME/.cargo/bin:$PATH"
-export OUT_DIR="out"
-export RUST_SRC_PATH="$HOME/.cargo/rust/src"
-
-# Setting some fzf options like color
-# export FZF_DEFAULT_OPTS='
-# 	--color fg:242,bg:233,hl:65,fg+:15,bg+:234,hl+:108
-# 	--color info:108,prompt:109,spinner:108,pointer:168,marker:168
-# '
-
-# Make the man command use vim instead
-# Reminder: if this for some reason stops working, try adding `let $PAGER=''` to the .vimrc
-export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-	nvim -R -c 'set ft=man nomod nolist nonumber linebreak' -c 'map q :q<CR>' \
-	-c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
-	-c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-
-# [ -z "$TMUX" ] && export TERM="xterm-256color" # If Vim stops working,
-
-export EDITOR=nvim
-
-# Set HJKL as movement in my programs
-export HJKL=1
-
-PROMPT=0; _update_ps1() { # if PROMPT 0: Default, 1: Force Powerline, 2: Force Normal, 3: Disable
-	EXIT=$?; if [ $(uname -s) = Darwin ] || [ $PROMPT -eq 1 ] && [ ! $PROMPT -ge 2 ] && [ -f ~/.config/bash/bash_prompt ]; then
-		. ~/.config/bash/bash_prompt $EXIT
-	elif [ $PROMPT -ne 3 ]; then
-		PS1='${debian_chroot:+($debian_chroot)}\[\033[01;'$([ $USER = root ] && echo 31 || echo 32)'m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w'$([ $EXIT -ne 0 ] && echo "\[\033[01;31m\] $EXIT\[\033[01;34m\]")' \$\[\033[00m\] ';
-	fi; }; PROMPT_COMMAND="_update_ps1";
-
-export LS_COLORS=$LS_COLORS:'di=0;34:ex=0;92:ln=0;96:cd=0;93:bd=0;93:';
-
-# Setup powerline
-# . /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# secure_ssh() {
-# 	TEST=$(osascript -e 'display dialog "Incoming SSH connection:\n'"$SSH_CONNECTION"'" buttons {"Deny", "Allow"} with icon note')
-# 	echo $TEST
-# }
-
-# if [ -n "$SSH_CLIENT" ]; then
-# 	trap '' 2
-# 	osascript -e 'tell app "System Events" to display dialog "Incoming SSH connection:\n'"$SSH_CLIENT"'\n'"$SSH_TTY"'" giving up after 30' >> /dev/null
-# 	if [ $? -eq 1 ]; then
-# 		echo "Denied."
-# 		logout;
-# 	fi
-# fi
+[ -f ~/.config/bash/bash_ps1 ] && . ~/.config/bash/bash_ps1;
+[ -f ~/.install/fzf/fzf.bash ] && source ~/.install/fzf/fzf.bash;

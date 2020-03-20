@@ -1,15 +1,4 @@
 .DS_Store
 nvim/plugged/
+fish/functions/__fzf*
 
-alacritty/
-configstore/
-crypto/
-menus/
-mpv/
-NuGet/
-pyenv/
-rtv/
-StardewValley/
-stetic/
-tudu/
-xbuild/

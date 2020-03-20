@@ -1,26 +1,9 @@
 #!/bin/bash
 
 fd() {
-	local dir
+	# local dir;
 	dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
-	cd "$dir"
-}
-
-gh() {
-	local CURRENT_DIRECTORY=$(pwd);
-	cd ~/GitHub;
-	fd; local EXIT=$?;
-	[ $EXIT -eq 130 ] && cd $CURRENT_DIRECTORY;
-	return $EXIT;
-}
-
-vgh() {
-	local CURRENT_DIRECTORY=$(pwd);
-	cd ~/GitHub;
-	SELECTED_FILE=$(fzf -q "!node_modules "); local EXIT=$?;
-	[ $EXIT -ne 130 ] && vim $SELECTED_FILE;
-	cd $CURRENT_DIRECTORY;
-	return $EXIT;
+	cd "$dir";
 }
 
 vim() {
@@ -41,80 +24,12 @@ vot() {
 	cd $CURRENT_DIRECTORY;
 }
 
-appear() {
-	CURRENT_DIRECTORY=$(pwd);
-	cd /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources;
-	sudo rm SystemAppearance.car;
-	sudo cp $(fzf) SystemAppearance.car
-	cd $CURRENT_DIRECTORY;
-	killall Finder;
-}
-
-p() {
-	ptpython --config-dir=~/.config/ptpython/ $@;
-}
-
-ipy() {
-	ipython -i --no-banner $@;
-}
-
-sshin() {
-	SELECTED_USER=$(ssh dev cat /var/www/data.txt | fzf);
-	if [ $? -ne 130 ]; then
-		ssh $SELECTED_USER;
-	fi
-}
-
-sshall() {
-	tmux new-session -s "ssh" -d
-	for client in $(ssh dev cat /var/www/data.txt); do
-		local name=$(echo $client | sed 's/@.*//');
-		tmux new-window -n $name "ssh $client;exit;"
-	done
-	tmux -2 attach-session -d
-}
-
 curl() {
 	$(which curl) $@;
 	echo;
 }
 
-apps() {
-	osascript -e 'tell application "System Events" to get name of (processes where background only is false)';
-}
-
-bashcomp() {
-	if [ -f $(brew --prefix)/etc/bash_completion ]; then
-		. $(brew --prefix)/etc/bash_completion
-	fi
-}
-
-build() {
-	~/GitHub/team4019-2018/gradlew build;
-}
-
-deploy() {
-	~/GitHub/team4019-2018/gradlew deploy;
-}
-
-frc() {
-	TASK=$(echo "build           # Assembles and tests this project.
-deploy          # Deploy to the robot.
-discoverRoborio # Figure out the address of the robot.
-riolog          # Run a console displaying output from the default RoboRIO.
-tasks           # Displays all runnable tasks." | fzf);
-	if [ $? -ne 130 ]; then
-		~/GitHub/team4019-2018/gradlew $(echo $TASK | sed 's/ .*//');
-	fi
-}
-
-rtlj() {
-	IFS="%";
-	width=$(($1-2));
-	height=$(($2-2));
-	line=$(printf "%${width}s");
-	space=$(printf "%${height}s");
-	echo -e r${line// /o}T${space// /"\nl${line}l"}"\n"L${line// /o}J | pbcopy;
-	unset IFS;
+p() {
+	ptpython --config-dir=~/.config/ptpython $@;
 }
 
