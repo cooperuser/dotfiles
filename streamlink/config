@@ -1,9 +1,0 @@
-# Player options
-player=mpv
-player-no-close
-verbose-player
-
-default-stream=best
-
-twitch-oauth-token=rsatx8hqex3v8k2yuh3e2wu3s506bp
-

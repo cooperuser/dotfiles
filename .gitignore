@@ -1,15 +1,11 @@
 .DS_Store
 nvim/plugged/
 
-alacritty/
 configstore/
-crypto/
-menus/
-mpv/
-NuGet/
-pyenv/
-rtv/
-StardewValley/
-stetic/
-tudu/
-xbuild/
+fish/functions/__*
+
+coc/*
+!coc/extensions
+coc/extensions/*
+!coc/extensions/package.json
+
