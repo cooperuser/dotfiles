@@ -31,12 +31,11 @@ set noshowmode " Hide current mode
 set timeoutlen=1000 " Escape
 set ttimeoutlen=0
 set virtualedit=onemore " Allow selecting the \n character
-" set scrolloff=3 " Keep the cursor away from the edges
-set scrolloff=99
-autocmd InsertLeave * normal `^ " Stop the cursor from moving when leaving insert
+set scrolloff=99 " Keep cursor centered on screen
+autocmd InsertLeave * normal `^
 set incsearch " Set autosearch highlighting
 set splitbelow " Set new split to appear below instead of above
-nnoremap <expr> h col(".") == 1 ? "hg$" : "h" " Hacky line moving fix
+nnoremap <expr> h col(".") == 1 ? "hg$" : "h"
 set path+=** " Set :find and :b autocomplete
 set wildmenu
 set cursorline " Show the line the cursor is on
@@ -50,7 +49,11 @@ set backspace=2 " Backspace settings
 set formatoptions-=cro
 filetype indent on
 filetype plugin on
-autocmd VimEnter * set autoindent smartindent noexpandtab tabstop=4 shiftwidth=4 shiftround
+set autoindent
+set smartindent
+set noexpandtab
+set tabstop=4 shiftwidth=4
+set shiftround
 set selection=exclusive
 set showcmd " Show keystrokes
 set pumheight=10 " Set max height for autocomplete popup
@@ -59,10 +62,10 @@ noremap <C-t> :Files<CR>
 " Add more fzf settings
 
 " Key rebinds
-map <up> <nop> " Disable arrow keys in normal mode
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+noremap <up> <nop> " Disable arrow keys in normal mode
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 inoremap <C-h> <left>
 inoremap <C-l> <right>
 inoremap <C-j> <down>
@@ -96,7 +99,8 @@ if 1
 	let g:airline_section_x = airline#section#create_right(["filetype", "%{getfsize(expand(@%))}"])
 	let g:airline_section_y = airline#section#create(["percent"])
 	let g:airline_section_z = airline#section#create(["linenr", ":%2v"])
-	let g:airline_symbols.linenr = ""
+	let g:airline_symbols.linenr = "☰"
+	let g:airline_symbols.branch = '⎇'
 endif
 
 " Set Coc tab and snippet navigation
@@ -128,12 +132,24 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>r  :<C-u>CocRestart<CR>
 nnoremap <silent> <space><space>  :<C-u>CocFix<CR>
 autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType json setlocal commentstring=//\ %s
+" Fugitive plugins
+nnoremap <silent> gs :G<CR>
 
 " Rainbow Brackets enable
 let g:rainbow_active = 1
 
 " Set up custom switch.vim toggles
 let g:switch_custom_definitions = [['0', '1'], ["on", "off"], ["#t", "#f"]]
+
+" Trim whitespace on write
+fun! TrimWhitespace()
+	let l:save = winsaveview()
+	keeppatterns %s/\s\+$//e
+	call winrestview(l:save)
+endfun
+
+autocmd BufWritePre * :call TrimWhitespace()
 
 syntax on
 set background=dark
