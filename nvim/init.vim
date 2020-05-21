@@ -99,7 +99,7 @@ if 1
 	let g:airline_section_x = airline#section#create_right(["filetype", "%{getfsize(expand(@%))}"])
 	let g:airline_section_y = airline#section#create(["percent"])
 	let g:airline_section_z = airline#section#create(["linenr", ":%2v"])
-	let g:airline_symbols.linenr = "☰"
+	let g:airline_symbols.linenr = ""
 	let g:airline_symbols.branch = '⎇'
 endif
 
