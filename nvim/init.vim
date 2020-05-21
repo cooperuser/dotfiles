@@ -62,7 +62,7 @@ noremap <C-t> :Files<CR>
 " Add more fzf settings
 
 " Key rebinds
-noremap <up> <nop> " Disable arrow keys in normal mode
+noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
@@ -132,9 +132,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>r  :<C-u>CocRestart<CR>
 nnoremap <silent> <space><space>  :<C-u>CocFix<CR>
 autocmd FileType json syntax match Comment +\/\/.\+$+
-autocmd FileType json setlocal commentstring=//\ %s
-" Fugitive plugins
-nnoremap <silent> gs :G<CR>
+" autocmd FileType json setlocal commentstring=//\ %s
+" Fugitive preferences
+autocmd VimEnter * noremap <silent> gs :G<CR>
 
 " Rainbow Brackets enable
 let g:rainbow_active = 1
