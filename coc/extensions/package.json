@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "coc-clangd": ">=0.4.14",
+    "coc-fish": ">=1.0.11",
     "coc-github-users": ">=1.0.0",
     "coc-html": ">=1.2.4",
     "coc-java": ">=1.4.12",
