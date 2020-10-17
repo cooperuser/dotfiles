@@ -1,11 +1,16 @@
 .DS_Store
 nvim/plugged/
+nvim/.netrwhist
 
 configstore/
 fish/functions/__*
+fish/functions/fish_user_key_bindings.fish
+fish/functions/fzf_key_bindings.fish
 
 coc/*
 !coc/extensions
 coc/extensions/*
 !coc/extensions/package.json
+
+ptpython/history
 
