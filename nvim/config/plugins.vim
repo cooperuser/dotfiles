@@ -18,14 +18,18 @@ Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 Plug 'machakann/vim-swap'
-Plug 'kana/vim-textobj-user'
-Plug 'sgur/vim-textobj-parameter'
 
 " Completion plugins
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntax plugins
 Plug 'sheerun/vim-polyglot'
+
+" Text objects
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+Plug 'glts/vim-textobj-comment'
+Plug 'Julian/vim-textobj-variable-segment'
 
 " Colorschemes
 Plug 'cooper-anderson/tjay.vim'
