@@ -3,7 +3,7 @@
 function vot
 	set CURRENT_DIRECTORY (pwd);
 	cd ~/.config;
-	set SELECTED_FILE (fzf --preview="bat --style=numbers --color=always {}" --query="!nvim/plugged ");
+	set SELECTED_FILE (git ls-tree -r master --name-only | fzf --preview="bat --style=full --color=always {}");
 	set error $status
 	if test $status -ne 130
 		$EDITOR $SELECTED_FILE;
