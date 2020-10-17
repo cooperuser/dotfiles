@@ -17,6 +17,9 @@ Plug 'npxbr/glow.nvim'
 Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
+Plug 'machakann/vim-swap'
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
 
 " Completion plugins
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,6 +33,7 @@ Plug 'morhetz/gruvbox'
 Plug 'balanceiskey/vim-framer-syntax'
 Plug 'Iron-E/nvim-highlite'
 Plug '~/GitHub/better'
+Plug 'trusktr/seti.vim'
 
 call plug#end() " Initialize vim-plug system and plugins
 
@@ -47,6 +51,9 @@ let g:Hexokinase_highlighters = [ 'backgroundfull' ]
 " neoclide/coc.vim'
 let g:coc_snippet_next = "<C-l>"
 let g:coc_snippet_prev = "<C-h>"
+
+" sgur/vim-textobj-parameter
+let g:vim_textobj_parameter_mapping = 'a'
 
 " nvim-treesitter/nvim-treesitter
 lua <<EOF

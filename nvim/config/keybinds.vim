@@ -73,6 +73,7 @@ nmap <silent> <space>vo :call VimuxOpenRunner()<CR>
 nmap <silent> <space>p :Glow<CR>
 nmap <silent> <space>z zf%
 nmap <silent> <space>t :tabnew<CR>
+nmap <silent> <space>T :tabclose<CR>
 
 " Set Coc tab and snippet navigation
 function! s:check_back_space() abort
@@ -81,3 +82,8 @@ function! s:check_back_space() abort
 endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <Tab> pumvisible() ? "\<cr>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+
+" Shifting items in a list
+nmap <S-h> <Plug>(swap-prev)
+nmap <S-l> <Plug>(swap-next)
+
