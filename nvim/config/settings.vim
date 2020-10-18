@@ -30,7 +30,7 @@ set tabstop=4 shiftwidth=4
 set shiftround
 set selection=exclusive
 set showcmd " Show keystrokes
-set pumheight=10 " Set max height for autocomplete popup
+set pumheight=16 " Set max height for autocomplete popup
 set signcolumn=number " Show lint signs in the number column
 
 set foldtext=MyFoldText()
