@@ -9,6 +9,8 @@
 	"diagnostic.virtualTextPrefix": "· ",
 	"diagnostic.enableMessage": "never",
 	"diagnostic.refreshOnInsertMode": true,
+	"javascript.suggest.names": false,
+	"suggest.snippetIndicator": "",
 	"suggest.disableMenuShortcut": true,
 	"suggest.noselect": false,
 	"suggest.completionItemKindLabels": {
