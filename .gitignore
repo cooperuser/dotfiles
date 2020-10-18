@@ -12,5 +12,7 @@ coc/*
 coc/extensions/*
 !coc/extensions/package.json
 
+yarn/
+
 ptpython/history
 

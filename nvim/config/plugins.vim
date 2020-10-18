@@ -38,6 +38,7 @@ Plug 'balanceiskey/vim-framer-syntax'
 Plug 'Iron-E/nvim-highlite'
 Plug '~/GitHub/better'
 Plug 'trusktr/seti.vim'
+Plug 'tomasiser/vim-code-dark'
 
 call plug#end() " Initialize vim-plug system and plugins
 
