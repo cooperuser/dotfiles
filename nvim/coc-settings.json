@@ -37,5 +37,14 @@
 		"unit":          " [unit]",
 		"value":         " [value]",
 		"variable":      " [variable]"
+	},
+	"suggest.completionItemKindLabels_single": {
+		"class": "", "color": "", "constant": "", "default": "",
+		"enum": "פּ", "enumMember": "", "event": "鬒", "field": "ﰠ",
+		"file": "", "folder": "", "function": "", "keyword": "",
+		"interface": "", "method": "", "module": "", "operator": "",
+		"property": "", "reference": "", "snippet": "", "struct": "",
+		"text": "ﮜ", "typeParameter": "ﯟ", "unit": "", "value": "",
+		"variable": ""
 	}
 }
