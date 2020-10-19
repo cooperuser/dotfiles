@@ -1,5 +1,5 @@
 let g:lightline = {}
-let g:lightline.colorscheme = 'better'
+let g:lightline.colorscheme = 'glowbeam'
 let g:lightline.separator = {'left': '', 'right': ''}
 let g:lightline.subseparator = {'left': '', 'right': ''}
 

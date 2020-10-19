@@ -8,5 +8,5 @@ source ~/.config/nvim/statusline.vim
 
 syntax on
 set termguicolors
-colorscheme better
+colorscheme glowbeam
 
