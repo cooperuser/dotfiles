@@ -7,20 +7,29 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-easy-align'
 Plug 'AndrewRadev/switch.vim'
 Plug 'benmills/vimux'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/playground'
 Plug 'npxbr/glow.nvim'
 Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 Plug 'machakann/vim-swap'
 
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/lib.kom'
+" Plug 'romgrk/barbar.nvim'
+
 " Completion plugins
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'nvim-lua/completion-nvim'
+" Plug 'neovim/nvim-lspconfig' ", {'for': ['vim', 'lua', 'rust']}
+" Plug 'nvim-lua/diagnostic-nvim'
 
 " Syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -36,11 +45,14 @@ Plug 'cooper-anderson/tjay.vim'
 Plug 'morhetz/gruvbox'
 Plug 'balanceiskey/vim-framer-syntax'
 Plug 'Iron-E/nvim-highlite'
-Plug '~/GitHub/better'
-Plug 'trusktr/seti.vim'
+Plug '~/GitHub/glowbeam.vim'
+Plug '~/Github/doom-two.vim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'romgrk/doom-one.vim'
 
 call plug#end() " Initialize vim-plug system and plugins
+
+" source ~/.config/nvim/config/plugin-settings/completion-nvim.vim
 
 " Configurations
 
@@ -64,9 +76,24 @@ let g:vim_textobj_parameter_mapping = 'a'
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = {"javascript", "jsdoc"},     -- one of "all", "language", or a list of languages
+	use_languagetree = true,
 	highlight = {
 		enable = true              -- false will disable the whole extension
 	},
 }
+
+require "nvim-treesitter.configs".setup {
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false -- Whether the query persists across vim sessions
+  }
+}
+
+require "nvim-treesitter.highlight"
+local hlmap = vim.treesitter.highlighter.hl_map
+hlmap["parameter"] = "Parameter"
+hlmap["parameter.arrow_function"] = "Parameter"
 EOF
 

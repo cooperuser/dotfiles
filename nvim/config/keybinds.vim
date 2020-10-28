@@ -50,6 +50,9 @@ nmap <silent> <space>gi <Plug>(coc-implementation)
 " Set Coc format keybinds
 nmap <leader>f  <Plug>(coc-format-selected)
 xmap <leader>f  <Plug>(coc-format-selected)
+" Set easy-align keybinds
+nmap <space>ga <Plug>(EasyAlign)
+xmap <space>ga <Plug>(EasyAlign)
 " Set Coc list commands
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
@@ -58,8 +61,10 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>R  :<C-u>CocRestart<CR>
 nnoremap <silent> <space>f  :<C-u>GFiles<CR>
 nnoremap <silent> <space>F  :<C-u>Files<CR>
+nnoremap <silent> <space>b  :<C-u>BufferPick<CR>
+nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
 nnoremap <silent> <c-f>  :<C-u>GFiles<CR>
-nnoremap <silent> <space><space>  :<C-u>CocFix<CR>
+nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
 " autocmd FileType json setlocal commentstring=//\ %s
 " Fugitive preferences autocmd VimEnter * noremap <silent> gs :G<CR>
 
@@ -81,7 +86,12 @@ function! s:check_back_space() abort
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <Tab> pumvisible() ? "\<cr>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+
+inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+inoremap <silent><expr> <c-l> pumvisible() ? coc#_select_confirm() . "." : "<right>"
+inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>d2F.." : "<left>"
+" inoremap <silent><expr> . pumvisible() ? "\<cr>." : "."
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Shifting items in a list
 nmap <S-h> <Plug>(swap-prev)

@@ -1,6 +1,8 @@
 let g:lightline = {}
 let g:lightline.colorscheme = 'glowbeam'
 let g:lightline.separator = {'left': '', 'right': ''}
+let g:lightline.enable = {'tabline': 0}
+
 let g:lightline.subseparator = {'left': '', 'right': ''}
 
 let g:lightline.component_type = {'coc_ok': 'ok'}
@@ -8,7 +10,8 @@ let g:lightline.component_function = {
 	\ 'gitbranch': 'FugitiveHead',
 	\ 'readonly': 'StatuslineReadonly',
 	\ 'modified': 'StatuslineModified',
-	\ 'fileicon': 'StatuslineFileIcon'
+	\ 'fileicon': 'StatuslineFileIcon',
+	\ 'syngroup': 'SynGroupFull'
 \ }
 let g:lightline.tab_component_function = {'modified': 'TablineModified', 'fileicon': 'TablineFileIcon'}
 
@@ -21,10 +24,11 @@ let g:lightline.active = {
 	\ ],
 	\ 'right': [
 		\ ['lineinfo'],
-		\ ['percent', 'charvaluehex'],
-		\ ['filetype']
+		\ ['percent'],
+		\ ['charvaluehex', 'filetype'],
 	\ ]
 \ }
+		" \ ['syngroup']
 
 let g:lightline.tabline = {
 	\ 'right': [
@@ -62,7 +66,7 @@ set showtabline=2
 " let g:lightline#coc#indicator_errors = ''
 
 let g:lightline#coc#indicator_ok = ''
-let g:lightline#coc#indicator_warnings = '𥉉'
+let g:lightline#coc#indicator_warnings = ' ' "𥉉
 let g:lightline#coc#indicator_errors = ' '
 
 function! StatuslineReadonly()
@@ -107,6 +111,16 @@ function! GetFileIcon(ft)
 	\ }
 	return has_key(l:icons, a:ft) ? l:icons[a:ft][0] : l:icons.default[0]
 endfunction
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    return synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+function! SynGroupFull()
+    let l:s = synID(line('.'), col('.'), 1)
+    return synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
 
 call lightline#coc#register()
 
