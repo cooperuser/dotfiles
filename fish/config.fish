@@ -18,6 +18,7 @@ bind \cw "aww";
 bind \cf "vim -c 'GFiles'";
 bind \cv "vim ~/.config/nvim/init.vim";
 bind \cs "echo;git status;echo;";
+bind \cg "gh_dirs";
 
 # Setup pyenv configurations
 if test -d ~/.install/pyenv
