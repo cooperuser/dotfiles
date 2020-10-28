@@ -3,9 +3,9 @@ set tabline=%!MyTabLine()  " custom tab pages line
 function MyTabLine()
 	let s = ''
 	for i in range(tabpagenr('$'))
-		let [icon, iconHL] = TablineIconInfo(i + 1)
+		let [icon, iconHL] = TablineIcon(i + 1)
 
-		" select the highlighting
+		" Select the highlighting of the sign
 		if i + 1 == tabpagenr()
 			let s .= '%#BufferCurrentSign#'
 		else
@@ -13,62 +13,33 @@ function MyTabLine()
 			let iconHL = 'BufferInactive'
 		endif
 		let s .= '▎'
+
+		" Show file icon with color if active
 		let s .= '%#' . iconHL . '#' . icon . ' '
-		" let s .= '%#%{TablineIconColor(' . (i + 1) . ')}#'
-		" let s .= '%{TablineIconColor(' . (i + 1) . ')}'
-		" let s .= '%{TablineIcon(' . (i + 1) . ')}'
 		if i + 1 == tabpagenr()
 			let s .= '%#BufferCurrent#'
 		else
 			let s .= '%#BufferInactive#'
 		endif
 
-		" set the tab page number (for mouse clicks)
+		" Set the tab page number (for mouse clicks)
 		let s .= '%' . (i + 1) . 'T'
 
-" let g:lightline.separator = {'left': '', 'right': ''}
-		" the label is made by MyTabLabel()
+		" Show name and if the file is modified
 		let s .= '%{TablineName(' . (i + 1) . ')}'
-		" let s .= '%t'
-
 		let s .= '%{TablineModified(' . (i + 1) . ')} '
 	endfor
 
-	" after the last tab fill with TabLineFill and reset tab page nr
+	" After the last tab fill with TabLineFill and reset tab page nr
 	let s .= '%#TabLineFill#%T'
 
-	" right-align the label to close the current tab page
+	" Right align for coc-status
 	let s .= '%='
 	if 1
 		let s .= TablineCocStatus()
 	end
 
 	return s
-endfunction
-
-function MyTabLabel(n)
-	let buflist = tabpagebuflist(a:n)
-	let winnr = tabpagewinnr(a:n)
-	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-	return bufname(l:bufnr)
-endfunction
-
-function! TablineModified(n)
-	" return &modified ? '' : ''
-	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-	let l:filetype = getbufvar(l:bufnr, '&ft')
-	let l:modified = getbufvar(l:bufnr, '&modified')
-	let l:modifiable = getbufvar(l:bufnr, '&modifiable')
-	return l:filetype ==# 'help' ? '' : l:modified ? '  ' : l:modifiable ? '' : ' '
-endfunction
-
-function! TablineName(n)
-	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-	let l:name = bufname(l:bufnr)
-	if empty(l:name)
-		return '[No Name]'
-	end
-	return fnamemodify(l:name, ':t')
 endfunction
 
 lua << END
@@ -81,18 +52,6 @@ function get_icon_wrapper(args)
 end
 END
 
-function! TablineIconInfo(n)
-	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-	let l:name = bufname(l:bufnr)
-	let basename = fnamemodify(l:name, ':t')
-	let extension = matchstr(basename, '\v\.@<=\w+$', '', '')
-	let [icon, hl] = luaeval("get_icon_wrapper(_A)", [basename, extension])
-	if icon == ''
-		let icon = g:icons.bufferline_default_file
-	end
-	return [icon, hl]
-endfunc
-
 function! TablineIcon(n)
 	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
 	let l:name = bufname(l:bufnr)
@@ -102,27 +61,36 @@ function! TablineIcon(n)
 	if icon == ''
 		let icon = g:icons.bufferline_default_file
 	end
-	" return [icon, hl]
-	return icon
+	if icon == ''
+		let icon = ""
+	end
+	return [icon, hl]
 endfunc
 
-function! TablineIconColor(n)
+function! TablineName(n)
 	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
 	let l:name = bufname(l:bufnr)
-	let basename = fnamemodify(l:name, ':t')
-	let extension = matchstr(basename, '\v\.@<=\w+$', '', '')
-	let [icon, hl] = luaeval("get_icon_wrapper(_A)", [basename, extension])
-	if icon == ''
-		let icon = g:icons.bufferline_default_file
+	if empty(l:name)
+		return '[No Name]'
 	end
-	" return [icon, hl]
-	return hl
-endfunc
+	return fnamemodify(l:name, ':t')
+endfunction
+
+function! TablineModified(n)
+	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+	let l:filetype = getbufvar(l:bufnr, '&ft')
+	let l:modified = getbufvar(l:bufnr, '&modified')
+	let l:modifiable = getbufvar(l:bufnr, '&modifiable')
+	return l:filetype ==# 'help' ? '' : l:modified ? '  ' : l:modifiable ? '' : ' '
+endfunction
 
 function! TablineCocStatus()
 	let status = get(b:, 'coc_diagnostic_info', {})
-	let c = '%#TablineSeparator#'
-	if empty(status) | return c . '%#TablineSuccess#  ' | endif
+	let textStart = '%#TablineSeparator#'
+	" let textEnd = ' %#TablineSeparator#'
+	let textEnd = ' '
+	let c = textStart
+	if empty(status) | return c . '%#TablineSuccess# ' . textEnd | endif
 	let error = status['error']
 	let warning = status['warning']
 	let info = status['information']
@@ -142,5 +110,7 @@ function! TablineCocStatus()
 	if !(error + warning + info + hint)
 		let c .= '%#TablineSuccess# '
 	end
-	return c . ' '
+	" return c . ' '
+	return c . textEnd
 endfunc
+
