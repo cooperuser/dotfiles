@@ -3,12 +3,12 @@ set laststatus=2 " Always show statusline
 set noshowmode " Hide current mode
 set timeoutlen=1000 " Escape
 set ttimeoutlen=0
-set virtualedit=onemore " Allow selecting the \n character
+" set virtualedit=onemore " Allow selecting the \n character
 set scrolloff=99 " Keep cursor centered on screen
 autocmd InsertLeave * normal `^
 set incsearch " Set autosearch highlighting
 set splitbelow " Set new split to appear below instead of above
-nnoremap <expr> h col(".") == 1 ? "hg$" : "h"
+" nnoremap <expr> h col(".") == 1 ? "hg$" : "h"
 set path+=** " Set :find and :b autocomplete
 set wildmenu
 set cursorline " Show the line the cursor is on
