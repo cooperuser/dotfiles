@@ -90,7 +90,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <silent><expr> <c-l> pumvisible() ? coc#_select_confirm() . "." : "<right>"
-inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>d2F.." : "<left>"
+" inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>dv2F.." : "<left>"
+inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>dv2b." : "<left>"
 " inoremap <silent><expr> . pumvisible() ? "\<cr>." : "."
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
