@@ -65,7 +65,9 @@ nnoremap <silent> <space>b  :<C-u>BufferPick<CR>
 nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
 nnoremap <silent> <c-f>  :<C-u>GFiles<CR>
 nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
-nnoremap <silent> <space>h  :<C-u>CocCommand git.chunkInfo<CR>
+nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
+nnoremap <silent> <space>h  :<C-u>tabprevious<CR>
+nnoremap <silent> <space>l  :<C-u>tabnext<CR>
 " autocmd FileType json setlocal commentstring=//\ %s
 " Fugitive preferences autocmd VimEnter * noremap <silent> gs :G<CR>
 
