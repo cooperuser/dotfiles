@@ -27,6 +27,7 @@ set autoindent
 set smartindent
 set noexpandtab
 set tabstop=4 shiftwidth=4
+set hidden
 set shiftround
 set selection=exclusive
 set showcmd " Show keystrokes
