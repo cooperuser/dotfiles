@@ -20,7 +20,7 @@ vnoremap c "_c
 nnoremap Q <Space>
 
 " Remap ctrl-j to replace word with clipboard
-nnoremap <C-j> "_ciw<C-o>P<ESC>
+nnoremap <C-p> "_ciw<C-o>P<ESC>
 
 " Set switch.vim key
 nnoremap <silent> <C-s> :Switch<CR>
@@ -61,13 +61,20 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>R  :<C-u>CocRestart<CR>
 nnoremap <silent> <space>f  :<C-u>GFiles<CR>
 nnoremap <silent> <space>F  :<C-u>Files<CR>
-nnoremap <silent> <space>b  :<C-u>BufferPick<CR>
+nnoremap <silent> <space>b  :<C-u>ene<CR>
 nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
+nnoremap <silent> <cr> :<C-u>BufferPick<CR>
 nnoremap <silent> <c-f>  :<C-u>GFiles<CR>
 nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
 nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
-nnoremap <silent> <space>h  :<C-u>tabprevious<CR>
-nnoremap <silent> <space>l  :<C-u>tabnext<CR>
+" nnoremap <silent> <space>h  :<C-u>BufferPrevious<CR>
+" nnoremap <silent> <space>l  :<C-u>BufferNext<CR>
+
+nnoremap <silent> <space>h  :<C-u>bprevious<CR>
+nnoremap <silent> <space>l  :<C-u>bnext<CR>
+nnoremap <silent> <c-j> :<C-u>bprevious<CR>
+nnoremap <silent> <c-k> :<C-u>bnext<CR>
+
 " autocmd FileType json setlocal commentstring=//\ %s
 " Fugitive preferences autocmd VimEnter * noremap <silent> gs :G<CR>
 
