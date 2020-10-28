@@ -55,7 +55,7 @@ nmap <space>ga <Plug>(EasyAlign)
 xmap <space>ga <Plug>(EasyAlign)
 " Set Coc list commands
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocList marketplace<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>R  :<C-u>CocRestart<CR>
