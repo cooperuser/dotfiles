@@ -52,17 +52,26 @@ function get_icon_wrapper(args)
 end
 END
 
+function! TablineRainbowColor(n)
+	let rainbowcolors = ["Html", "Rss", "Js", "Vim", "Lua", "Jl"]
+	return rainbowcolors[a:n % 6] . "DevIcon"
+endfunc
+
 function! TablineIcon(n)
 	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
 	let l:name = bufname(l:bufnr)
 	let basename = fnamemodify(l:name, ':t')
 	let extension = matchstr(basename, '\v\.@<=\w+$', '', '')
 	let [icon, hl] = luaeval("get_icon_wrapper(_A)", [basename, extension])
-	if icon == ''
-		let icon = g:icons.bufferline_default_file
-	end
-	if icon == ''
+	if icon == '' || icon == ''
 		let icon = ""
+		let hl = TablineRainbowColor(a:n - 1)
+	end
+	if l:name =~ '[0-9]*;#FZF'
+		let icon = ''
+		let hl = TablineRainbowColor(str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % 6)
+	elseif l:name =~ 'help\.txt'
+		let icon = 'ﬤ'
 	end
 	return [icon, hl]
 endfunc
@@ -72,6 +81,9 @@ function! TablineName(n)
 	let l:name = bufname(l:bufnr)
 	if empty(l:name)
 		return '[No Name]'
+	end
+	if l:name =~ '[0-9]*;#FZF'
+		return '[FZF] '
 	end
 	return fnamemodify(l:name, ':t')
 endfunction
