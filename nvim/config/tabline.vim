@@ -90,7 +90,7 @@ function! TablineCocStatus()
 	" let textEnd = ' %#TablineSeparator#'
 	let textEnd = ' '
 	let c = textStart
-	if empty(status) | return c . '%#TablineSuccess# ' . textEnd | endif
+	if empty(status) | return '' | endif
 	let error = status['error']
 	let warning = status['warning']
 	let info = status['information']
