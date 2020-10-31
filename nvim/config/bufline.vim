@@ -64,7 +64,7 @@ END
 
 function! TablineRainbowColor(n)
 	let rainbowcolors = ["Html", "Rss", "Js", "Vim", "Lua", "Jl"]
-	return rainbowcolors[a:n % 6] . "DevIcon"
+	return "DevIcon" . rainbowcolors[a:n % 6]
 endfunc
 
 function! TablineIcon(n)
