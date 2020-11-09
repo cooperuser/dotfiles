@@ -68,6 +68,23 @@ nnoremap <silent> <cr> :<C-u>BufferPick<CR>
 nnoremap <silent> <c-f>  :<C-u>GFiles<CR>
 nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
 nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
+
+let g:shg = 0
+function! ToggleShowHighlightGroup()
+	if g:shg == 1
+		let g:shg = 0
+	else
+		let g:shg = 1
+	end
+endfunction
+function! ShowHighlightGroup()
+	if g:shg == 1
+		TSHighlightCapturesUnderCursor
+	end
+endfunction
+autocmd CursorHold * call ShowHighlightGroup()
+nnoremap <silent> <space>gh :call ToggleShowHighlightGroup()<CR>
+
 " nnoremap <silent> <space>h  :<C-u>BufferPrevious<CR>
 " nnoremap <silent> <space>l  :<C-u>BufferNext<CR>
 
