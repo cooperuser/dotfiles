@@ -7,20 +7,26 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/vim-easy-align'
 Plug 'AndrewRadev/switch.vim'
 Plug 'benmills/vimux'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/playground'
-Plug 'npxbr/glow.nvim'
-Plug 'rrethy/vim-hexokinase', {'do': 'make hexokinase'}
+Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 Plug 'machakann/vim-swap'
+Plug 'voldikss/vim-floaterm'
 
+" Searching
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
+
+" Buffer bar
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/lib.kom'
 " Plug 'romgrk/barbar.nvim'
@@ -30,6 +36,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'nvim-lua/completion-nvim'
 " Plug 'neovim/nvim-lspconfig' ", {'for': ['vim', 'lua', 'rust']}
 " Plug 'nvim-lua/diagnostic-nvim'
+" Plug 'tjdevries/nlua.nvim'
 
 " Syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -43,7 +50,6 @@ Plug 'Julian/vim-textobj-variable-segment'
 " Colorschemes
 Plug 'cooper-anderson/tjay.vim'
 Plug 'morhetz/gruvbox'
-Plug 'balanceiskey/vim-framer-syntax'
 Plug 'Iron-E/nvim-highlite'
 Plug '~/GitHub/glowbeam.vim'
 Plug '~/Github/doom-two.vim'
@@ -72,6 +78,10 @@ let g:coc_snippet_prev = "<C-h>"
 " sgur/vim-textobj-parameter
 let g:vim_textobj_parameter_mapping = 'a'
 
+" Floaterm
+let g:floaterm_winblend = 10
+let g:fern#renderer = "nerdfont"
+
 " nvim-treesitter/nvim-treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -96,4 +106,8 @@ local hlmap = vim.treesitter.highlighter.hl_map
 hlmap["parameter"] = "Parameter"
 hlmap["parameter.arrow_function"] = "Parameter"
 EOF
+
+" Telescope
+lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
+let g:dashboard_default_executive ='telescope'
 
