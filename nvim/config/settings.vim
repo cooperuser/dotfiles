@@ -62,4 +62,8 @@ endfun
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd User CocDiagnosticChange redrawtabline
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 250})
+augroup END
 
