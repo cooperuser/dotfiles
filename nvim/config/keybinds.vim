@@ -62,6 +62,7 @@ nnoremap <silent> <space>R  :<C-u>CocRestart<CR>
 nnoremap <silent> <space>f  :<C-u>GFiles<CR>
 nnoremap <silent> <space>F  :<C-u>Files<CR>
 nnoremap <silent> <space>b  :<C-u>ene<CR>
+nnoremap <silent> <space>B  :<C-u>bd<CR>
 nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
 nnoremap <silent> <cr> :<C-u>BufferPick<CR>
 nnoremap <silent> <c-f>  :<C-u>GFiles<CR>
