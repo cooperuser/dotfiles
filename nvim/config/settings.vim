@@ -61,4 +61,5 @@ endfun
 " autocmd BufWritePre * :call TrimWhitespace()
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd User CocDiagnosticChange redrawtabline
 
