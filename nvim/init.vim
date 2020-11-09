@@ -12,7 +12,6 @@ set termguicolors
 " Temporary loading two separate colorschemes to
 " get the nvim-treesitter colors working properly
 colorscheme glowbeam
-colorscheme doom-two
 
 lua <<EOF
 require'nvim-web-devicons'.setup {
