@@ -90,6 +90,7 @@ nmap <silent> <space>p :Glow<CR>
 nmap <silent> <space>z zf%
 nmap <silent> <space>t :tabnew<CR>
 nmap <silent> <space>T :tabclose<CR>
+nmap <silent> <space>/ :nohlsearch<CR>
 
 " Set Coc tab and snippet navigation
 function! s:check_back_space() abort
