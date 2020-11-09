@@ -37,8 +37,9 @@ set winblend=15 " Set transparency for floating window
 " set signcolumn=number " Show lint signs in the number column
 set signcolumn=yes:1
 set list
-set listchars=tab:│\ ,trail:~
-" set listchars=tab:┊\ >,trail:~,eol:$
+set listchars=tab:▏\ ,trail:~
+set colorcolumn=+0
+set nowrap
 	
 set foldtext=MyFoldText()
 function MyFoldText()
