@@ -1,5 +1,5 @@
 let g:lightline = {}
-let g:lightline.colorscheme = 'glowbeam'
+let g:lightline.colorscheme = 'glowbat'
 let g:lightline.separator = {'left': '', 'right': ''}
 let g:lightline.enable = {'tabline': 0}
 
@@ -41,18 +41,18 @@ let g:lightline.tab = {
 	\ 'inactive': ['tabnum', 'fileicon', 'filename', 'modified'],
 \ }
 
-let g:lightline.mode_mapd = {
-	\ 'n' : '',
+let g:lightline.mode_map = {
+	\ 'n' : 'ﮟ',
 	\ 'i' : '',
-	\ 'R' : 'R',
-	\ 'v' : 'V',
-	\ 'V' : 'VL',
-	\ "\<C-v>": 'VB',
-	\ 'c' : 'C',
-	\ 's' : 'S',
-	\ 'S' : 'SL',
-	\ "\<C-s>": 'SB',
-	\ 't': 'T',
+	\ 'R' : '',
+	\ 'v' : '',
+	\ 'V' : '',
+	\ "\<C-v>": '',
+	\ 'c' : '',
+	\ 's' : '',
+	\ 'S' : '',
+	\ "\<C-s>": '',
+	\ 't': '',
 \ }
 
 set showtabline=2
