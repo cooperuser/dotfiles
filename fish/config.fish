@@ -16,7 +16,7 @@ export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
 
 bind \cw "aww";
 bind \cf "vim -c 'GFiles'";
-bind \cv "vim ~/.config/nvim/init.vim ~/.config/nvim/config/plugins.vim ~/.config/nvim/config/settings.vim ~/.config/nvim/config/keybinds.vim ~/.config/nvim/config/statusline.vim ~/.config/nvim/config/bufline.vim";
+bind \cv "vim ~/.config/nvim/init.vim ~/.config/nvim/config/plugins.vim ~/.config/nvim/config/settings.vim ~/.config/nvim/config/keybinds.vim ~/.config/nvim/config/statusline.vim ~/.config/nvim/config/bufline.vim -c 'bp | bn'";
 bind \cs "echo;git status;echo;";
 
 # Setup pyenv configurations
