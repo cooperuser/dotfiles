@@ -127,3 +127,11 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 nmap <S-h> <Plug>(swap-prev)
 nmap <S-l> <Plug>(swap-next)
 
+" Floaterm
+noremap <silent> <C-\> :FloatermToggle<CR>
+tnoremap <silent> <C-\> <C-\><C-n>:FloatermToggle<CR>
+
+" Telescope
+nnoremap <Space>f <cmd>lua require'telescope.builtin'.git_files({windblend = 10})<CR>
+nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({windblend = 10})<CR>
+
