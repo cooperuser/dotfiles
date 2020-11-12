@@ -98,6 +98,10 @@ require "nvim-treesitter.configs".setup {
     disable = {},
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false -- Whether the query persists across vim sessions
+  },
+  rainbow = {
+    enable = true,
+    disable = {'lua'} -- please disable lua for now
   }
 }
 
