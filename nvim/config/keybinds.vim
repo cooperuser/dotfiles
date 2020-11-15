@@ -65,7 +65,6 @@ nnoremap <silent> <space>b  :<C-u>ene<CR>
 nnoremap <silent> <space>B  :<C-u>bd<CR>
 nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
 nnoremap <silent> <cr> :<C-u>BufferPick<CR>
-nnoremap <silent> <c-f>  :<C-u>GFiles<CR>
 nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
 nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
 
@@ -134,4 +133,12 @@ tnoremap <silent> <C-\> <C-\><C-n>:FloatermToggle<CR>
 " Telescope
 nnoremap <Space>f <cmd>lua require'telescope.builtin'.git_files({windblend = 10})<CR>
 nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({windblend = 10})<CR>
+
+" Control PUM menu
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<up>"
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
