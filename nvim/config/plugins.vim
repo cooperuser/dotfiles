@@ -13,7 +13,7 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'benmills/vimux'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
-Plug 'p00f/nvim-ts-rainbow'
+" Plug 'p00f/nvim-ts-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 Plug 'machakann/vim-swap'
@@ -99,10 +99,10 @@ require "nvim-treesitter.configs".setup {
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false -- Whether the query persists across vim sessions
   },
-  rainbow = {
+  --[[rainbow = {
     enable = true,
     disable = {'lua'} -- please disable lua for now
-  }
+  }--]]
 }
 
 require "nvim-treesitter.highlight"
