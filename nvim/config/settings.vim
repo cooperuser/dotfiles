@@ -67,3 +67,5 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 250})
 augroup END
 
+let g:python_recommended_style = 0
+
