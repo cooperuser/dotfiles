@@ -127,7 +127,9 @@ tnoremap <silent> <C-\> <C-\><C-n>:FloatermToggle<CR>
 
 " Telescope
 nnoremap <Space>f <cmd>lua require'telescope.builtin'.git_files({windblend = 10})<CR>
-nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({windblend = 10})<CR>
+nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({
+	\ file_ignore_patterns = {"node_modules/*", ".git/*"}
+  \ })<CR>
 
 " Control PUM menu
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<down>"
