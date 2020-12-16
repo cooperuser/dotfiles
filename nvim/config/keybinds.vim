@@ -42,12 +42,10 @@ noremap <C-t> :Files<CR>
 " Set Coc diagnostic keybinds
 nmap <silent> g[ <Plug>(coc-diagnostic-prev)
 nmap <silent> g] <Plug>(coc-diagnostic-next)
-" nmap <silent> ; <Plug>(coc-diagnostic-next)
 nmap <silent> <space>k <Plug>(coc-diagnostic-prev)
 nmap <silent> <space>j <Plug>(coc-diagnostic-next)
 nmap <silent> <space>gd <Plug>(coc-definition)
 nmap <silent> <space>gi <Plug>(coc-implementation)
-" nmap <silent> <space>f <Plug>(coc-fix-current)
 " Set Coc format keybinds
 nmap <leader>f  <Plug>(coc-format-selected)
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -58,7 +56,6 @@ xmap <space>ga <Plug>(EasyAlign)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>e  :<C-u>CocList marketplace<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <silent> <space>R  :<C-u>CocRestart<CR>
 nnoremap <silent> <space>f  :<C-u>GFiles<CR>
 nnoremap <silent> <space>F  :<C-u>Files<CR>
@@ -85,11 +82,6 @@ endfunction
 autocmd CursorHold * call ShowHighlightGroup()
 nnoremap <silent> <space>gh :call ToggleShowHighlightGroup()<CR>
 
-" nnoremap <silent> <space>h  :<C-u>BufferPrevious<CR>
-" nnoremap <silent> <space>l  :<C-u>BufferNext<CR>
-
-nnoremap <silent> <space>h  :<C-u>bprevious<CR>
-nnoremap <silent> <space>l  :<C-u>bnext<CR>
 nnoremap <silent> <c-j> :<C-u>bprevious<CR>
 nnoremap <silent> <c-k> :<C-u>bnext<CR>
 
