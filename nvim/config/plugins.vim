@@ -3,7 +3,6 @@ set rtp+=~/.install/fzf
 call plug#begin('~/.config/nvim/plugged') " Begin vim-plug
 
 " Main plugins
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -18,6 +17,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 Plug 'machakann/vim-swap'
 Plug 'voldikss/vim-floaterm'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'lervag/vimtex'
 
 " Searching
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -27,7 +29,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
 " Buffer bar
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/lib.kom'
 " Plug 'romgrk/barbar.nvim'
 
@@ -114,4 +115,29 @@ EOF
 " Telescope
 lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
 let g:dashboard_default_executive ='telescope'
+
+" nvim-tree-lua
+let g:lua_tree_indent_markers = 1
+let g:lua_tree_git_hl = 1
+let g:lua_tree_ignore = [
+	\ '.git',
+	\ 'node_modules',
+	\ '.cache',
+	\ '.idea',
+	\ '.firebase'
+\ ]
+let g:lua_tree_show_icons = {
+	\ 'git': 0,
+	\ 'folders': 1,
+	\ 'files': 1,
+\ }
+let g:lua_tree_icons = {
+	\ 'folder': {
+		\ 'default': '',
+		\ 'open': '',
+	\ }
+\ }
+
+" Vimtex
+let g:vimtex_view_method = 'skim'
 
