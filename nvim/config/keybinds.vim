@@ -111,10 +111,10 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <silent><expr> <c-l> pumvisible() ? coc#_select_confirm() . "." : "<right>"
-" inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>dv2F.." : "<left>"
-inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>dv2b." : "<left>"
-" inoremap <silent><expr> . pumvisible() ? "\<cr>." : "."
+" inoremap <silent><expr> <c-l> pumvisible() ? coc#_select_confirm() . "." : "<right>"
+" inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>dv2b." : "<left>"
+inoremap <silent><expr> <C-l> "<right>"
+inoremap <silent><expr> <C-h> "<left>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Shifting items in a list
@@ -134,8 +134,8 @@ nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({
 " Control PUM menu
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<up>"
-nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-d>"
+inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-u>"
 
