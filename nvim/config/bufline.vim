@@ -115,7 +115,7 @@ function! TablineCocStatus()
 	let info = status['information']
 	let hint = status['hint']
 	if get(status, 'hint', 0)
-		let c .= '%#TablineSpecial# ﬤ ' . hint
+		let c .= '%#TablineHint# ﬤ ' . hint
 	end
 	if get(status, 'information', 0)
 		let c .= '%#TablineInfo#  ' . info
