@@ -65,6 +65,8 @@ nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
 nnoremap <silent> <cr> :<C-u>BufferPick<CR>
 nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
 nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
+nnoremap <silent> <space>lc :VimtexCompileSS<CR>
+nnoremap <silent> <space>lv :VimtexView<CR>
 
 let g:shg = 0
 function! ToggleShowHighlightGroup()
@@ -95,7 +97,7 @@ nmap <silent> <space>q :call VimuxInterruptRunner()<CR>
 nmap <silent> <space>vc :call VimuxCloseRunner()<CR>
 nmap <silent> <space>vo :call VimuxOpenRunner()<CR>
 nmap <silent> <space>vo :call VimuxOpenRunner()<CR>
-nmap <silent> <space>p :Glow<CR>
+nmap <silent> <space>p :LuaTreeToggle<CR>
 nmap <silent> <space>z zf%
 nmap <silent> <space>t :tabnew<CR>
 nmap <silent> <space>T :tabclose<CR>
