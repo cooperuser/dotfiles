@@ -5,15 +5,16 @@ noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
-inoremap <C-h> <left>
-inoremap <C-l> <right>
-inoremap <C-j> <down>
-inoremap <C-k> <up>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 
 inoremap <C-c> <ESC>
 
 " Remap change to assign register
 nnoremap c "_c
+nnoremap C "_C
 vnoremap c "_c
 
 " Stop the terrible Q mistake
