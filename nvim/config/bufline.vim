@@ -98,8 +98,7 @@ endfunction
 
 function! TablineModified(n)
 	let l:bufnr = a:n
-	let l:name = bufname(a:n)
-	if l:name =~ 'fish'
+	if &buftype == 'terminal'
 		return ''
 	end
 	let l:filetype = getbufvar(l:bufnr, '&ft')
