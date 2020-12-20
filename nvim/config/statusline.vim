@@ -75,6 +75,9 @@ endfunction
 
 function! StatuslineModified()
 	" return &modified ? '' : ''
+	if &buftype == 'terminal'
+		return ''
+	end
 	return &ft ==# 'help' ? '' : &modified ? '' : &modifiable ? '' : ''
 endfunction
 
