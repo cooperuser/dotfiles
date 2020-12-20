@@ -10,8 +10,6 @@ source ~/.config/nvim/config/terminal.vim
 
 syntax on
 set termguicolors
-" Temporary loading two separate colorschemes to
-" get the nvim-treesitter colors working properly
 colorscheme glowbeam
 
 lua <<EOF
@@ -19,4 +17,10 @@ require'nvim-web-devicons'.setup {
  default = true;
 }
 EOF
+
+function! StartVimtex(n)
+	let b:vimtex_main = a:n . "/" . a:n . ".tex"
+	:VimtexReloadState
+	:VimtexCompile
+endfunction
 
