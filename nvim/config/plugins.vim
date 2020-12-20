@@ -11,7 +11,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'AndrewRadev/switch.vim'
 Plug 'benmills/vimux'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
+Plug 'nvim-treesitter/playground'
 " Plug 'p00f/nvim-ts-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
