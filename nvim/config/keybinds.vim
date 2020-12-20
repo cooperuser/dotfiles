@@ -63,7 +63,7 @@ nnoremap <silent> <space>b  :<C-u>ene<CR>
 nnoremap <silent> <space>B  :<C-u>bd<CR>
 nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
 nnoremap <silent> <cr> :<C-u>BufferPick<CR>
-nnoremap <silent> <space><cr>  :<C-u>CocFix<CR>
+nnoremap <silent> <space><cr>  :<C-u>CocAction<CR>
 nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
 nnoremap <silent> <space>lc :VimtexCompileSS<CR>
 nnoremap <silent> <space>lv :VimtexView<CR>
@@ -90,7 +90,6 @@ nnoremap <silent> <c-k> :<C-u>bnext<CR>
 " autocmd FileType json setlocal commentstring=//\ %s
 " Fugitive preferences autocmd VimEnter * noremap <silent> gs :G<CR>
 
-nmap <silent> <space>r :w<CR>:call VimuxRunCommand("make")<CR>
 nmap <silent> <space>m :w<CR>:make<CR>
 nmap <silent> <space>Q :so ~/.config/nvim/init.vim<CR>
 nmap <silent> <space>q :call VimuxInterruptRunner()<CR>
@@ -99,8 +98,6 @@ nmap <silent> <space>vo :call VimuxOpenRunner()<CR>
 nmap <silent> <space>vo :call VimuxOpenRunner()<CR>
 nmap <silent> <space>p :LuaTreeToggle<CR>
 nmap <silent> <space>z zf%
-nmap <silent> <space>t :tabnew<CR>
-nmap <silent> <space>T :tabclose<CR>
 nmap <silent> <space>/ :nohlsearch<CR>
 
 " Set Coc tab and snippet navigation
@@ -121,10 +118,6 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 nmap <S-h> <Plug>(swap-prev)
 nmap <S-l> <Plug>(swap-next)
 
-" Floaterm
-noremap <silent> <C-\> :FloatermToggle<CR>
-tnoremap <silent> <C-\> <C-\><C-n>:FloatermToggle<CR>
-
 " Telescope
 nnoremap <Space>f <cmd>lua require'telescope.builtin'.git_files({windblend = 10})<CR>
 nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({
@@ -132,10 +125,24 @@ nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({
   \ })<CR>
 
 " Control PUM menu
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<down>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<up>"
+inoremap <expr> <C-j> pumvisible() ? "\<down>" : "\<down>"
+inoremap <expr> <C-k> pumvisible() ? "\<up>" : "\<up>"
 nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
 nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-d>"
 inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-u>"
+
+" Duplicate line and comment
+nmap gcn "0yygcc"0p
+nmap gcp "0yygcc"0P
+
+nnoremap <silent> <space>PI :PlugInstall<CR>
+nnoremap <silent> <space>PU :PlugUpdate<CR>
+nnoremap <silent> <space>PC :PlugClean<CR>
+
+nnoremap <C-z> <C-^>
+inoremap <C-z> <C-o><C-^>
+tnoremap <C-z> <C-\><C-n><C-^>
+tnoremap <C-w> <C-\><C-n><C-w>
+tnoremap <C-w><C-w> <C-w>
 
