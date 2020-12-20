@@ -7,10 +7,9 @@ fish/functions/__*
 fish/functions/fish_user_key_bindings.fish
 fish/functions/fzf_key_bindings.fish
 
-coc/*
-!coc/extensions
-coc/extensions/*
-!coc/extensions/package.json
+coc/
+
+tmux/plugins/
 
 yarn/
 
@@ -18,4 +17,5 @@ ptpython/history
 gcloud/
 binwalk/
 gh/
+firebase/
 
