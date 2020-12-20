@@ -99,21 +99,25 @@ require "nvim-treesitter.configs".setup {
     disable = {},
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false -- Whether the query persists across vim sessions
-  },
-  --[[rainbow = {
+  }
+}
+require "nvim-treesitter.configs".setup {
+  query_linter = {
     enable = true,
-    disable = {'lua'} -- please disable lua for now
-  }--]]
+    use_virtual_text = true,
+    lint_events = {"BufWrite", "CursorHold"},
+  },
+}
+require "nvim-treesitter.configs".setup {
+	incremental_selection = {
+		enable = true
+	}
 }
 
-require "nvim-treesitter.highlight"
-local hlmap = vim.treesitter.highlighter.hl_map
-hlmap["parameter"] = "Parameter"
-hlmap["parameter.arrow_function"] = "Parameter"
 EOF
 
 " Telescope
-lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
+lua require('telescope').setup({defaults = {winblend = 15, file_sorter = require('telescope.sorters').get_fzy_sorter}})
 let g:dashboard_default_executive ='telescope'
 
 " nvim-tree-lua
