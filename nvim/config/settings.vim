@@ -40,6 +40,7 @@ set list
 set listchars=tab:▏\ ,trail:~
 set colorcolumn=+0
 set nowrap
+set splitright
 	
 set foldtext=MyFoldText()
 function MyFoldText()
@@ -52,20 +53,14 @@ endfunction
 set foldcolumn=0
 set fillchars=fold:\ " Remove dots after fold
 
-" Trim whitespace on write
-fun! TrimWhitespace()
-	let l:save = winsaveview()
-	keeppatterns %s/\s\+$//e
-	call winrestview(l:save)
-endfun
-" autocmd BufWritePre * :call TrimWhitespace()
-
 autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd User CocDiagnosticChange redrawtabline
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 250})
 augroup END
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:python_recommended_style = 0
 
