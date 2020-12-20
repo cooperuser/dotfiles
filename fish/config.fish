@@ -14,10 +14,13 @@ export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
 # Setup command aliases
 . ~/.config/fish/aliases.fish
 
-bind \cw "aww";
 bind \cf "vim -c 'GFiles'";
 bind \cv "vim ~/.config/nvim/init.vim ~/.config/nvim/config/plugins.vim ~/.config/nvim/config/settings.vim ~/.config/nvim/config/keybinds.vim ~/.config/nvim/config/statusline.vim ~/.config/nvim/config/bufline.vim -c 'bp | bn'";
 bind \cs "echo;git status;echo;";
+bind \t forward-word
+bind \cj complete
+bind \ck complete-and-search
+bind --key btab accept-autosuggestion
 
 # Setup pyenv configurations
 if test -d ~/.install/pyenv
