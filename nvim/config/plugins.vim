@@ -23,7 +23,6 @@ Plug 'lervag/vimtex'
 
 " Searching
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
@@ -41,6 +40,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntax plugins
 Plug 'sheerun/vim-polyglot'
+Plug 'harenome/vim-mipssyntax'
+Plug 'skanehira/preview-uml.vim'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
@@ -81,7 +82,6 @@ let g:vim_textobj_parameter_mapping = 'a'
 
 " Floaterm
 let g:floaterm_winblend = 10
-let g:fern#renderer = "nerdfont"
 
 " nvim-treesitter/nvim-treesitter
 lua <<EOF
