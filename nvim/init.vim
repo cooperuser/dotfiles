@@ -6,6 +6,7 @@ source ~/.config/nvim/config/keybinds.vim
 
 source ~/.config/nvim/config/statusline.vim
 source ~/.config/nvim/config/bufline.vim
+source ~/.config/nvim/config/terminal.vim
 
 syntax on
 set termguicolors
