@@ -12,7 +12,6 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'benmills/vimux'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
-" Plug 'p00f/nvim-ts-rainbow'
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 Plug 'machakann/vim-swap'
@@ -20,23 +19,25 @@ Plug 'voldikss/vim-floaterm'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lervag/vimtex'
+Plug 'lewis6991/gitsigns.nvim'
 
 " Searching
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
 " Buffer bar
 Plug 'romgrk/lib.kom'
-" Plug 'romgrk/barbar.nvim'
 
 " Completion plugins
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'nvim-lua/completion-nvim'
-" Plug 'neovim/nvim-lspconfig' ", {'for': ['vim', 'lua', 'rust']}
-" Plug 'nvim-lua/diagnostic-nvim'
-" Plug 'tjdevries/nlua.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
+Plug 'tjdevries/nlua.nvim'
+Plug 'SirVer/ultisnips'
 
 " Syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -59,8 +60,6 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'romgrk/doom-one.vim'
 
 call plug#end() " Initialize vim-plug system and plugins
-
-" source ~/.config/nvim/config/plugin-settings/completion-nvim.vim
 
 " Configurations
 

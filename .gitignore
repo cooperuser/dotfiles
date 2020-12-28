@@ -1,6 +1,7 @@
 .DS_Store
 nvim/plugged/
 nvim/.netrwhist
+nvim/plugin/packer_compiled.vim
 
 configstore/
 fish/functions/__*

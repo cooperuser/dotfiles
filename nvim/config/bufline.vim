@@ -108,30 +108,29 @@ function! TablineModified(n)
 endfunction
 
 function! TablineCocStatus()
-	let status = get(b:, 'coc_diagnostic_info', {})
+	let l:numbers = luaeval("GetStatusNumbers()")
+	let l:errors = l:numbers[0]
+	let l:warnings = l:numbers[1]
+	let l:infos = l:numbers[2]
+	let l:hints = l:numbers[3]
 	let textStart = '%#TablineSeparator#'
 	let textEnd = ' '
 	let c = textStart
-	if empty(status) | return '' | endif
-	let error = status['error']
-	let warning = status['warning']
-	let info = status['information']
-	let hint = status['hint']
-	if get(status, 'hint', 0)
-		let c .= '%#TablineHint# ﬤ ' . hint
-	end
-	if get(status, 'information', 0)
-		let c .= '%#TablineInfo#  ' . info
-	end
-	if get(status, 'warning', 0)
-		let c .= '%#TablineWarning#  ' . warning
-	end
-	if get(status, 'error', 0)
-		let c .= '%#TablineError#  ' . error
-	end
-	if !(error + warning + info + hint)
+	if l:hints != 0
+		let c .= '%#TablineHint# ﬤ ' . l:hints
+	endif
+	if l:infos != 0
+		let c .= '%#TablineInfo#  ' . l:infos
+	endif
+	if l:warnings != 0
+		let c .= '%#TablineWarning#  ' . l:warnings
+	endif
+	if l:errors != 0
+		let c .= '%#TablineError#  ' . l:errors
+	endif
+	if l:errors + l:warnings + l:infos + l:hints == 0
 		let c .= '%#TablineSuccess# '
-	end
+	endif
 	return c . textEnd
 endfunc
 

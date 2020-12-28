@@ -13,7 +13,7 @@ let g:lightline.component_function = {
 	\ 'fileicon': 'StatuslineFileIcon',
 	\ 'syngroup': 'SynGroupFull'
 \ }
-let g:lightline.tab_component_function = {'modified': 'TablineModified', 'fileicon': 'TablineFileIcon'}
+let g:lightline.tab_component_function = {'modified': 'StatModified', 'fileicon': 'StatFileIcon'}
 
 let g:lightline.active = {
 	\ 'left': [
@@ -81,7 +81,7 @@ function! StatuslineModified()
 	return &ft ==# 'help' ? '' : &modified ? '' : &modifiable ? '' : ''
 endfunction
 
-function! TablineModified(n)
+function! StatModified(n)
 	" return &modified ? '' : ''
 	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
 	let l:filetype = getbufvar(l:bufnr, '&ft')
@@ -94,7 +94,7 @@ function! StatuslineFileIcon()
 	return GetFileIcon(&ft)
 endfunction
 
-function! TablineFileIcon(n)
+function! StatFileIcon(n)
 	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
 	return GetFileIcon(getbufvar(l:bufnr, '&ft'))
 endfunction
@@ -125,5 +125,5 @@ function! SynGroupFull()
     return synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 
-call lightline#coc#register()
+" call lightline#coc#register()
 
