@@ -7,4 +7,6 @@ alias tree="exa -T"
 alias p="ptpython --config-dir=~/.config/ptpython"
 alias m="musikcube"
 alias htop="export TERM=screen-256color;/usr/local/bin/htop;export TERM=tmux-256color"
+alias jc="cd ~/.config"
+alias jcn="cd ~/.config/nvim"
 

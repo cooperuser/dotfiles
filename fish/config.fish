@@ -15,7 +15,7 @@ export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
 . ~/.config/fish/aliases.fish
 
 bind \cf "vim -c 'GFiles'";
-bind \cv "vim ~/.config/nvim/init.vim ~/.config/nvim/config/plugins.vim ~/.config/nvim/config/settings.vim ~/.config/nvim/config/keybinds.vim ~/.config/nvim/config/statusline.vim ~/.config/nvim/config/bufline.vim -c 'bp | bn'";
+bind \cv "config_vim";
 bind \cs "echo;git status;echo;";
 bind \t forward-word
 bind \cj complete
