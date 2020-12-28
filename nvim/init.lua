@@ -1,5 +1,6 @@
-K = require("ampersand.keybinds")
-K.keybinds()
+local keybinds = require("ampersand.keybinds")
+keybinds.keybinds()
+K = keybinds.map
 require("ampersand.plugins")
 require("ampersand.settings")
 

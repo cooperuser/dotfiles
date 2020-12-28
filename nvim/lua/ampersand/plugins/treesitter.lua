@@ -1,6 +1,7 @@
-Plugins.treesitter = {}
+local plugin = {name = "treesitter"}
+Plugins[plugin.name] = plugin
 
-function Plugins.treesitter.settings()
+function plugin.settings()
 	local ts = require("nvim-treesitter.configs")
 	ts.setup {
 		ensure_installed = {

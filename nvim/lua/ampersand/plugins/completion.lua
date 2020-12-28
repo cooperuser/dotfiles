@@ -1,6 +1,7 @@
-Plugins.completion = {}
+local plugin = {name = "completion"}
+Plugins[plugin.name] = plugin
 
-function Plugins.completion.settings()
+function plugin.settings()
 	local lspconfig = require("lspconfig")
 	local completion = require("completion")
 
@@ -44,10 +45,10 @@ function Plugins.completion.settings()
 		Variable = " ",
 		Field = " ",
 		Enum = "פּ ",
-		EnumMember = " [Member]",
+		EnumMember = " ",
 		Class = " ",
-		Method = " [Method]",
-		Function = " [Function]",
+		Method = " ",
+		Function = " ",
 		Property = " ",
 		UltiSnips = " ",
 		Snippet = " ",
@@ -56,7 +57,7 @@ function Plugins.completion.settings()
 		Constant = " ",
 		Interface = " ",
 		Struct = " ",
-		Reference = " [refrence]"
+		Reference = " "
 	}
 	-- vim.g.completion_customize_lsp_label = {
 	-- 	Text = "ﮜ [text]",
@@ -111,7 +112,20 @@ function Plugins.completion.settings()
 	end
 end
 
+function plugin.keybinds()
+	K.group([[Move between diagnostics]], function()
+		K.sp("k", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
+		K.sp("j", ":lua vim.lsp.diagnostic.goto_next()<CR>")
+	end)
+
+	K.group([[Bring up code action menu]], function()
+		K.n("<C-space>", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+		K.i("<C-space>", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+	end)
+end
+
 return function()
 	Plugins.completion.settings()
+	K.plugin(Plugins.completion)
 end
 

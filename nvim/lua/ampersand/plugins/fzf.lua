@@ -1,6 +1,7 @@
-Plugins.fzf = {}
+local plugin = {name = "fzf"}
+Plugins[plugin.name] = plugin
 
-function Plugins.fzf.settings()
+function plugin.settings()
 	vim.g.fzf_layout = {
 		window = {
 			width = 0.8,

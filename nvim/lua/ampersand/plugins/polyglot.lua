@@ -1,6 +1,7 @@
-Plugins.polyglot = {}
+local plugin = {name = "polyglot"}
+Plugins[plugin.name] = plugin
 
-function Plugins.polyglot.settings()
+function plugin.settings()
 	vim.g.python_recommended_style = 0
 end
 

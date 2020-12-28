@@ -1,10 +1,16 @@
-Plugins.template = {}
+local plugin = {name = "template"}
+Plugins[plugin.name] = plugin
 
-function Plugins.template.settings()
+function plugin.settings()
+
+end
+
+function plugin.keybinds()
 
 end
 
 return function()
 	Plugins.template.settings()
+	K.plugin(Plugins.template)
 end
 

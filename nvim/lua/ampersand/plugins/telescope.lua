@@ -1,6 +1,7 @@
-Plugins.telescope = {}
+local plugin = {name = "telescope"}
+Plugins[plugin.name] = plugin
 
-function Plugins.telescope.settings()
+function plugin.settings()
 	Telescope = require("telescope.builtin")
 
 	require("telescope").setup({
@@ -11,18 +12,14 @@ function Plugins.telescope.settings()
 	})
 end
 
-function Plugins.telescope.keybinds()
-	K.nnoremap("<space>f", ":lua Telescope.git_files()<CR>", {silent = true})
-	K.nnoremap("<space>F",
-		":lua Telescope.find_files(" ..
-			[[{file_ignore_patterns = {"node_modules/*", ".git/*"}}]] ..
-		")<CR>",
-		{silent = true}
-	)
+function plugin.keybinds()
+	K.sp('f', "<cmd>lua Telescope.git_files()<CR>")
+	local ignore = [[{file_ignore_patterns = {"node_modules/*", ".git/*"}}]]
+	K.sp('F', ":lua Telescope.find_files(" .. ignore ..  ")<CR>")
 end
 
 return function()
 	Plugins.telescope.settings()
-	Plugins.telescope.keybinds()
+	K.plugin(Plugins.telescope)
 end
 
