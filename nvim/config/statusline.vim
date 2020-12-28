@@ -125,5 +125,5 @@ function! SynGroupFull()
     return synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 
-call lightline#coc#register()
+" call lightline#coc#register()
 
