@@ -29,9 +29,6 @@ nnoremap <silent> <C-s> :Switch<CR>
 " Allow scrolling with scroll wheel
 set mouse=a
 
-" nnoremap <silent> zz za
-" nnoremap <silent> zZ 0zf%
-
 " Shift lines in visual mode
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -39,32 +36,16 @@ vnoremap K :m '<-2<CR>gv=gv
 " Show fzf in current directory with ctrl-t
 noremap <C-t> :Files<CR>
 
-" Set Coc diagnostic keybinds
-nmap <silent> g[ <Plug>(coc-diagnostic-prev)
-nmap <silent> g] <Plug>(coc-diagnostic-next)
-nmap <silent> <space>k <Plug>(coc-diagnostic-prev)
-nmap <silent> <space>j <Plug>(coc-diagnostic-next)
-nmap <silent> <space>gd <Plug>(coc-definition)
-nmap <silent> <space>gi <Plug>(coc-implementation)
-" Set Coc format keybinds
-nmap <leader>f  <Plug>(coc-format-selected)
-xmap <leader>f  <Plug>(coc-format-selected)
+nmap <silent> <space>k :lua vim.lsp.diagnostic.goto_prev()<CR>
+nmap <silent> <space>j :lua vim.lsp.diagnostic.goto_next()<CR>
+
 " Set easy-align keybinds
 nmap <space>ga <Plug>(EasyAlign)
 xmap <space>ga <Plug>(EasyAlign)
-" Set Coc list commands
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList marketplace<cr>
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>R  :<C-u>CocRestart<CR>
-nnoremap <silent> <space>f  :<C-u>GFiles<CR>
-nnoremap <silent> <space>F  :<C-u>Files<CR>
+
 nnoremap <silent> <space>b  :<C-u>ene<CR>
 nnoremap <silent> <space>B  :<C-u>bd<CR>
-nnoremap <silent> <space><space>  :<C-u>BufferPick<CR>
-nnoremap <silent> <cr> :<C-u>BufferPick<CR>
-nnoremap <silent> <space><cr>  :<C-u>CocAction<CR>
-nnoremap <silent> <space>gg  :<C-u>CocCommand git.chunkInfo<CR>
+
 nnoremap <silent> <space>lc :VimtexCompileSS<CR>
 nnoremap <silent> <space>lv :VimtexView<CR>
 
@@ -100,19 +81,10 @@ nmap <silent> <space>p :LuaTreeToggle<CR>
 nmap <silent> <space>z zf%
 nmap <silent> <space>/ :nohlsearch<CR>
 
-" Set Coc tab and snippet navigation
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-inoremap <silent><expr> <c-space> coc#refresh()
-
-inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm() : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-" inoremap <silent><expr> <c-l> pumvisible() ? coc#_select_confirm() . "." : "<right>"
-" inoremap <silent><expr> <c-h> pumvisible() ? "<c-o>dv2b." : "<left>"
-inoremap <silent><expr> <C-l> "<right>"
-inoremap <silent><expr> <C-h> "<left>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-h> <left>
+inoremap <C-l> <right>
 
 " Shifting items in a list
 nmap <S-h> <Plug>(swap-prev)
@@ -123,14 +95,6 @@ nnoremap <Space>f <cmd>lua require'telescope.builtin'.git_files({windblend = 10}
 nnoremap <Space>F <cmd>lua require'telescope.builtin'.find_files({
 	\ file_ignore_patterns = {"node_modules/*", ".git/*"}
   \ })<CR>
-
-" Control PUM menu
-inoremap <expr> <C-j> pumvisible() ? "\<down>" : "\<down>"
-inoremap <expr> <C-k> pumvisible() ? "\<up>" : "\<up>"
-nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
-inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-d>"
-inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-u>"
 
 " Duplicate line and comment
 nmap gcn "0yygcc"0p
@@ -145,4 +109,10 @@ inoremap <C-z> <C-o><C-^>
 tnoremap <C-z> <C-\><C-n><C-^>
 tnoremap <C-w> <C-\><C-n><C-w>
 tnoremap <C-w><C-w> <C-w>
+tnoremap <C-u> <C-\><C-n><C-u>
+
+nnoremap <c-i> <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <space><space> <Cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <C-space> <Cmd>lua vim.lsp.buf.code_action()<CR>
+inoremap <C-space> <Cmd>lua vim.lsp.buf.code_action()<CR>
 
