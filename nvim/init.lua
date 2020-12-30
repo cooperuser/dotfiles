@@ -1,3 +1,5 @@
+vim.g.mapleader = ","
+
 local keybinds = require("ampersand.keybinds")
 keybinds.keybinds()
 K = keybinds.map
