@@ -26,6 +26,7 @@ return require("packer").startup(function()
 	use {"AndrewRadev/switch.vim", config = strap("switch")}
 	use {"nvim-treesitter/nvim-treesitter", config = strap("treesitter")}
 	use "nvim-treesitter/playground"
+	use {"psliwka/vim-smoothie", config = strap("smoothie")}
 	-- }}}
 
 	-- Aesthetic plugins {{{
