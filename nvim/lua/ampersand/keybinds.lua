@@ -132,7 +132,8 @@ local function keybinds()
 	map.n("Q", "<nop>") [[The terrible Q]]
 	map.i("<C-c>", "<ESC>") [[Allow ctrl-c to leave insert]]
 	map.n("<C-p>", [["_ciw<C-o>P<ESC>]]) [[Replace word with clipboard]]
-	map.sp("/", "<cmd>nohlsearch<CR>") [[Clear search highlighting]]
+	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
+	map.n("yif", "ggyG``") [[Yank whole file]]
 	-- }}}
 
 	-- Terminal {{{
