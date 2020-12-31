@@ -93,7 +93,7 @@ function! TablineName(n)
 	if l:name =~ '[0-9]*;#FZF'
 		return '[FZF] '
 	end
-	return fnamemodify(l:name, ':t')
+	return pathshorten(l:name)
 endfunction
 
 function! TablineModified(n)
