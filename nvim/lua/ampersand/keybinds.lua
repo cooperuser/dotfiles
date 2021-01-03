@@ -125,8 +125,8 @@ local function keybinds()
 	end)
 
 	map.group([[Shift lines in visual mode]], function()
-		map.v("K", ":m '>+1<CR>gv=gv")
-		map.v("J", ":m '<-2<CR>gv=gv")
+		map.v("K", ":m '<-2<CR>gv=gv")
+		map.v("J", ":m '>+1<CR>gv=gv")
 	end)
 
 	map.n("Q", "<nop>") [[The terrible Q]]
