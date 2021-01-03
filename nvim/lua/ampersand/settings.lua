@@ -6,6 +6,8 @@ opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.foldmethod = "marker"
+opt.foldlevelstart = 1
+vim.opt.guifont = [[Hack\ Nerd\ Font:h12]]
 -- }}}
 
 -- Information options {{{
@@ -33,6 +35,7 @@ opt.fillchars = [[fold:\ ]]
 opt.list = true
 opt.formatoptions = "jql"
 opt.clipboard = "unnamed"
+vim.cmd("autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()")
 -- }}}
 
 -- Movement options {{{
