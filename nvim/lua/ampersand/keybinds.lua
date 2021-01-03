@@ -138,7 +138,8 @@ local function keybinds()
 
 	-- Terminal {{{
 	map.t("<C-w>", [[<C-\><C-n><C-w>]]) [[Window movements in terminal mode]]
-	map.t("<C-u>", [[<C-\><C-n><C-u>]]) [[Quickly scroll up in terminal mode]]
+	map.t("<C-u>", [[<C-\><C-n><C-u>]], {map=true})
+	[[Quickly scroll up in terminal mode]]
 	-- }}}
 end
 
