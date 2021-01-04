@@ -65,7 +65,11 @@ return require("packer").startup(function()
 	
 	-- Miscellaneous {{{
 	-- use "machakann/vim-swap"
-	-- use "voldikss/vim-floaterm"
+	use {"skywind3000/asynctasks.vim",
+		config = strap("asynctasks"),
+		requires = {"skywind3000/asyncrun.vim"}
+	}
+	use {"voldikss/vim-floaterm", config = strap("floaterm")}
 	-- use "kyazdani42/nvim-tree.lua"
 	-- }}}
 	
