@@ -9,7 +9,38 @@ function plugin.settings()
 		return completion.on_attach()
 	end
 
-	lspconfig.sumneko_lua.setup{on_attach=attach}
+	local system_name
+	if vim.fn.has("mac") == 1 then
+		system_name = "macOS"
+	elseif vim.fn.has("unix") == 1 then
+		system_name = "Linux"
+	elseif vim.fn.has('win32') == 1 then
+		system_name = "Windows"
+	else
+		print("Unsupported system for sumneko")
+	end
+
+	local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
+	local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+
+	-- local sumneko_root_path = "~/.cache/nvim/nvim_lsp/sumneko_lua/lua-language-server"
+	lspconfig.sumneko_lua.setup{
+		on_attach=attach,
+		cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = {'vim', 'use'},
+				},
+				workspace = {
+					library = {
+						[vim.fn.expand('$VIMRUNTIME/lua')] = true,
+						[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+					},
+				},
+			}
+		}
+	}
 	lspconfig.vimls.setup{on_attach=attach}
 	lspconfig.pyright.setup{on_attach=attach}
 	lspconfig.tsserver.setup{on_attach=attach}
@@ -17,10 +48,10 @@ function plugin.settings()
 	lspconfig.texlab.setup{on_attach=attach}
 	lspconfig.clangd.setup{on_attach=attach}
 	lspconfig.julials.setup{on_attach=attach}
-	require('nlua.lsp.nvim').setup(lspconfig, {
-			on_attach=attach,
-			globals = {"Color", "c", "Group", "g", "s",}
-		})
+	-- require('nlua.lsp.nvim').setup(lspconfig, {
+	-- 		on_attach=attach,
+	-- 		globals = {"Color", "c", "Group", "g", "s",}
+	-- 	})
 	require('gitsigns').setup({
 			signs = {
 				add          = {hl = 'GitGutterAdd'   , text = '▏', numhl='GitSignsAddNr'},

@@ -6,7 +6,6 @@ vim.cmd("autocmd BufWritePost */nvim/lua/ampersand/plugins* PackerCompile")
 local function strap(name) return require("ampersand.plugins." .. name) end
 
 return require("packer").startup(function()
-	local use = use or function() end
 	use {"wbthomason/packer.nvim", opt = true}
 
 	-- Library plugins {{{
@@ -57,12 +56,12 @@ return require("packer").startup(function()
 	use {"lervag/vimtex", config = strap("vimtex")}
 	use "skanehira/preview-uml.vim"
 	-- }}}
-	
+
 	-- Colorschemes {{{
 	use "~/GitHub/glowbeam.vim"
 	use "~/Github/doom-two.vim"
 	-- }}}
-	
+
 	-- Miscellaneous {{{
 	-- use "machakann/vim-swap"
 	use {"skywind3000/asynctasks.vim",
@@ -72,7 +71,7 @@ return require("packer").startup(function()
 	use {"voldikss/vim-floaterm", config = strap("floaterm")}
 	-- use "kyazdani42/nvim-tree.lua"
 	-- }}}
-	
+
 	-- Temporary plugins {{{
 	-- }}}
 end)
