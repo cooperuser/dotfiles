@@ -32,6 +32,7 @@ return require("packer").startup(function()
 	-- Aesthetic plugins {{{
 	use "itchyny/lightline.vim"
 	use "kyazdani42/nvim-web-devicons"
+	use {"akinsho/nvim-bufferline.lua", config = strap("bufferline")}
 	use {"junegunn/goyo.vim", config = strap("goyo"), cmd = "Goyo"}
 	-- }}}
 
