@@ -7,6 +7,7 @@ let g:lightline.subseparator = {'left': '', 'right': ''}
 
 let g:lightline.component_type = {'coc_ok': 'ok'}
 let g:lightline.component_function = {
+	\ 'filename': 'StatuslineFilename',
 	\ 'gitbranch': 'FugitiveHead',
 	\ 'readonly': 'StatuslineReadonly',
 	\ 'modified': 'StatuslineModified',
@@ -57,14 +58,6 @@ let g:lightline.mode_map = {
 
 set showtabline=2
 
-" let g:lightline#coc#indicator_ok = ''
-" let g:lightline#coc#indicator_warnings = ' '
-" let g:lightline#coc#indicator_errors = ''
-
-" let g:lightline#coc#indicator_ok = ''
-" let g:lightline#coc#indicator_warnings = ' '
-" let g:lightline#coc#indicator_errors = ''
-
 let g:lightline#coc#indicator_ok = ''
 let g:lightline#coc#indicator_warnings = ' ' "𥉉
 let g:lightline#coc#indicator_errors = ' '
@@ -74,7 +67,6 @@ function! StatuslineReadonly()
 endfunction
 
 function! StatuslineModified()
-	" return &modified ? '' : ''
 	if &buftype == 'terminal'
 		return ''
 	end
@@ -82,7 +74,6 @@ function! StatuslineModified()
 endfunction
 
 function! StatModified(n)
-	" return &modified ? '' : ''
 	let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
 	let l:filetype = getbufvar(l:bufnr, '&ft')
 	let l:modified = getbufvar(l:bufnr, '&modified')
@@ -125,5 +116,14 @@ function! SynGroupFull()
     return synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 
-" call lightline#coc#register()
+function! StatuslineFilename()
+	let raw = expand('%:t')
+	if raw == ''
+		return '[No Name]'
+	endif
+	if has_key(g:, 'started_by_firenvim')
+		return luaeval('Plugins.firenvim.filename("' . raw . '")')
+	endif
+	return raw
+endfunction
 

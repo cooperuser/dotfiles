@@ -26,6 +26,7 @@ return require("packer").startup(function()
 	use {"nvim-treesitter/nvim-treesitter", config = strap("treesitter")}
 	use "nvim-treesitter/playground"
 	use {"psliwka/vim-smoothie", config = strap("smoothie")}
+	use {"voldikss/vim-floaterm", config = strap("floaterm")}
 	-- }}}
 
 	-- Aesthetic plugins {{{
@@ -69,7 +70,10 @@ return require("packer").startup(function()
 		config = strap("asynctasks"),
 		requires = {"skywind3000/asyncrun.vim"}
 	}
-	use {"voldikss/vim-floaterm", config = strap("floaterm")}
+	use {"glacambre/firenvim",
+		config = strap("firenvim"),
+		run = function() vim.fn["firenvim#install"](0) end
+	}
 	-- use "kyazdani42/nvim-tree.lua"
 	-- }}}
 
