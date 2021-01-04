@@ -31,6 +31,7 @@ return require("packer").startup(function()
 	-- Aesthetic plugins {{{
 	use "itchyny/lightline.vim"
 	use "kyazdani42/nvim-web-devicons"
+	use {"junegunn/goyo.vim", config = strap("goyo"), cmd = "Goyo"}
 	-- }}}
 
 	-- Search plugins {{{
