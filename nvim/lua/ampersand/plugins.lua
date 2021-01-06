@@ -6,6 +6,7 @@ vim.cmd("autocmd BufWritePost */nvim/lua/ampersand/plugins* PackerCompile")
 local function strap(name) return require("ampersand.plugins." .. name) end
 
 return require("packer").startup(function()
+	-- luacheck: push globals use
 	use {"wbthomason/packer.nvim", opt = true}
 
 	-- Library plugins {{{
@@ -81,5 +82,6 @@ return require("packer").startup(function()
 
 	-- Temporary plugins {{{
 	-- }}}
+	-- luacheck: pop
 end)
 

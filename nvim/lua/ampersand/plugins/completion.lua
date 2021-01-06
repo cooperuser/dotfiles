@@ -1,3 +1,4 @@
+-- luacheck: new_globals GetStatusNumbers
 local plugin = {name = "completion"}
 Plugins[plugin.name] = plugin
 

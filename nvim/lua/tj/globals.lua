@@ -21,6 +21,7 @@ local set_key_value = function(t, key_value_str)
   t[key] = value
 end
 
+--luacheck: push ignore 212
 local convert_vimoption_to_lua = function(option, val)
   -- Short circuit if we've already converted!
   if type(val) == 'table' then
@@ -46,6 +47,7 @@ local convert_vimoption_to_lua = function(option, val)
     end
   end
 end
+--luacheck: pop
 
 -- local concat_keys = function(t, sep)
 --   return table.concat(vim.tbl_keys(t), sep)

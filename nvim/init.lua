@@ -1,3 +1,5 @@
+-- luacheck: new_globals K
+
 vim.g.mapleader = ","
 
 local keybinds = require("ampersand.keybinds")

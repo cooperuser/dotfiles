@@ -1,3 +1,5 @@
+-- luacheck: new_globals RunnerSend
+
 local plugin = {name = "floaterm"}
 Plugins[plugin.name] = plugin
 
@@ -21,7 +23,7 @@ function plugin.settings()
 	vim.g.floaterm_borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'}
 
 	vim.cmd("hi FloatermBorder guifg=orange")
-	vim.cmd("autocmd FileType floaterm setlocal winblend=10")
+	vim.cmd("autocmd FileType floaterm setlocal winblend=0")
 
 	vim.g.project_commands = {
 		run = "yarn build;yarn start",

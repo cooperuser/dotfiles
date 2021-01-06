@@ -1,3 +1,5 @@
+-- luacheck: new_globals Telescope
+
 local plugin = {name = "telescope"}
 Plugins[plugin.name] = plugin
 

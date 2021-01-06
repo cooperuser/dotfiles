@@ -1,3 +1,5 @@
+-- luacheck: globals BGToggle BGApply
+
 local active = true
 
 local function BGTurnOn()
