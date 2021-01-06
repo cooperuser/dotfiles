@@ -1,0 +1,11 @@
+[flags]
+battery = true
+default_time_value = 30000
+disable_click = true
+group_processes = true
+hide_table_gap = true
+left_legend = true
+rate = 500
+regex = true
+show_table_scroll_position = true
+
