@@ -88,7 +88,12 @@ local function keybinds()
 		map.i("<up>", "<nop>")
 		map.i("<down>", "<nop>")
 		map.i("<left>", "<nop>")
-		map.i("<right>", "<nop>") [[TEST TEST TEST]]
+		map.i("<right>", "<nop>")
+	end)
+
+	map.group([[Swap 0 and ^ (possibly temporary)]], function()
+		map.n("0", "^")
+		map.n("^", "0")
 	end)
 
 	map.group([[ctrl-[hjkl] Movement]], function()
@@ -134,6 +139,14 @@ local function keybinds()
 	map.n("<C-p>", [["_ciw<C-o>P<ESC>]]) [[Replace word with clipboard]]
 	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
 	map.n("yif", "ggyG``") [[Yank whole file]]
+
+	map.sp("s", "<cmd>silent w | luafile %<CR>") [[Run current lua file]]
+
+	map.i("<M-h>", "<C-o>^") [[Move to beginning of line]]
+	map.i("<M-l>", "<C-o>$") [[Move to end of line]]
+	map.i("<M-o>", "<C-o>o") [[Move to end of line]]
+	map.i("<M-O>", "<C-o>O") [[Move to end of line]]
+
 	-- }}}
 
 	-- Terminal {{{
