@@ -29,8 +29,16 @@ function plugin.settings()
 			use_virtual_text = true,
 			lint_events = {"BufWrite", "CursorHold"},
 		},
-		incremental_selection = {
-			enable = true
+		textobjects = {
+			swap = {
+				enable = true,
+				swap_next = {
+					["<Leader>a"] = "@parameter.inner",
+				},
+				swap_previous = {
+					["<Leader>A"] = "@parameter.inner",
+				},
+			},
 		}
 	}
 end
