@@ -46,6 +46,7 @@ return require("packer").startup(function()
 	use "junegunn/fzf.vim"
 	use {"nvim-lua/telescope.nvim", config = strap("telescope")}
 	use "nvim-telescope/telescope-fzy-native.nvim"
+	use {"unblevable/quick-scope", config = strap("quickscope")}
 	-- }}}
 
 	-- Completion plugins {{{
