@@ -18,7 +18,8 @@ return require("packer").startup(function()
 
 	-- Utility plugins {{{
 	use {"tpope/vim-commentary", config = strap("commentary")}
-	use "tpope/vim-surround"
+	-- use "tpope/vim-surround"
+	use "machakann/vim-sandwich"
 	use "tpope/vim-fugitive"
 	use "junegunn/vim-peekaboo"
 	use "junegunn/vim-easy-align"
