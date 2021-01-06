@@ -12,6 +12,39 @@ local settings = {
 	enforce_regular_tabs = false
 }
 
+local function getStatusNumbers()
+	local error = vim.lsp.diagnostic.get_count(0, [[Error]])
+	local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
+	local information = vim.lsp.diagnostic.get_count(0, [[Information]])
+	local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+	return {error, warning, information, hint}
+end
+
+function _G.nvim_copperline()
+	-- @type string
+	local bufferline = _G.nvim_bufferline()
+	bufferline = string.sub(bufferline, 1, #bufferline - 16)
+	bufferline = bufferline
+	local status = getStatusNumbers()
+	bufferline = bufferline .. '%#TablineSeparator# '
+	if status[4] ~= 0 then
+		bufferline = bufferline .. "%#TablineHint# ﬤ " .. status[4]
+	end
+	if status[3] ~= 0 then
+		bufferline = bufferline .. "%#TablineInfo#  " .. status[3]
+	end
+	if status[2] ~= 0 then
+		bufferline = bufferline .. "%#TablineWarning#  " .. status[2]
+	end
+	if status[1] ~= 0 then
+		bufferline = bufferline .. "%#TablineError#  " .. status[1]
+	end
+	if status[1] + status[2] + status[3] + status[4] == 0 then
+		bufferline = bufferline .. "%#TablineSuccess# "
+	end
+	return bufferline .. " "
+end
+
 function plugin.settings()
 	local c = {
 		fill_bg = colors.get_hex("TabLineFill", "bg"),
@@ -100,16 +133,18 @@ function plugin.settings()
 			}
 		}
 	}
+
+	vim.o.tabline = "%!v:lua.nvim_copperline()"
 end
 
 function plugin.keybinds()
-	-- TODO: Document these keybinds
-
-	K.n("<C-j>", "<cmd>BufferLineCyclePrev<CR>")
-	K.n("<C-k>", "<cmd>BufferLineCycleNext<CR>")
-	K.sp("J", "<cmd>BufferLineMovePrev<CR>")
-	K.sp("K", "<cmd>BufferLineMoveNext<CR>")
-	K.n("<CR>", "<cmd>BufferLinePick<CR>")
+	K.group([[Move between buffers using nvim-bufferline]], function()
+		K.n("<C-j>", "<cmd>BufferLineCyclePrev<CR>")
+		K.n("<C-k>", "<cmd>BufferLineCycleNext<CR>")
+		K.sp("J", "<cmd>BufferLineMovePrev<CR>")
+		K.sp("K", "<cmd>BufferLineMoveNext<CR>")
+		K.n("<CR>", "<cmd>BufferLinePick<CR>")
+	end)
 end
 
 return function()

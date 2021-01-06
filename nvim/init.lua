@@ -8,7 +8,6 @@ K = keybinds.map
 require("ampersand.plugins")
 require("ampersand.settings")
 
-vim.cmd("source ~/.config/nvim/config/bufline.vim")
 vim.cmd("source ~/.config/nvim/config/statusline.vim")
 
 vim.cmd("colorscheme glowbeam")
