@@ -115,6 +115,11 @@ local function keybinds()
 		map.sp("B", "<cmd>bd<CR>")
 	end)
 
+	map.group([[Create/delete tabs]], function()
+		map.sp("gt", "<cmd>tabnew<CR>")
+		map.sp("gT", "<cmd>tabclose<CR>")
+	end)
+
 	map.group([[Move to last buffer]], function()
 		map.n("<C-z>", "<C-^>")
 		map.i("<C-z>", "<C-o><C-^>")
@@ -139,6 +144,7 @@ local function keybinds()
 	map.n("<C-p>", [["_ciw<C-o>P<ESC>]]) [[Replace word with clipboard]]
 	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
 	map.n("yif", "ggyG``") [[Yank whole file]]
+	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
 
 	map.sp("s", "<cmd>silent w | luafile %<CR>") [[Run current lua file]]
 
