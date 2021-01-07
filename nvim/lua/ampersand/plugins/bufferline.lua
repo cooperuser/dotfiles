@@ -24,25 +24,33 @@ function _G.nvim_copperline()
 	-- @type string
 	local bufferline = _G.nvim_bufferline()
 	bufferline = string.sub(bufferline, 1, #bufferline - 16)
-	bufferline = bufferline
+	local _, tabstart = string.find(bufferline, "#Fill#%%=")
+	local tabline = string.sub(bufferline, tabstart + 1)
+	bufferline = string.sub(bufferline, 1, tabstart)
 	local status = getStatusNumbers()
-	bufferline = bufferline .. '%#TablineSeparator# '
+	local theme = "%#Tabline"
+	local separator = " "
+	if #tabline ~= 0 then
+		theme = "%#Tabline"
+		separator = " %#Separator#▕"
+	end
+	local copperline = theme .. 'Separator# '
 	if status[4] ~= 0 then
-		bufferline = bufferline .. "%#TablineHint# ﬤ " .. status[4]
+		copperline = copperline .. theme .. "Hint# ﬤ " .. status[4]
 	end
 	if status[3] ~= 0 then
-		bufferline = bufferline .. "%#TablineInfo#  " .. status[3]
+		copperline = copperline .. theme .. "Info#  " .. status[3]
 	end
 	if status[2] ~= 0 then
-		bufferline = bufferline .. "%#TablineWarning#  " .. status[2]
+		copperline = copperline .. theme .. "Warning#  " .. status[2]
 	end
 	if status[1] ~= 0 then
-		bufferline = bufferline .. "%#TablineError#  " .. status[1]
+		copperline = copperline .. theme .. "Error#  " .. status[1]
 	end
 	if status[1] + status[2] + status[3] + status[4] == 0 then
-		bufferline = bufferline .. "%#TablineSuccess# "
+		copperline = copperline .. theme .. "Success# "
 	end
-	return bufferline .. " "
+	return bufferline .. copperline .. separator .. tabline
 end
 
 function plugin.settings()
