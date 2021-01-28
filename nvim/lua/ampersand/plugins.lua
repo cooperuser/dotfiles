@@ -29,13 +29,15 @@ return require("packer").startup(function()
 	use "nvim-treesitter/nvim-treesitter-textobjects"
 	use {"psliwka/vim-smoothie", config = strap("smoothie")}
 	use {"voldikss/vim-floaterm", config = strap("floaterm")}
+	use {"pwntester/octo.nvim"}
+	-- use {"oberblastmeister/neuron.nvim", config = strap("neuron")}
 	-- }}}
 
 	-- Aesthetic plugins {{{
 	use "itchyny/lightline.vim"
 	use "kyazdani42/nvim-web-devicons"
 	use {"akinsho/nvim-bufferline.lua", config = strap("bufferline")}
-	use {"junegunn/goyo.vim", config = strap("goyo"), cmd = "Goyo"}
+	use {"junegunn/goyo.vim", config = strap("goyo")}
 	-- }}}
 
 	-- Search plugins {{{
@@ -54,8 +56,9 @@ return require("packer").startup(function()
 	use "neovim/nvim-lspconfig"
 	use {"nvim-lua/completion-nvim", config = strap("completion")}
 	use "RishabhRD/nvim-lsputils"
-	use "tjdevries/nlua.nvim"
+	-- use "tjdevries/nlua.nvim"
 	use "SirVer/ultisnips"
+	-- use {"glepnir/lspsaga.nvim", config = strap("lspsaga")} -- TODO: Follow development
 	-- }}}
 
 	-- Language plugins {{{
@@ -80,6 +83,10 @@ return require("packer").startup(function()
 		run = function() vim.fn["firenvim#install"](0) end
 	}
 	-- use "kyazdani42/nvim-tree.lua"
+	-- }}}
+
+	-- Runner plugins {{{
+	use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", config = strap("markdownpreview")}
 	-- }}}
 
 	-- Temporary plugins {{{
