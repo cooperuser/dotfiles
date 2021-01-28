@@ -17,10 +17,10 @@ export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
 bind \cf "vim -c 'GFiles'";
 bind \cv "config_vim";
 bind \cs "echo;git status;echo;";
-bind \t forward-word
-bind \cj complete
-bind \ck complete-and-search
-bind --key btab accept-autosuggestion
+# bind \t forward-word
+# bind \cj complete
+# bind \ck complete-and-search
+# bind --key btab accept-autosuggestion
 
 # Setup pyenv configurations
 if test -d ~/.install/pyenv
