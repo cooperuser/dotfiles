@@ -25,6 +25,7 @@ opt.hidden = true
 opt.splitbelow = true
 opt.splitright = true
 opt.visualbell = true
+opt.gdefault = true
 -- }}}
 
 -- Text options {{{
@@ -35,6 +36,7 @@ opt.fillchars = [[fold:\ ]]
 opt.list = true
 opt.formatoptions = "jql"
 opt.clipboard = "unnamed"
+opt.inccommand = "nosplit"
 vim.cmd("autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()")
 -- }}}
 
@@ -62,6 +64,7 @@ opt.winblend = 15
 opt.selection = "exclusive"
 opt.incsearch = true
 opt.ignorecase = true
+opt.smartcase = true
 opt.completeopt = "menuone,noinsert"
 -- }}}
 

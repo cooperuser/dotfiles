@@ -72,6 +72,7 @@ local map = {
 	n = wrapper('n'),
 	v = wrapper('v'),
 	t = wrapper('t'),
+	c = wrapper('c'),
 	sp = wrapper('n', "<space>", {silent = true}),
 	group = group,
 	plugin = plugin
@@ -152,6 +153,9 @@ local function keybinds()
 	map.i("<M-l>", "<C-o>$") [[Move to end of line]]
 	map.i("<M-o>", "<C-o>o") [[Move to end of line]]
 	map.i("<M-O>", "<C-o>O") [[Move to end of line]]
+
+	map.n("*", "*``", {map = true}) [[Highlight word without moving]]
+	map.c("%s", "%sm/") [[Highlight word without moving]]
 
 	-- }}}
 
