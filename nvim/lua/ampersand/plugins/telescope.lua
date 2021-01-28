@@ -10,7 +10,7 @@ function plugin.settings()
 	require("telescope").setup{
 		defaults = {
 			-- TODO: Fix color change on blank line
-			winblend = 15,
+			-- winblend = 15,
 			file_ignore_patterns = {
 				"node_modules/*", ".git/*",
 				"%.png", "%.ico", "%.jpg", "%.map"
