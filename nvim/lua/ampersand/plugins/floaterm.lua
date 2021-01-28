@@ -19,6 +19,16 @@ function RunnerSend(command)
 	vim.cmd("FloatermSend --name=runner " .. cmd)
 end
 
+function plugin.toggle(name, command)
+	local bufnr = vim.fn["floaterm#terminal#get_bufnr"](name)
+	if bufnr == -1 then
+		local args = "--name=" .. name .. " --title=" .. name .. " "
+		vim.cmd("FloatermNew --autoclose=1 " .. args .. command)
+	else
+		vim.cmd("FloatermToggle " .. name)
+	end
+end
+
 function plugin.settings()
 	vim.g.floaterm_borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'}
 
@@ -47,15 +57,13 @@ function plugin.keybinds()
 	K.n("<Leader>x", "<C-w><C-w><C-\\><C-n>")
 	K.t("<Leader>x", "<C-\\><C-n>")
 
-	K.t("<C-h>", "<Left>")
-	K.t("<C-l>", "<Right>")
 	K.t("<Leader>w", "<C-w>")
 
 	bothNT("<Leader>d", "<cmd>FloatermKill<CR>")
 	bothNT("<Leader>f", "<C-w><C-w>")
 
 	K.t("<Leader>c", "<cmd>FloatermUpdate " .. settings.floating .. "<CR>")
-	K.t("<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR>")
+	K.t("<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR><cmd>call animate#window_absolute_width(80)<CR>")
 end
 
 return function()
