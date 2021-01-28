@@ -63,7 +63,7 @@ function plugin.keybinds()
 	bothNT("<Leader>f", "<C-w><C-w>")
 
 	K.t("<Leader>c", "<cmd>FloatermUpdate " .. settings.floating .. "<CR>")
-	K.t("<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR><cmd>call animate#window_absolute_width(80)<CR>")
+	K.t("<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR>")
 end
 
 return function()
