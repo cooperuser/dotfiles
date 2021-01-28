@@ -9,4 +9,5 @@ alias m="musikcube"
 alias htop="export TERM=screen-256color;/usr/local/bin/htop;export TERM=tmux-256color"
 alias jc="cd ~/.config"
 alias jcn="cd ~/.config/nvim"
+alias gs="git status"
 
