@@ -69,7 +69,6 @@ return require("packer").startup(function()
 
 	-- Colorschemes {{{
 	use "~/GitHub/glowbeam.vim"
-	use "~/Github/doom-two.vim"
 	-- }}}
 
 	-- Miscellaneous {{{
