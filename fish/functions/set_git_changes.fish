@@ -7,6 +7,8 @@ function set_git_changes
 		set changes (string split \t $rev_list)
 		if test $changes[1] -ne 0 -o $changes[2] -ne 0
 			set -g git_changes $changes
+		else
+			set -g git_changes
 		end
 	end
 end
