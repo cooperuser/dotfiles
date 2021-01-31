@@ -151,6 +151,8 @@ local function keybinds()
 
 	map.i("<M-h>", "<C-o>^") [[Move to beginning of line]]
 	map.i("<M-l>", "<C-o>$") [[Move to end of line]]
+	map.i("<M-j>", "<C-o>b") [[Move to last word]]
+	map.i("<M-k>", "<C-o>w") [[Move to next word]]
 	map.i("<M-o>", "<C-o>o") [[Move to end of line]]
 	map.i("<M-O>", "<C-o>O") [[Move to end of line]]
 
