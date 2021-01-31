@@ -1,8 +1,10 @@
 .DS_Store
 
 BraveSoftware/
-discordcanary/
 dconf/
+discordcanary/
+gita/repo_path
+lazygit/state.yml
 
 nvim/plugged/
 nvim/.netrwhist
