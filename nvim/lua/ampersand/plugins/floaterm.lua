@@ -5,7 +5,7 @@ Plugins[plugin.name] = plugin
 
 local settings = {
 	floating = "--wintype=floating --position=center --width=0.6 --height=0.6",
-	normal = "--wintype=normal --position=right --width=80 --height=24"
+	normal = "--wintype=vsplit --width=80"
 }
 
 local function bothNT(key, command)
