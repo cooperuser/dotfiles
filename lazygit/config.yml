@@ -1,0 +1,27 @@
+gui:
+  mouseEvents: false
+  theme:
+    activeBorderColor:
+      - yellow
+      - bold
+    inactiveBorderColor:
+      - blue
+    optionsTextColor:
+      - yellow
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - blue
+keybinding:
+  universal:
+    prevBlock: "<c-k>"
+    nextBlock: "<c-j>"
+    prevTab: "<c-h>"
+    nextTab: "<c-l>"
+    prevTab-alt: "h"
+    nextTab-alt: "l"
+  commits:
+    moveUpCommit: "<left>"
+    moveDownCommit: "<right>"
+os:
+  openCommand: 'vim {{filename}}'
