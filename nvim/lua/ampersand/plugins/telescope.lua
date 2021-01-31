@@ -19,11 +19,6 @@ function plugin.settings()
 			grep_previewer = previewers.vim_buffer_vimgrep.new,
 			qflist_previewer = previewers.vim_buffer_qflist.new,
 			selection_strategy = "row",
-			borderchars = {
-				prompt = {'▄', '▌', '▀', '▐', '▗', '▖', '▘', '▝' },
-				results = {'▄', '▌', '▀', '▐', '▗', '▖', '▘', '▝' },
-				preview = {'▄', '▌', '▀', '▐', '▗', '▖', '▘', '▝' }
-			},
 			show_line = false,
 			prompt_prefix = ' >'
 		},
