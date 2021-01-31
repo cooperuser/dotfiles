@@ -1,0 +1,18 @@
+{
+	"position": "bottom",
+	"height": 26,
+	"modules-left": [
+		"sway/workspaces",
+		"sway/mode"
+	],
+	"modules-right": [
+		"pulseaudio",
+		"backlight",
+		"battery",
+		"clock"
+	],
+	"clock": {
+		"format": "{:%Y-%m-%d  %a  %H:%M}",
+		"format-alt": "{:%Y-%m-%d\t%H:%M}",
+	}
+}
