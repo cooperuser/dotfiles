@@ -1,4 +1,9 @@
 .DS_Store
+
+BraveSoftware/
+discordcanary/
+dconf/
+
 nvim/plugged/
 nvim/.netrwhist
 nvim/plugin/packer_compiled.vim
