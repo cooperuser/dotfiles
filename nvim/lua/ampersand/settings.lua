@@ -35,7 +35,7 @@ opt.listchars = [[tab:▏\ ,trail:~]]
 opt.fillchars = [[fold:\ ]]
 opt.list = true
 opt.formatoptions = "jql"
-opt.clipboard = "unnamed"
+opt.clipboard = "unnamedplus"
 opt.inccommand = "nosplit"
 vim.cmd("autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()")
 -- }}}
