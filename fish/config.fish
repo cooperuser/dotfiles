@@ -3,24 +3,33 @@
 set -U EDITOR nvim
 set fish_greeting
 
-export TERM="tmux-256color";
-
 export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
-# export LS_COLORS='di=0;163:ex=0;163:ln=0;163:cd=0;163:bd=0;163:';
-# export LS_COLORS=$LS_COLORS'di=0;34:ex=0;92:ln=0;96:cd=0;93:bd=0;93:';
-# export LS_COLORS=$LS_COLORS:'di=0;34:ex=0;163:ln=0;96:cd=0;93:bd=0;93:';
-# export PAGER="/bin/sh -c \"unset PAGER;col -b -x | nvim -R -c 'set ft=man nomod nolist nonumber linebreak' -c 'map q :q<CR>' -c 'map <SPACE> <C-D>' -c 'map b <C-U>' -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\"";
+export MANPAGER='nvim +Man!'
 
-# Setup command aliases
-. ~/.config/fish/aliases.fish
+# Vi mode {{{
+bind --mode insert --sets-mode default \cc force-repaint;
+bind --mode default --sets-mode insert \cc kill-whole-line force-repaint;
+bind --mode default \cd kill-whole-line delete-or-exit;
 
-bind \cf "vim -c 'GFiles'";
-bind \cv "config_vim";
-bind \cs "echo;git status;echo;";
-# bind \t forward-word
-# bind \cj complete
-# bind \ck complete-and-search
-# bind --key btab accept-autosuggestion
+bind --mode insert \cp history-search-backward
+bind --mode insert \cn history-search-forward
+
+bind --mode insert \ch backward-char;
+bind --mode insert \cj backward-word;
+bind --mode insert \eh beginning-of-line;
+bind --mode insert \eJ backward-bigword;
+
+bind --mode insert \cl forward-char;
+bind --mode insert \ck forward-word forward-char;
+bind --mode insert \el end-of-line;
+bind --mode insert \eK forward-bigword forward-char;
+
+bind --mode default dw kill-word delete-char
+# }}}
+
+set fish_cursor_default 'block'
+set fish_cursor_insert 'line'
+set fish_cursor_visual 'line'
 
 # Setup pyenv configurations
 if test -d ~/.install/pyenv
@@ -30,18 +39,9 @@ if test -d ~/.install/pyenv
 	set -gx PATH $PYENV_ROOT/bin $PYENV_ROOT/shims $RUST_ROOT/bin $PATH;
 end
 
-# if test (tty) = /dev/tty1
-	# If not running fbterm, run fbterm
-	# fbterm;
-	# exit;
-# else if test ! -n "$TMUX"
-	# If not running tmux, run tmux
-	# bind \ca "attempt_tmux;fish_prompt";
-	# tmux;
-	# exit;
-# end
+set -gx PATH ~/.local/bin $PATH;
 
 if test ! -n "$TMUX"
-	bind \ca "attempt_tmux;fish_prompt";
+	bind --mode insert \ca "attempt_tmux;fish_prompt";
 end
 
