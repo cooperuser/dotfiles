@@ -145,10 +145,10 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.group([[Move between diagnostics]], function()
-		K.sp("k", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
-		K.sp("j", ":lua vim.lsp.diagnostic.goto_next()<CR>")
-	end)
+	-- K.group([[Move between diagnostics]], function()
+	-- 	K.sp("k", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
+	-- 	K.sp("j", ":lua vim.lsp.diagnostic.goto_next()<CR>")
+	-- end)
 
 	K.group([[Bring up code action menu]], function()
 		K.n("<C-space>", "<cmd>lua vim.lsp.buf.code_action()<CR>")
