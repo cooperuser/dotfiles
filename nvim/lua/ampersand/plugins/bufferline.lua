@@ -12,9 +12,7 @@ local settings = {
 	enforce_regular_tabs = false,
 	diagnostics = "nvim_lsp",
 	diagnostics_indicator = function(count, level)
-		if count == 0 then return "" end
-		local icon = level:match("error") and '' or ''
-		return ' ' .. icon .. " " .. count
+		return ''
 	end,
 	filter = function(buf_num)
 		if not vim.t.is_help_tab then return nil end
@@ -22,46 +20,46 @@ local settings = {
 	end
 }
 
--- local function getStatusNumbers()
--- 	local error = vim.lsp.diagnostic.get_count(0, [[Error]])
--- 	local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
--- 	local information = vim.lsp.diagnostic.get_count(0, [[Information]])
--- 	local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
--- 	return {error, warning, information, hint}
--- end
+local function getStatusNumbers()
+	local error = vim.lsp.diagnostic.get_count(0, [[Error]])
+	local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
+	local information = vim.lsp.diagnostic.get_count(0, [[Information]])
+	local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+	return {error, warning, information, hint}
+end
 
--- function _G.nvim_copperline()
--- 	-- @type string
--- 	local bufferline = _G.nvim_bufferline()
--- 	bufferline = string.sub(bufferline, 1, #bufferline - 16)
--- 	local _, tabstart = string.find(bufferline, "#Fill#%%=")
--- 	local tabline = string.sub(bufferline, tabstart + 1)
--- 	bufferline = string.sub(bufferline, 1, tabstart)
--- 	local status = getStatusNumbers()
--- 	local theme = "%#Tabline"
--- 	local separator = " "
--- 	if #tabline ~= 0 then
--- 		theme = "%#Tabline"
--- 		separator = " %#Separator#▕"
--- 	end
--- 	local copperline = theme .. 'Separator# '
--- 	if status[4] ~= 0 then
--- 		copperline = copperline .. theme .. "Hint# ﬤ " .. status[4]
--- 	end
--- 	if status[3] ~= 0 then
--- 		copperline = copperline .. theme .. "Info#  " .. status[3]
--- 	end
--- 	if status[2] ~= 0 then
--- 		copperline = copperline .. theme .. "Warning#  " .. status[2]
--- 	end
--- 	if status[1] ~= 0 then
--- 		copperline = copperline .. theme .. "Error#  " .. status[1]
--- 	end
--- 	if status[1] + status[2] + status[3] + status[4] == 0 then
--- 		copperline = copperline .. theme .. "Success# "
--- 	end
--- 	return bufferline .. copperline .. separator .. tabline
--- end
+function _G.nvim_copperline()
+	-- @type string
+	local bufferline = _G.nvim_bufferline()
+	bufferline = string.sub(bufferline, 1, #bufferline - 26)
+	local _, tabstart = string.find(bufferline, "#BufferLineFill#%%=")
+	local tabline = string.sub(bufferline, tabstart + 1)
+	bufferline = string.sub(bufferline, 1, tabstart)
+	local status = getStatusNumbers()
+	local theme = "%#Tabline"
+	local separator = " "
+	-- if #tabline ~= 0 then
+	-- 	theme = "%#Tabline"
+	-- 	separator = " %#Separator#▕"
+	-- end
+	local copperline = theme .. 'Separator# '
+	if status[4] ~= 0 then
+		copperline = copperline .. theme .. "Hint#  " .. status[4]
+	end
+	if status[3] ~= 0 then
+		copperline = copperline .. theme .. "Info#  " .. status[3]
+	end
+	if status[2] ~= 0 then
+		copperline = copperline .. theme .. "Warning#  " .. status[2]
+	end
+	if status[1] ~= 0 then
+		copperline = copperline .. theme .. "Error#  " .. status[1]
+	end
+	if status[1] + status[2] + status[3] + status[4] == 0 then
+		copperline = copperline .. theme .. "Success# "
+	end
+	return bufferline .. copperline .. separator .. tabline
+end
 
 function plugin.settings()
 	local c = {
@@ -183,7 +181,7 @@ function plugin.settings()
 		}
 	}
 
-	-- vim.o.tabline = "%!v:lua.nvim_copperline()"
+	vim.o.tabline = "%!v:lua.nvim_copperline()"
 end
 
 function plugin.keybinds()
