@@ -6,6 +6,9 @@ set fish_greeting
 export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
 export MANPAGER='nvim +Man!'
 
+# Setup command aliases
+. ~/.config/fish/aliases.fish
+
 # Vi mode {{{
 bind --mode insert --sets-mode default \cc force-repaint;
 bind --mode default --sets-mode insert \cc kill-whole-line force-repaint;
@@ -44,4 +47,6 @@ set -gx PATH ~/.local/bin $PATH;
 if test ! -n "$TMUX"
 	bind --mode insert \ca "attempt_tmux;fish_prompt";
 end
+
+set_git_changes
 

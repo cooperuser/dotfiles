@@ -16,64 +16,63 @@ set customPurple (set_color B7D)
 set customCopper (set_color FFAA22)
 set customMuted  (set_color aaa)
 
-function fish_prompt
+function fish_mode_prompt
 	set error $status
-	set charUser "&"
 
 	set colorTime   $customOrange
 	set colorPath   $customBlue
 	set colorArrow  $customGreen
-	set colorChar   $customCopper
 	set colorError  $customRed
-	set colorBranch	$customPurple
 	set charArrow   $charArrowPass
 
 	set branch (git branch ^/dev/null | grep \* | sed 's/* //')
 
-	set_git_changes
-
 	if test $error -eq 130
 		set error
-		set colorArrow $customRed
+		set colorArrow $colorError
 		set charArrow $charArrowTerm
 	else if test $error -ne 0
 		set error $error\ ;
-		set colorArrow $colorError
+		set colorArrow $customRed
 		if test $error -ne 130
 			set charArrow $charArrowFail
 		end
 	else if test -n "$branch"
 		set error
-		set changes $git_changes
-		if test -n "$changes"
-			set changes (string split \  $changes)
+		if test -n "$git_changes"
 			set colorArrow $customBlue
-			if test $changes[1] -ne 0 -a $changes[2] -ne 0
-				set charArrow $charGitBoth
-			else if test $changes[1] -ne 0
-				set charArrow $charGitAhead
-			else
-				set charArrow $charGitBehind
-			end
 		end
 	else
 		set error
 	end
 
-	set charArrow "$charArrow "
-
-	sudo -n true 2> /dev/null;
-	if test $status -eq 0
-		set charUser "#"
-		set colorChar $customRed
-	end
-
 	echo -n -s \
-		\n \
-		$colorArrow └$charArrow \
-		$colorBranch $branch\  \
-		$colorError $error \
-		$colorChar $charUser\  \
-		$colorNormal;
+		$colorArrow┌\  \
+		$colorTime (date "+%H:%M")\  \
+		$colorPath (prompt_pwd)\ \
+		(get_mode_indicator);
+end
+
+function get_mode_indicator
+	switch $fish_bind_mode
+		case default
+			echo $customGreen
+			echo ' '
+		case insert
+			echo $customBlue
+			# echo ' '
+			echo '  '
+		case replace_one
+			echo $customRed
+			echo '•'
+			# echo ' '
+		case visual
+			echo $customOrange
+			echo ' '
+		case '*'
+			echo $customRed
+			echo '? '
+	end
+	set_color normal
 end
 
