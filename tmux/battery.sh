@@ -1,4 +1,3 @@
 #!/bin/bash
-# cat /sys/class/power_supply/BAT0/capacity
-echo $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+echo $(acpi | sed 's/.\+ \([0-9]\+\)%.*/\1/g')
 
