@@ -58,7 +58,7 @@ return require("packer").startup(function()
 	use "RishabhRD/nvim-lsputils"
 	-- use "tjdevries/nlua.nvim"
 	use "SirVer/ultisnips"
-	-- use {"glepnir/lspsaga.nvim", config = strap("lspsaga")} -- TODO: Follow development
+	use {"glepnir/lspsaga.nvim", config = strap("lspsaga")}
 	-- }}}
 
 	-- Language plugins {{{
