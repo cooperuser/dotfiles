@@ -1,0 +1,105 @@
+set $mod Mod4
+
+font pango:Roboto 15
+focus_follows_mouse no
+
+input 1:1:AT_Translated_Set_2_keyboard repeat_delay 250
+input 1:1:AT_Translated_Set_2_keyboard repeat_rate 25
+
+input type:touchpad {
+	accel_profile adaptive
+	pointer_accel 0.20
+	dwt enabled
+}
+
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+r reload
+bindsym $mod+Ctrl+Shift+r restart
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+bindsym $mod+Shift+7 move container to workspace 7; workspace 7
+bindsym $mod+Shift+8 move container to workspace 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace 9; workspace 9
+bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s sticky toggle
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym Alt+Tab workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+n border toggle
+bindsym $mod+Ctrl+j workspace prev
+bindsym $mod+Ctrl+k workspace next
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+space focus mode_toggle
+# bindsym $mod+z bar mode toggle
+bindsym $mod+q kill
+
+bindsym $mod+r mode "resize"
+bindsym $mod+t mode "terminal"
+
+include pip.conf
+
+mode "resize" {
+	bindsym h resize shrink width 10px or 10ppt
+	bindsym j resize grow height 10px or 10ppt
+	bindsym k resize shrink height 10px or 10ppt
+	bindsym l resize grow width 10px or 10ppt
+
+	bindsym $mod+t mode "terminal"
+	bindsym $mod+r mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+mode "terminal" {
+	bindsym h resize shrink width 10px
+	bindsym j resize grow height 22px
+	bindsym k resize shrink height 22px
+	bindsym l resize grow width 10px
+
+	bindsym $mod+r mode "resize"
+	bindsym $mod+t mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+default_border pixel 3
+gaps inner 12
+gaps outer -5
+
+bar {
+	swaybar_command waybar
+}
+
+bindsym $mod+d exec dmenu_run
+bindsym $mod+Shift+f exec --no-startup-id brave-beta
+
