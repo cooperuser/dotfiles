@@ -145,7 +145,9 @@ local function keybinds()
 	map.n("<C-p>", [["_ciw<C-o>P<ESC>]]) [[Replace word with clipboard]]
 	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
 	map.n("yif", "ggyG``") [[Yank whole file]]
+	map.n("=if", "gg=G``") [[Reindent whole file]]
 	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
+	map.sp("<tab>", "<cmd>set noexpandtab tabstop=4 shiftwidth=4") [[Indents]]
 
 	map.sp("s", "<cmd>silent w | luafile %<CR>") [[Run current lua file]]
 
@@ -157,7 +159,7 @@ local function keybinds()
 	map.i("<M-O>", "<C-o>O") [[Move to end of line]]
 
 	map.n("*", "*``", {map = true}) [[Highlight word without moving]]
-	map.c("%s", "%sm/") [[Highlight word without moving]]
+	map.c("%s", "%sm") [[Highlight word without moving]]
 
 	-- }}}
 
