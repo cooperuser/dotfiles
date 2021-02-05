@@ -62,14 +62,18 @@ function fish_prompt
 
 	set charArrow "$charArrow "
 
-	sudo -n true 2> /dev/null;
-	if test $status -eq 0
-		set charUser "#"
-		set colorChar $customRed
-	end
+	# sudo -n true 2> /dev/null;
+	# if test $status -eq 0
+	# 	set charUser "#"
+	# 	set colorChar $customRed
+	# end
 
 	echo -n -s \
-		\n \
+		\n \ \ \
+		$colorArrow├\  \
+		$colorTime (date "+%H:%M")\  \
+		$colorPath (prompt_pwd)\ \
+		\n \ \ \
 		$colorArrow └$charArrow \
 		$colorBranch $branch\  \
 		$colorError $error \

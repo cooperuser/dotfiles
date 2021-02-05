@@ -15,6 +15,13 @@ set customBlue   (set_color 87afff)
 set customPurple (set_color B7D)
 set customCopper (set_color FFAA22)
 set customMuted  (set_color aaa)
+set customTime  (set_color 73797e)
+
+set modeBack (set_color -r --background=3f444a)
+set modeColor $customMuted
+set modeIcon " "
+set modeLeft ""
+set modeRight ""
 
 function fish_mode_prompt
 	set error $status
@@ -46,33 +53,42 @@ function fish_mode_prompt
 		set error
 	end
 
+	set_mode_indicator
+
 	echo -n -s \
-		$colorArrow┌\  \
-		$colorTime (date "+%H:%M")\  \
-		$colorPath (prompt_pwd)\ \
-		(get_mode_indicator);
+		$modeColor $modeLeft \
+		$modeBack $modeIcon \
+		(set_color normal) \
+		$modeColor $modeRight \
+		(get_cmd_timer);
 end
 
-function get_mode_indicator
+function set_mode_indicator
 	switch $fish_bind_mode
 		case default
-			echo $customGreen
-			echo ' '
+			set modeColor $customGreen
+			set modeIcon '  '
 		case insert
-			echo $customBlue
-			# echo ' '
-			echo '  '
+			set modeColor $customBlue
+			set modeIcon '  '
 		case replace_one
-			echo $customRed
-			echo '•'
-			# echo ' '
+			set modeColor $customRed
+			set modeIcon ' • '
+		case replace
+			set modeColor $customRed
+			set modeIcon ' × '
 		case visual
-			echo $customOrange
-			echo ' '
+			set modeColor $customOrange
+			set modeIcon '  '
 		case '*'
-			echo $customRed
-			echo '? '
+			set modeColor $customMuted
+			set modeIcon '   '
 	end
-	set_color normal
+end
+
+function get_cmd_timer
+	if test $CMD_DURATION -gt 9
+		echo $customTime └○ "$CMD_DURATION ms"
+	end
 end
 
