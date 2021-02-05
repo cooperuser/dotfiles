@@ -5,6 +5,7 @@ Plugins[plugin.name] = plugin
 
 function plugin.goyo_enter()
 	vim.cmd("silent !tmux set status off")
+	vim.cmd("hi EndOfBuffer guifg=bg")
 end
 
 function plugin.goyo_leave()
