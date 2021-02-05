@@ -11,8 +11,10 @@
 		"battery",
 		"clock"
 	],
+	"modules-center": [
+		"tray"
+	],
 	"clock": {
 		"format": "{:%Y-%m-%d  %a  %H:%M}",
-		"format-alt": "{:%Y-%m-%d\t%H:%M}",
 	}
 }
