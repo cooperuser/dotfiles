@@ -8,13 +8,14 @@ input 1:1:AT_Translated_Set_2_keyboard repeat_rate 25
 
 input type:touchpad {
 	accel_profile adaptive
-	pointer_accel 0.20
+	pointer_accel 0.25
 	dwt enabled
 }
 
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+r reload
 bindsym $mod+Ctrl+Shift+r restart
+bindsym $mod+Shift+q exec swaylock
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -27,16 +28,36 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym $mod+Shift+1 move container to workspace 1; workspace 1
-bindsym $mod+Shift+2 move container to workspace 2; workspace 2
-bindsym $mod+Shift+3 move container to workspace 3; workspace 3
-bindsym $mod+Shift+4 move container to workspace 4; workspace 4
-bindsym $mod+Shift+5 move container to workspace 5; workspace 5
-bindsym $mod+Shift+6 move container to workspace 6; workspace 6
-bindsym $mod+Shift+7 move container to workspace 7; workspace 7
-bindsym $mod+Shift+8 move container to workspace 8; workspace 8
-bindsym $mod+Shift+9 move container to workspace 9; workspace 9
-bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+# bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+# bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+# bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+# bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+# bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+# bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+# bindsym $mod+Shift+7 move container to workspace 7; workspace 7
+# bindsym $mod+Shift+8 move container to workspace 8; workspace 8
+# bindsym $mod+Shift+9 move container to workspace 9; workspace 9
+# bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Alt+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Alt+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Alt+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Alt+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Alt+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Alt+Shift+6 move container to workspace 6; workspace 6
+bindsym $mod+Alt+Shift+7 move container to workspace 7; workspace 7
+bindsym $mod+Alt+Shift+8 move container to workspace 8; workspace 8
+bindsym $mod+Alt+Shift+9 move container to workspace 9; workspace 9
+bindsym $mod+Alt+Shift+0 move container to workspace 10; workspace 10
 
 floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
@@ -66,6 +87,12 @@ bindsym $mod+q kill
 bindsym $mod+r mode "resize"
 bindsym $mod+t mode "terminal"
 
+bindsym $mod+Shift+minus opacity minus 0.1
+bindsym $mod+Shift+equal opacity plus 0.1
+bindsym $mod+Shift+backspace opacity set 1
+
+bindsym $mod+Shift+c move position cursor
+
 include pip.conf
 
 mode "resize" {
@@ -73,6 +100,8 @@ mode "resize" {
 	bindsym j resize grow height 10px or 10ppt
 	bindsym k resize shrink height 10px or 10ppt
 	bindsym l resize grow width 10px or 10ppt
+
+	bindsym n resize set 90ppt 90ppt
 
 	bindsym $mod+t mode "terminal"
 	bindsym $mod+r mode "default"
@@ -85,6 +114,8 @@ mode "terminal" {
 	bindsym j resize grow height 22px
 	bindsym k resize shrink height 22px
 	bindsym l resize grow width 10px
+
+	bindsym d resize set 866px 578px
 
 	bindsym $mod+r mode "resize"
 	bindsym $mod+t mode "default"
@@ -100,6 +131,28 @@ bar {
 	swaybar_command waybar
 }
 
+for_window [app_id="js-benzer"] floating enable
+
 bindsym $mod+d exec dmenu_run
 bindsym $mod+Shift+f exec --no-startup-id brave-beta
 
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+	gsettings set $gnome-schema gtk-theme 'vimix-dark-laptop-ruby'
+	gsettings set $gnome-schema gtk-icon-theme 'Arc'
+	gsettings set $gnome-schema cursor-theme 'default'
+	gsettings set $gnome-schema cursor-size 12
+	gsettings set $gnome-schema monospace-font-name 'Iosevka Copper'
+	gsettings set $gnome-schema font-name 'Roboto'
+}
+
+# vimix-dark'...
+# vimix-dark-doder'...
+# vimix-dark-beryl'...
+# vimix-dark-ruby'...
+# vimix-dark-amethyst'...
+# vimix-dark-laptop'...
+# vimix-dark-laptop-doder'..
+# vimix-dark-laptop-beryl'..
+# vimix-dark-laptop-ruby'...
+# vimix-dark-laptop-amethyst
