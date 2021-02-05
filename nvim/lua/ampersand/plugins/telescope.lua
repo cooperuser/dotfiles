@@ -18,9 +18,9 @@ function plugin.settings()
 			file_previewer = previewers.vim_buffer_cat.new,
 			grep_previewer = previewers.vim_buffer_vimgrep.new,
 			qflist_previewer = previewers.vim_buffer_qflist.new,
-			selection_strategy = "row",
+			-- selection_strategy = "row",
 			show_line = false,
-			prompt_prefix = ' >'
+			prompt_prefix = ' 🯁🯂🯃' --ᐳ
 		},
 		extensions = {
 			fzy_native = {
