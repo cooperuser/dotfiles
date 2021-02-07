@@ -5,6 +5,7 @@ set fish_greeting
 
 export NETHACKOPTIONS=@$HOME/.config/nethack/nethackrc;
 export MANPAGER='nvim +Man!'
+export XDG_CURRENT_DESKTOP=sway
 
 # Setup command aliases
 . ~/.config/fish/aliases.fish
