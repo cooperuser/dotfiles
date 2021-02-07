@@ -2,8 +2,7 @@
 	"position": "bottom",
 	"height": 26,
 	"modules-left": [
-		"sway/workspaces",
-		"sway/mode"
+		"sway/workspaces"
 	],
 	"modules-right": [
 		"tray",
@@ -12,12 +11,19 @@
 		"battery",
 		"clock"
 	],
+	"modules-center": [
+		"sway/mode"
+	],
 	"clock": {
 		"format": "{:%Y-%m-%d  %a  %H:%M}",
 	},
 	"battery": {
+		"states": {
+			"warning": 25,
+			"critical": 12
+		},
 		"format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", "", ""]
+		"format-icons": ["", "", "", "", "", "", "", "", "", ""]
 	},
 	"pulseaudio": {
 		"format": "{volume} {icon}",

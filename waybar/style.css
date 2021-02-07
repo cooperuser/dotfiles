@@ -28,7 +28,15 @@ window#waybar {
 }
 
 #tray {
+	background: rgba(242, 198, 138, 0.3);
+	/* border-bottom: 3px solid rgba(242, 198, 138, 0.05); */
+	border-bottom: 3px solid rgba(0, 0, 0, 0.01);
 	margin-right: 4px;
+	animation-delay: 0.3s;
+	animation-duration: 1.5s;
+	animation-name: blinkborder2;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 
 #workspaces button:hover {
@@ -78,7 +86,16 @@ window#waybar {
 
 #mode {
 	background: #64727D;
-	border-bottom: 3px solid #f53c3c;
+	/* border-bottom: 3px solid #f53c3c; */
+
+	color: #ddd;
+	/* background: rgba(242, 198, 138, 0.35); */
+	border-bottom: 3px solid rgba(242, 198, 138, 0.5);
+	/* border-color: transparent; */
+	animation-duration: 1.5s;
+	animation-name: blinkborder2;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 
 #clock {
@@ -90,8 +107,15 @@ window#waybar {
 }
 
 #battery.charging {
-	color: white;
-	background-color: #26A65B;
+	/* padding-top: 3px; */
+	/* border-bottom: 3px solid RGBA(242, 198, 138, 0.75); */
+	background-color: RGBA(242, 198, 138, 0.5);
+	animation-duration: 1.5s;
+	animation-name: blinkborder;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	/* animation-direction: alternate; */
+	/* background-color: RGBA(135, 175, 255, 0.75); */
 }
 
 @keyframes blink {
@@ -99,6 +123,140 @@ window#waybar {
 		background-color: rgba(255, 255, 255, 0.2);
 	}
 }
+
+@keyframes blinkborder {
+	0% {
+		border-radius: 12px 12px 12px 12px;
+	}
+	25% {
+		border-radius: 8px 8px 14px 14px;
+	}
+	35% {
+		border-radius: 14px 14px 8px 8px;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	45% {
+		margin-top: -3px;
+		margin-bottom: 3px;
+		border-radius: 14px 14px 8px 8px;
+	}
+	55% {
+		margin-top: -3px;
+		margin-bottom: 3px;
+		border-radius: 12px 12px 12px 12px;
+	}
+	65% {
+		margin-top: 0;
+		margin-bottom: 0;
+		border-radius: 8px 8px 14px 14px;
+	}
+	75% {
+		border-radius: 12px 12px 8px 8px;
+	}
+	85% {
+		border-radius: 8px 8px 12px 12px;
+	}
+	95% {
+		border-radius: 12px 12px 12px 12px;
+	}
+	100% {
+		border-radius: 12px 12px 12px 12px;
+	}
+}
+
+@keyframes blinkborder2 {
+	0% {
+		border-radius: 12px 12px 3px 3px;
+		/* padding-left: 6px; */
+		/* padding-right: 4px; */
+	}
+	25% {
+		border-radius: 7px 7px 3px 3px;
+	}
+	34% {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	35% {
+		border-radius: 14px 14px 3px 3px;
+		/* margin-top: 2; */
+		/* margin-bottom: -2; */
+	}
+	45% {
+		margin-top: -4px;
+		margin-bottom: 4px;
+
+		border-radius: 14px 14px 3px 3px;
+	}
+	50% {
+		/* background: rgba(255, 255, 255, 0.1); */
+		/* padding-left: 4px; */
+		/* padding-right: 6px; */
+	}
+	55% {
+		margin-top: -4px;
+		margin-bottom: 4px;
+
+		border-radius: 12px 12px 6px 6px;
+	}
+	65% {
+		margin-top: 0px;
+		margin-bottom: 0;
+		border-radius: 3px 3px 8px 8px;
+	}
+	75% {
+		border-radius: 12px 12px 3px 3px;
+	}
+	85% {
+		border-radius: 8px 8px 8px 8px;
+	}
+	95% {
+		border-radius: 12px 12px 3px 3px;
+	}
+	100% {
+		/* padding-left: 6px; */
+		/* padding-right: 4px; */
+		border-radius: 12px 12px 2px 3px;
+	}
+}
+
+/* @keyframes blinkborder { */
+/* 	/1* to { *1/ */
+/* 	/1* 	border-color: rgba(255, 255, 255, 0.2); *1/ */
+/* 	/1* 	border-radius: 6px 12px 3px 3px; *1/ */
+/* 	/1* } *1/ */
+/* 	0% { */
+/* 		border-radius: 14px 14px 12px 12px; */
+/* 		/1* border-radius: 14px 14px 12px 12px; *1/ */
+/* 	} */
+/* 	12% { */
+/* 		border-radius: 8px 8px 12px 12px; */
+/* 	} */
+/* 	25% { */
+/* 		border-radius: 12px 12px 8px 8px; */
+/* 		margin-top: 0; */
+/* 		margin-bottom: 0; */
+/* 	} */
+/* 	30% { */
+/* 		margin-top: -3px; */
+/* 		margin-bottom: 3px; */
+/* 	} */
+/* 	45% { */
+/* 		border-radius: 12px 12px 12px 12px; */
+/* 		margin-top: 0; */
+/* 		margin-bottom: 0; */
+/* 	} */
+/* 	/1* 83% { *1/ */
+/* 	/1* 	border-radius: 12px 12px 12px 12px; *1/ */
+/* 	/1* } *1/ */
+/* 	90% { */
+/* 		border-radius: 12px 12px 12px 12px; */
+/* 	} */
+/* 	100% { */
+/* 		border-radius: 14px 14px 12px 12px; */
+/* 	} */
+/* } */
 
 #battery.warning:not(.charging) {
 	background-color: rgba(255, 108, 107, 1.0);
