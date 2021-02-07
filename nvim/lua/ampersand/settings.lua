@@ -65,7 +65,7 @@ opt.selection = "exclusive"
 opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
-opt.completeopt = "menuone,noinsert"
+opt.completeopt = "menu,menuone,noselect"
 -- }}}
 
 -- Timing options {{{
