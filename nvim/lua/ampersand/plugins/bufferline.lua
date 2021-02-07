@@ -1,8 +1,6 @@
 local plugin = {name = "bufferline"}
 Plugins[plugin.name] = plugin
 
-local colors = require "bufferline/colors"
-
 local settings = {
 	show_buffer_close_icons = false,
 	separator_style = {"▕", "▊"},
@@ -62,6 +60,8 @@ function _G.nvim_copperline()
 end
 
 function plugin.settings()
+	local colors = require "bufferline/colors"
+
 	local c = {
 		fill_bg = colors.get_hex("TabLineFill", "bg"),
 		selected_bg = colors.get_hex("Normal", "bg"),
