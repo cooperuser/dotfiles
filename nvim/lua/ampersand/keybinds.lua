@@ -147,7 +147,7 @@ local function keybinds()
 	map.n("yif", "ggyG``") [[Yank whole file]]
 	map.n("=if", "gg=G``") [[Reindent whole file]]
 	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
-	map.sp("<tab>", "<cmd>set noexpandtab tabstop=4 shiftwidth=4") [[Indents]]
+	map.sp("<tab>", "<cmd>set noexpandtab tabstop=4 shiftwidth=4<CR>") [[Indents]]
 
 	map.sp("s", "<cmd>silent w | luafile %<CR>") [[Run current lua file]]
 
@@ -167,6 +167,21 @@ local function keybinds()
 	map.t("<C-w>", [[<C-\><C-n><C-w>]]) [[Window movements in terminal mode]]
 	map.t("<C-u>", [[<C-\><C-n><C-u>]], {map=true})
 	[[Quickly scroll up in terminal mode]]
+	-- }}}
+
+	-- MultiRun() {{{
+	function MultiRun()
+		local filetype = vim.api.nvim_buf_get_option(0, "syntax")
+
+		if filetype == "markdown" then
+			vim.cmd("MarkdownPreview")
+		elseif filetype == "tex" then
+			vim.cmd("VimtexCompile")
+			map.sp("v", "<cmd>VimtexView<CR>")
+		end
+	end
+
+	map.sp("c", "<cmd>lua MultirunRun()<CR>")
 	-- }}}
 end
 
