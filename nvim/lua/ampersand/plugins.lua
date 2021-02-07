@@ -22,7 +22,7 @@ return require("packer").startup(function()
 	use "tpope/vim-fugitive"
 	use "junegunn/vim-peekaboo"
 	use "junegunn/vim-easy-align"
-	use "lewis6991/gitsigns.nvim"
+	use {"lewis6991/gitsigns.nvim", config = strap("gitsigns")}
 	use {"AndrewRadev/switch.vim", config = strap("switch")}
 	use {"nvim-treesitter/nvim-treesitter", config = strap("treesitter")}
 	use "nvim-treesitter/playground"
@@ -31,6 +31,7 @@ return require("packer").startup(function()
 	use {"voldikss/vim-floaterm", config = strap("floaterm")}
 	use {"pwntester/octo.nvim"}
 	-- use {"oberblastmeister/neuron.nvim", config = strap("neuron")}
+	use {"metakirby5/codi.vim", config = strap("codi")}
 	-- }}}
 
 	-- Aesthetic plugins {{{
@@ -53,8 +54,8 @@ return require("packer").startup(function()
 	-- }}}
 
 	-- Completion plugins {{{
-	use "neovim/nvim-lspconfig"
-	use {"nvim-lua/completion-nvim", config = strap("completion")}
+	use {"neovim/nvim-lspconfig", config = strap("lspconfig")}
+	-- use {"nvim-lua/completion-nvim", config = strap("completion")}
 	use "RishabhRD/nvim-lsputils"
 	-- use "tjdevries/nlua.nvim"
 	use "SirVer/ultisnips"
@@ -89,6 +90,8 @@ return require("packer").startup(function()
 	-- }}}
 
 	-- Temporary plugins {{{
+	use {"~/git/tabi.nvim"}
+	use {"hrsh7th/nvim-compe", config = strap("compe")}
 	-- }}}
 	-- luacheck: pop
 end)

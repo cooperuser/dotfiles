@@ -6,15 +6,35 @@
 		"sway/mode"
 	],
 	"modules-right": [
-		"pulseaudio",
+		"tray",
 		"backlight",
+		"pulseaudio",
 		"battery",
 		"clock"
 	],
-	"modules-center": [
-		"tray"
-	],
 	"clock": {
 		"format": "{:%Y-%m-%d  %a  %H:%M}",
+	},
+	"battery": {
+		"format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", ""]
+	},
+	"pulseaudio": {
+		"format": "{volume} {icon}",
+		"format-bluetooth": "{volume} {icon}",
+		"format-muted": "{volume} 婢",
+		"format-icons": {
+			"headphone": "",
+			"default": ["奄", "奔", "墳"]
+		},
+		"states": {
+			"loud": 90
+		}
+	},
+	"backlight": {
+		"format": "{percent} {icon}",
+		"format-icons": [" ", "", "", "", "", ""],
+		"on-scroll-up": "brightnessctl set +1",
+		"on-scroll-down": "brightnessctl --min-value=10 set 1-"
 	}
 }

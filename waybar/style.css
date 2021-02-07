@@ -1,6 +1,5 @@
 * {
 	border: none;
-	/* border-radius: 2px; */
 	border-radius: 3px 3px 0 0;
 	font-family: Roboto, Helvetica, Arial, sans-serif;
 	font-size: 15px;
@@ -17,41 +16,64 @@ window#waybar {
 	margin: 0 1px;
 }
 
-#workspaces button {
+#workspaces button, #tray {
 	margin-left: 1px;
 	margin-right: 1px;
-	margin-top: 3px;
-	margin-bottom: -3px;
-	border-radius: 8px 8px 3px 3px;
+	border-radius: 12px 12px 3px 3px;
 	padding: 0 5px;
 	background: rgba(255, 255, 255, 0.1);
 	color: white;
-	border-bottom: 3px solid rgba(100, 114, 125, 0.75);;
-	transition: background 200ms, margin 200ms
+	border-bottom: 3px solid rgba(100, 114, 125, 0.75);
+	transition: background 200ms, margin 200ms;
+}
+
+#tray {
+	margin-right: 4px;
 }
 
 #workspaces button:hover {
 	background: rgba(255, 255, 255, 0.2);
+	border-radius: 10px 10px 3px 3px;
 	margin-top: 1.5px;
 	margin-bottom: -1.5px;
+	transition: border-radius 300ms, margin 200ms;
 }
 
-#workspaces button.activity {
-	background: RGBA(245, 60, 60, 0.4);
-	margin-top: 1.5px;
-	margin-bottom: -1.5px;
+#workspaces button.urgent {
+	background: rgba(255, 108, 107, 0.5);
+	transition: background 200ms;
 }
 
 #workspaces button.focused {
 	background: #64727D;
-	border-bottom: 3px solid white;
-	margin-top: 0px;
-	margin-bottom: 0px;
+	margin-top: 3px;
+	margin-bottom: -3px;
+	border-radius: 8px 8px 3px 3px;
+	border-bottom: 3px solid rgba(242, 166, 138, 0.75);
+	transition: border-radius 300ms, margin 200ms;
 }
 
-#mode, #clock, #battery, #backlight {
+#mode, #clock, #battery, #backlight, #pulseaudio {
 	padding: 0 10px;
 	margin: 0 5px;
+}
+
+#battery, #pulseaudio, #backlight {
+	min-width: 48px;
+	font-family: "RobotoMono Nerd Font";
+}
+
+#pulseaudio {
+	transition: margin 200ms, opacity 200ms, background-color 200ms;
+}
+
+#pulseaudio.muted {
+	margin-left: -74px;
+	opacity: 0;
+}
+
+#pulseaudio.loud {
+	background-color: rgba(255, 108, 107, 0.5);
 }
 
 #mode {
@@ -63,9 +85,8 @@ window#waybar {
 	background-color: #64727D;
 }
 
-#battery {
-	background-color: #ffffff;
-	color: black;
+#battery, #backlight, #pulseaudio {
+	background-color: rgba(255, 255, 255, 0.2);
 }
 
 #battery.charging {
@@ -73,22 +94,25 @@ window#waybar {
 	background-color: #26A65B;
 }
 
-#backlight {
-	background-color: #ffffff;
-	color: black;
-}
-
 @keyframes blink {
 	to {
-		background-color: #ffffff;
-		color: black;
+		background-color: rgba(255, 255, 255, 0.2);
 	}
 }
 
 #battery.warning:not(.charging) {
-	background: #f53c3c;
+	background-color: rgba(255, 108, 107, 1.0);
 	animation-name: blink;
 	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+	background-color: rgba(255, 108, 107, 1.0);
+	animation-name: blink;
+	animation-duration: 0.25s;
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
 	animation-direction: alternate;

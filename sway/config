@@ -8,14 +8,15 @@ input 1:1:AT_Translated_Set_2_keyboard repeat_rate 25
 
 input type:touchpad {
 	accel_profile adaptive
-	pointer_accel 0.25
+	pointer_accel 0.3
 	dwt enabled
 }
 
 bindsym $mod+Return exec kitty
-bindsym $mod+Shift+r reload
+bindsym $mod+Shift+r reload; exec makoctl reload
 bindsym $mod+Ctrl+Shift+r restart
 bindsym $mod+Shift+q exec swaylock
+bindsym $mod+Shift+m exec amixer -D pulse set Master 1+ toggle
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -28,16 +29,9 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-# bindsym $mod+Shift+1 move container to workspace 1; workspace 1
-# bindsym $mod+Shift+2 move container to workspace 2; workspace 2
-# bindsym $mod+Shift+3 move container to workspace 3; workspace 3
-# bindsym $mod+Shift+4 move container to workspace 4; workspace 4
-# bindsym $mod+Shift+5 move container to workspace 5; workspace 5
-# bindsym $mod+Shift+6 move container to workspace 6; workspace 6
-# bindsym $mod+Shift+7 move container to workspace 7; workspace 7
-# bindsym $mod+Shift+8 move container to workspace 8; workspace 8
-# bindsym $mod+Shift+9 move container to workspace 9; workspace 9
-# bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
+
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -75,13 +69,11 @@ bindsym $mod+Shift+l move right
 
 bindsym Alt+Tab workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+n border toggle
 bindsym $mod+Ctrl+j workspace prev
 bindsym $mod+Ctrl+k workspace next
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+space focus mode_toggle
-# bindsym $mod+z bar mode toggle
 bindsym $mod+q kill
 
 bindsym $mod+r mode "resize"
@@ -132,8 +124,10 @@ bar {
 }
 
 for_window [app_id="js-benzer"] floating enable
+for_window [app_id="zathura"] resize set width 805 px
 
 bindsym $mod+d exec dmenu_run
+bindsym $mod+Shift+d exec --no-startup-id discord-canary
 bindsym $mod+Shift+f exec --no-startup-id brave-beta
 
 set $gnome-schema org.gnome.desktop.interface
