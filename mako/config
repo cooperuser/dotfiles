@@ -1,0 +1,36 @@
+max-visible=3
+layer=overlay
+# default-timeout=15000
+# group-by=app-name
+
+# font=Iosevka Copper
+# font=Iosevka
+font=Roboto
+background-color=#141414c0
+text-color=#cccccc
+width=480
+margin=20,20,20
+padding=10
+# border-color=#f2c68ac0
+border-size=3
+border-radius=10
+format=<span fgcolor="#87afff"><b>- %a</b></span>\n<b>%s</b>\n%b
+
+# [group-index=1]
+# invisible=0
+
+# [grouped]
+# format=<span fgcolor="#87afff"><b>- %a</b></span> (%g)\n<b>  %s</b>\n  %b
+
+[urgency="low"]
+border-color=#f2c68ac0
+
+[urgency="normal"]
+border-color=#646464c0
+
+[urgency="high"]
+border-color=#ff6c6bc0
+
+[app-name="discord"]
+border-color=#87afffc0
+
