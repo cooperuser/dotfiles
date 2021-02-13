@@ -93,7 +93,17 @@ local function keybinds()
 	end)
 
 	map.group([[Swap 0 and ^ (possibly temporary)]], function()
-		map.n("0", "^")
+		function MoveZero()
+			local line = vim.api.nvim_get_current_line()
+			local cursor = vim.api.nvim_win_get_cursor(0)
+			if line:sub(cursor[2], cursor[2]) == "\t" then
+				-- vim.api.nvim_win_set_cursor(cursor[1], 0)
+				vim.api.nvim_feedkeys("0", "n", true)
+			else
+				vim.api.nvim_feedkeys("^", "n", true)
+			end
+		end
+		map.n("0", "<cmd>lua MoveZero()<CR>")
 		map.n("^", "0")
 	end)
 
@@ -103,6 +113,8 @@ local function keybinds()
 		map.i("<C-h>", "<left>")
 		map.i("<C-l>", "<right>")
 	end)
+
+	map.n("<Leader>;", ",")
 	-- }}}
 
 	-- Buffers {{{
@@ -145,6 +157,7 @@ local function keybinds()
 	map.n("<C-p>", [["_ciw<C-o>P<ESC>]]) [[Replace word with clipboard]]
 	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
 	map.n("yif", "ggyG``") [[Yank whole file]]
+	map.n("y0", "my^y$`y") [[Yank whole file]]
 	map.n("=if", "gg=G``") [[Reindent whole file]]
 	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
 	map.sp("<tab>", "<cmd>set noexpandtab tabstop=4 shiftwidth=4<CR>") [[Indents]]
@@ -161,6 +174,10 @@ local function keybinds()
 	map.n("*", "*``", {map = true}) [[Highlight word without moving]]
 	map.c("%s", "%sm") [[Highlight word without moving]]
 
+	map.i("<C-b>", "<C-k>") [[Remap for digraph input]]
+
+	map.i("<C-q>", [[<Esc>F "qx"qpgi]])
+	map.i("<C-f>", [[<Esc>ge"qx"qpgi]])
 	-- }}}
 
 	-- Terminal {{{
