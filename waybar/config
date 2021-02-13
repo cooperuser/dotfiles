@@ -30,7 +30,7 @@
 		"format-bluetooth": "{volume} {icon}",
 		"format-muted": "{volume} 婢",
 		"format-icons": {
-			"headphone": "",
+			"headphone": "",
 			"default": ["奄", "奔", "墳"]
 		},
 		"states": {
