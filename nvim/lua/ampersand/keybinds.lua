@@ -157,7 +157,7 @@ local function keybinds()
 	map.n("<C-p>", [["_ciw<C-o>P<ESC>]]) [[Replace word with clipboard]]
 	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
 	map.n("yif", "ggyG``") [[Yank whole file]]
-	map.n("y0", "my^y$`y") [[Yank whole file]]
+	map.n("y0", "my^y$`y") [[Yank line without newline]]
 	map.n("=if", "gg=G``") [[Reindent whole file]]
 	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
 	map.sp("<tab>", "<cmd>set noexpandtab tabstop=4 shiftwidth=4<CR>") [[Indents]]
