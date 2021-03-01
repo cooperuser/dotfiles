@@ -1,1 +1,11 @@
-set default-bg "#141414"
+set highlight-color             "#87afff" # bright:yellow
+set highlight-active-color      "#95e454" # bright:orange
+# set highlight-active-color      "#322c0e" # bright:orange
+
+set default-bg                  "#3f444a" # bg
+set default-fg                  "#ff0000" # fg
+
+# Recolor book content's color
+set recolor-darkcolor           "#ddd"    # bg
+set recolor-lightcolor          "#141414" # fg
+set recolor                     "true"
