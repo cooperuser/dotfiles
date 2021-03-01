@@ -13,7 +13,7 @@ function plugin.settings()
 			-- TODO: Fix color change on blank line
 			winblend = 15,
 			file_ignore_patterns = {
-				"node_modules/*", ".git/*",
+				"node_modules/*", "\\.git/*",
 				"%.png", "%.ico", "%.jpg", "%.icns", "%.map"
 			},
 			file_previewer = previewers.vim_buffer_cat.new,
