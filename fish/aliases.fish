@@ -15,6 +15,7 @@ alias jg="cd ~/git"
 alias gs="git status"
 alias gss="gita ll"
 alias plz="sudo $history[1]"
+alias lg="lazygit"
 
 alias :e="config_vim"
 
