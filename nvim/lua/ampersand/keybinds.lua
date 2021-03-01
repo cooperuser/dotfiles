@@ -19,12 +19,14 @@ local function wrapper(mode, prefix, args)
 	---@param cmd string Command to run
 	---@param opts table Options [optional]
 	local function noremap(key, cmd, opts)
+		local local_args = {}
+			for k, v in pairs(args) do local_args[k] = v end
 		if opts then
 			if opts.map then
 				opts.map = nil
 				opts.noremap = false
 			end
-			for k, v in pairs(opts) do args[k] = v end
+			for k, v in pairs(opts) do local_args[k] = v end
 		end
 
 		local full = key
@@ -43,7 +45,7 @@ local function wrapper(mode, prefix, args)
 			group = data.group
 		}
 
-		vim.api.nvim_set_keymap(mode, full, cmd, args)
+		vim.api.nvim_set_keymap(mode, full, cmd, local_args)
 
 		return function(comment)
 			binds[keyPath].comment = comment
@@ -160,7 +162,8 @@ local function keybinds()
 	map.n("y0", "my^y$`y") [[Yank line without newline]]
 	map.n("=if", "gg=G``") [[Reindent whole file]]
 	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
-	map.sp("<tab>", "<cmd>set noexpandtab tabstop=4 shiftwidth=4<CR>") [[Indents]]
+	map.sp("<tab>", "<cmd>set noexpandtab tabstop=2 shiftwidth=2<CR>") [[Indents]]
+	map.n("<C-i>", "O<CR>") [[New line inbetween]]
 
 	map.sp("s", "<cmd>silent w | luafile %<CR>") [[Run current lua file]]
 
@@ -184,6 +187,7 @@ local function keybinds()
 	map.t("<C-w>", [[<C-\><C-n><C-w>]]) [[Window movements in terminal mode]]
 	map.t("<C-u>", [[<C-\><C-n><C-u>]], {map=true})
 	[[Quickly scroll up in terminal mode]]
+
 	-- }}}
 
 	-- MultiRun() {{{
@@ -199,6 +203,7 @@ local function keybinds()
 	end
 
 	map.sp("c", "<cmd>lua MultirunRun()<CR>")
+	map.n("gp", [[mp^"_di"P^fh"_d3f/`p]])
 	-- }}}
 end
 
