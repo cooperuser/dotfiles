@@ -1,7 +1,7 @@
 * {
 	border: none;
 	border-radius: 3px 3px 0 0;
-	font-family: Roboto, Helvetica, Arial, sans-serif;
+	font-family: "RobotoMono Nerd Font";
 	font-size: 15px;
 	min-height: 0;
 }
@@ -16,10 +16,10 @@ window#waybar {
 	margin: 0 1px;
 }
 
-#workspaces button, #tray {
+#workspaces button, #tray > * > * {
 	margin-left: 1px;
 	margin-right: 1px;
-	border-radius: 12px 12px 3px 3px;
+	border-radius: 12px 12px 2px 2px;
 	padding: 0 5px;
 	background: rgba(255, 255, 255, 0.1);
 	color: white;
@@ -27,16 +27,22 @@ window#waybar {
 	transition: background 200ms, margin 200ms;
 }
 
-#tray {
+#tray > * > * {
 	background: rgba(242, 198, 138, 0.3);
 	/* border-bottom: 3px solid rgba(242, 198, 138, 0.05); */
 	border-bottom: 3px solid rgba(0, 0, 0, 0.01);
 	margin-right: 4px;
+	padding: 0;
 	animation-delay: 0.3s;
 	animation-duration: 1.5s;
 	animation-name: blinkborder2;
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
+}
+
+#tray * {
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #workspaces button:hover {
@@ -61,14 +67,31 @@ window#waybar {
 	transition: border-radius 300ms, margin 200ms;
 }
 
-#mode, #clock, #battery, #backlight, #pulseaudio {
+#mode, #clock, #battery, #backlight, #pulseaudio, #idle_inhibitor {
 	padding: 0 10px;
 	margin: 0 5px;
+}
+
+#clock {
+	font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 #battery, #pulseaudio, #backlight {
 	min-width: 48px;
 	font-family: "RobotoMono Nerd Font";
+}
+
+#idle_inhibitor {
+	padding-right: 8px;
+	margin-bottom: 1px;
+	margin-top: -1px;
+	font-family: "RobotoMono Nerd Font";
+	color: rgba(242, 198, 138, 1.0);
+	transition: opacity 200ms;
+}
+
+#idle_inhibitor.deactivated {
+	opacity: 0;
 }
 
 #pulseaudio {
@@ -107,15 +130,13 @@ window#waybar {
 }
 
 #battery.charging {
-	/* padding-top: 3px; */
 	/* border-bottom: 3px solid RGBA(242, 198, 138, 0.75); */
 	background-color: RGBA(242, 198, 138, 0.5);
-	animation-duration: 1.5s;
-	animation-name: blinkborder;
+	animation-duration: 1.0s;
+	animation-name: blink;
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
-	/* animation-direction: alternate; */
-	/* background-color: RGBA(135, 175, 255, 0.75); */
+	animation-direction: alternate;
 }
 
 @keyframes blink {

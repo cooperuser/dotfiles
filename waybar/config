@@ -5,7 +5,8 @@
 		"sway/workspaces"
 	],
 	"modules-right": [
-		"tray",
+		// "tray",
+		"idle_inhibitor",
 		"backlight",
 		"pulseaudio",
 		"battery",
@@ -14,6 +15,26 @@
 	"modules-center": [
 		"sway/mode"
 	],
+	"sway/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"1": "<small></small>",
+			"5": "<big></big>",
+			"2": "",
+			"3": "",
+			"4": "爵",
+			"11": "1",
+			"12": "2",
+			"13": "3",
+			"14": "4",
+			"15": "5",
+			"16": "6",
+			"17": "7",
+			"18": "8",
+			"19": "9",
+			"20": "冷"
+		}
+	},
 	"clock": {
 		"format": "{:%Y-%m-%d  %a  %H:%M}",
 	},
@@ -35,12 +56,22 @@
 		},
 		"states": {
 			"loud": 90
-		}
+		},
+		"on-click": "pavucontrol"
 	},
 	"backlight": {
 		"format": "{percent} {icon}",
 		"format-icons": [" ", "", "", "", "", ""],
 		"on-scroll-up": "brightnessctl set +1",
 		"on-scroll-down": "brightnessctl --min-value=10 set 1-"
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
 	}
 }
+
+// vim: ft=jsonc

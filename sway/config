@@ -3,59 +3,42 @@ set $mod Mod4
 font pango:Roboto 15
 focus_follows_mouse no
 
-input 1:1:AT_Translated_Set_2_keyboard repeat_delay 250
+input 1:1:AT_Translated_Set_2_keyboard repeat_delay 225
 input 1:1:AT_Translated_Set_2_keyboard repeat_rate 25
 
 input type:touchpad {
 	accel_profile adaptive
-	pointer_accel 0.3
+	pointer_accel 0.40
 	dwt enabled
+	middle_emulation disabled
 }
 
-bindsym $mod+Return exec kitty
+output eDP-1 pos 0 0 res 1920x1080
+
+workspace 20 output DP-1
+
+input * {
+	xkb_options compose:ralt,caps:none,middle_click:left_click
+}
+
+input "1:1:AT_Translated_Set_2_keyboard" {
+	xkb_layout "us,us"
+	xkb_options "grp:shifts_toggle, caps:escape"
+}
+
 bindsym $mod+Shift+r reload; exec makoctl reload
 bindsym $mod+Ctrl+Shift+r restart
 bindsym $mod+Shift+q exec swaylock
 bindsym $mod+Shift+m exec amixer -D pulse set Master 1+ toggle
+bindsym $mod+Shift+z exec killall -SIGUSR1 waybar
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+Shift+t exec ~/.config/sway/screenshot
 
-bindsym $mod+p workspace prev
-bindsym $mod+n workspace next
-
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-bindsym $mod+Alt+Shift+1 move container to workspace 1; workspace 1
-bindsym $mod+Alt+Shift+2 move container to workspace 2; workspace 2
-bindsym $mod+Alt+Shift+3 move container to workspace 3; workspace 3
-bindsym $mod+Alt+Shift+4 move container to workspace 4; workspace 4
-bindsym $mod+Alt+Shift+5 move container to workspace 5; workspace 5
-bindsym $mod+Alt+Shift+6 move container to workspace 6; workspace 6
-bindsym $mod+Alt+Shift+7 move container to workspace 7; workspace 7
-bindsym $mod+Alt+Shift+8 move container to workspace 8; workspace 8
-bindsym $mod+Alt+Shift+9 move container to workspace 9; workspace 9
-bindsym $mod+Alt+Shift+0 move container to workspace 10; workspace 10
+include workspaces.conf
 
 floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+Shift+s sticky toggle
+bindsym $mod+Ctrl+s sticky toggle
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -72,7 +55,7 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Ctrl+j workspace prev
 bindsym $mod+Ctrl+k workspace next
 
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Ctrl+f fullscreen toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+q kill
 
@@ -82,8 +65,6 @@ bindsym $mod+t mode "terminal"
 bindsym $mod+Shift+minus opacity minus 0.1
 bindsym $mod+Shift+equal opacity plus 0.1
 bindsym $mod+Shift+backspace opacity set 1
-
-bindsym $mod+Shift+c move position cursor
 
 include pip.conf
 
@@ -116,8 +97,13 @@ mode "terminal" {
 }
 
 default_border pixel 3
+default_floating_border pixel 3
 gaps inner 12
 gaps outer -5
+bindsym $mod+u border pixel 3
+
+bindsym $mod+z move container to workspace 1; workspace 1
+bindsym $mod+x move container to workspace 2; workspace 2
 
 bar {
 	swaybar_command waybar
@@ -125,14 +111,74 @@ bar {
 
 for_window [app_id="js-benzer"] floating enable
 for_window [app_id="zathura"] resize set width 805 px
+for_window [app_id="gnome-calculator"] floating enable
+for_window [app_id="pavucontrol"] floating enable
 
-bindsym $mod+d exec dmenu_run
-bindsym $mod+Shift+d exec --no-startup-id discord-canary
-bindsym $mod+Shift+f exec --no-startup-id brave-beta
+set $kitty 1
+set $app 7
+set $spotify 2
+set $discord 3
+set $brave 4
+
+for_window [app_id="kitty"] {
+	move container to workspace $kitty
+	workspace $kitty
+}
+for_window [app_id="anticipainter"] {
+	floating enable
+}
+for_window [class="Spotify"] {
+	move container to workspace $spotify
+	workspace $spotify
+}
+for_window [class="discord"] {
+	move container to workspace $discord
+	workspace $discord
+}
+for_window [class="Brave-browser-beta"] {
+	move container to workspace $brave
+	workspace $brave
+}
+bindsym $mod+a workspace $kitty
+
+bindsym $mod+Shift+Escape move container to workspace $kitty
+bindsym $mod+Shift+f move container to workspace $brave
+bindsym $mod+Shift+d move container to workspace $discord
+bindsym $mod+Shift+s move container to workspace $spotify
+bindsym $mod+Shift+a move container to workspace $app
+
+
+# for_window [class="discord"] {
+# 	bindsym Ctrl+Alt+h exec ydotool key ctrl+alt+left
+# 	bindsym Ctrl+Alt+j exec ydotool key ctrl+alt+down
+# 	bindsym Ctrl+Alt+k exec ydotool key ctrl+alt+up
+# 	bindsym Ctrl+Alt+l exec ydotool key ctrl+alt+right
+
+# 	bindsym Shift+Alt+h exec ydotool key shift+alt+left
+# 	bindsym Shift+Alt+j exec ydotool key shift+alt+down
+# 	bindsym Shift+Alt+k exec ydotool key shift+alt+up
+# 	bindsym Shift+Alt+l exec ydotool key shift+alt+right
+
+# 	bindsym Alt+h exec ydotool key alt+left
+# 	bindsym Alt+j exec ydotool key alt+down
+# 	bindsym Alt+k exec ydotool key alt+up
+# 	bindsym Alt+l exec ydotool key alt+right
+# }
+
+bindsym $mod+Ctrl+d exec dmenu_run
+
+bindsym $mod+Return [urgent="newest"] focus
+
+bindsym $mod+Shift+Return exec --no-startup-id kitty
+bindsym $mod+Escape exec --no-startup-id ~/.config/sway/sway-run-or-raise kitty
+bindsym $mod+d exec --no-startup-id ~/.config/sway/sway-run-or-raise discord-canary discord
+bindsym $mod+f exec --no-startup-id ~/.config/sway/sway-run-or-raise brave Brave-browser-beta brave-beta
+bindsym $mod+s exec --no-startup-id ~/.config/sway/sway-run-or-raise spotify Spotify spotify
+bindsym $mod+Shift+c exec --no-startup-id gnome-calculator
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-	gsettings set $gnome-schema gtk-theme 'vimix-dark-laptop-ruby'
+	gsettings set $gnome-schema gtk-theme 'WhiteSur-dark'
 	gsettings set $gnome-schema gtk-icon-theme 'Arc'
 	gsettings set $gnome-schema cursor-theme 'default'
 	gsettings set $gnome-schema cursor-size 12
@@ -140,13 +186,12 @@ exec_always {
 	gsettings set $gnome-schema font-name 'Roboto'
 }
 
-# vimix-dark'...
-# vimix-dark-doder'...
-# vimix-dark-beryl'...
-# vimix-dark-ruby'...
-# vimix-dark-amethyst'...
-# vimix-dark-laptop'...
-# vimix-dark-laptop-doder'..
-# vimix-dark-laptop-beryl'..
-# vimix-dark-laptop-ruby'...
-# vimix-dark-laptop-amethyst
+exec_always swayidle -w \
+		 timeout 300 'swaylock -f' \
+		 timeout 600 'swaymsg "output * dpms off"' \
+		 resume 'swaymsg "output * dpms on"' \
+		 before-sleep 'swaylock -f'
+
+exec_always ydotoold
+
+# vim: ft=i3config
