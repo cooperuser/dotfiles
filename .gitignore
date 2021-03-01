@@ -5,6 +5,7 @@ dconf/
 discordcanary/
 gita/repo_path
 lazygit/state.yml
+lazygit/.config
 
 nvim/plugged/
 nvim/.netrwhist
