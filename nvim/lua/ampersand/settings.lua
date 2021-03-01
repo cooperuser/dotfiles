@@ -4,10 +4,16 @@ local opt = vim.opt
 -- Appearance options {{{
 opt.number = true
 opt.relativenumber = true
-opt.cursorline = true
+-- opt.cursorline = true
 opt.foldmethod = "marker"
 opt.foldlevelstart = 1
 vim.opt.guifont = [[Hack\ Nerd\ Font:h12]]
+local a = "n-sm:block-Cursor,"
+local b = "i-ci:ver25-CursorIM,"
+local c = "r-cr:hor20-CursorRM,"
+local d = "v-ve:ver25-CursorVM,"
+local e = "c-o:block-CursorCM,"
+opt.guicursor = a .. b .. c .. d .. e
 -- }}}
 
 -- Information options {{{
@@ -16,6 +22,8 @@ opt.signcolumn = "yes:1"
 opt.showmode = false
 opt.showcmd = true
 opt.shortmess = vim.api.nvim_get_option("shortmess") .. "c"
+opt.undofile = true
+opt.swapfile = false
 -- }}}
 
 -- Window/buffer options {{{
@@ -31,8 +39,8 @@ opt.gdefault = true
 -- Text options {{{
 opt.scrolloff = 99
 opt.wrap = false
-opt.listchars = [[tab:▏\ ,trail:~]]
-opt.fillchars = [[fold:\ ]]
+opt.listchars = [[tab:🭰\ ,trail:▓]]
+opt.fillchars = [[fold:\ ,eob:\ ]]
 opt.list = true
 opt.formatoptions = "jql"
 opt.clipboard = "unnamedplus"
@@ -49,8 +57,8 @@ vim.cmd("autocmd InsertLeave * normal `^")
 opt.autoindent = true
 opt.smartindent = true
 opt.expandtab = false
-opt.tabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = 2
+opt.shiftwidth = 2
 opt.shiftround = true
 -- }}}
 
