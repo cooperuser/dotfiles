@@ -10,10 +10,10 @@ function plugin.settings()
 		finder_definition_icon = '   ',
 		finder_reference_icon = '   ',
 		definition_preview_icon = '   ',
-		error_header = "   Error",
-		warn_header = "   Warn",
-		hint_header = "   Hint",
-		infor_header = "   Infor"
+		-- error_header = "   Error",
+		-- warn_header = "   Warn",
+		-- hint_header = "   Hint",
+		-- infor_header = "   Infor"
 	}
 end
 
@@ -23,6 +23,8 @@ function plugin.keybinds()
 		K.sp("j", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 		K.n("[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 		K.n("]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+		K.n("<M-k>", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+		K.n("<M-j>", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 	end)
 	K.n("gr", "<cmd>Lspsaga rename<CR>")
 	K.n("gs", "<cmd>Lspsaga signature_help<CR>", {silent = false})
@@ -32,6 +34,7 @@ function plugin.keybinds()
 	K.n("gd", "<cmd>Lspsaga preview_definition<CR>")
 	K.n("gh", "<cmd>Lspsaga lsp_finder<CR>")
 	K.n("g<Space>", "<cmd>Lspsaga hover_doc<CR>")
+	K.n("<C-h>", "<cmd>lua vim.lsp.buf.hover()<CR>")
 	K.n("<M-Return>", "<cmd>Lspsaga code_action<CR>")
 end
 

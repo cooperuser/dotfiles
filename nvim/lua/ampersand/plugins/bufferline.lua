@@ -34,7 +34,7 @@ function _G.nvim_copperline()
 	local tabline = string.sub(bufferline, tabstart + 1)
 	bufferline = string.sub(bufferline, 1, tabstart)
 	local status = getStatusNumbers()
-	local theme = "%#Tabline"
+	local theme = "%#TabLine"
 	local separator = " "
 	-- if #tabline ~= 0 then
 	-- 	theme = "%#Tabline"
@@ -66,7 +66,7 @@ function plugin.settings()
 		fill_bg = colors.get_hex("TabLineFill", "bg"),
 		selected_bg = colors.get_hex("Normal", "bg"),
 		selected_fg = colors.get_hex("Ignore", "fg"),
-		selected_sign = colors.get_hex("InfoMsg", "fg"),
+		selected_sign = colors.get_hex("PmenuSel", "bg"),
 		visible_bg = colors.get_hex("Normal", "bg"),
 		visible_fg = colors.get_hex("StatusLine", "fg"),
 		visible_sign = colors.get_hex("StatusLine", "fg"),
@@ -132,6 +132,21 @@ function plugin.settings()
 			modified_selected = {
 				guifg = c.green,
 				guibg = c.selected_bg
+			},
+			duplicate_selected = {
+				guifg = c.selected_fg,
+				guibg = c.selected_bg,
+				gui = "none"
+			},
+			duplicate_visible = {
+				guifg = c.visible_fg,
+				guibg = c.visible_bg,
+				gui = "none"
+			},
+			duplicate = {
+				guifg = c.inactive_fg,
+				guibg = c.inactive_bg,
+				gui = "none"
 			},
 			pick_selected = {
 				guifg = c.inactive_fg,

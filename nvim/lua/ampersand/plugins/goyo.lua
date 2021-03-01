@@ -16,6 +16,7 @@ end
 function plugin.settings()
 	vim.cmd("autocmd! User GoyoEnter nested lua Plugins.goyo.goyo_enter()")
 	vim.cmd("autocmd! User GoyoLeave nested lua Plugins.goyo.goyo_leave()")
+	vim.g.goyo_width = 81
 end
 
 function plugin.keybinds()

@@ -31,18 +31,24 @@ function plugin.settings()
 		};
 	}
 
-	vim.cmd("sign define LspDiagnosticsSignError text=▎")
-	vim.cmd("sign define LspDiagnosticsSignWarning text=▎")
-	vim.cmd("sign define LspDiagnosticsSignInformation text=▎")
-	vim.cmd("sign define LspDiagnosticsSignHint text=▎")
+	-- vim.cmd("sign define LspDiagnosticsSignError text=▎")
+	-- vim.cmd("sign define LspDiagnosticsSignWarning text=▎")
+	-- vim.cmd("sign define LspDiagnosticsSignInformation text=▎")
+	-- vim.cmd("sign define LspDiagnosticsSignHint text=▎")
+	vim.fn.sign_define("LspDiagnosticsSignError", {text="", numhl="LspDiagnosticsSignError"})
+	vim.fn.sign_define("LspDiagnosticsSignWarning", {text="", numhl="LspDiagnosticsSignWarning"})
+	vim.fn.sign_define("LspDiagnosticsSignInformation", {text="", numhl="LspDiagnosticsSignInformation"})
+	vim.fn.sign_define("LspDiagnosticsSignHint", {text="", numhl="LspDiagnosticsSignHint"})
 end
 
 function plugin.keybinds()
 	vim.cmd("inoremap <silent><expr> <C-Space> compe#complete()")
 	-- vim.cmd("inoremap <silent><expr> <CR>      compe#confirm('<CR>')")
-	vim.cmd("inoremap <silent><expr> <CR>      compe#close('<CR>')")
+	-- vim.cmd("inoremap <silent><expr> <CR>      compe#close('<CR>')")
 	vim.cmd("inoremap <silent><expr> <tab>     compe#confirm('<tab>')")
 	vim.cmd("inoremap <silent><expr> <C-e>     compe#close('<C-e>')")
+
+	-- vim.cmd [[inoremap <silent><expr> <CR> pumvisible() ? <C_e><CR> : <CR>]]
 end
 
 return function()

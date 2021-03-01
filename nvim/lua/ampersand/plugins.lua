@@ -26,18 +26,27 @@ return require("packer").startup(function()
 	use {"AndrewRadev/switch.vim", config = strap("switch")}
 	use {"nvim-treesitter/nvim-treesitter", config = strap("treesitter")}
 	use "nvim-treesitter/playground"
-	use "nvim-treesitter/nvim-treesitter-textobjects"
 	use {"psliwka/vim-smoothie", config = strap("smoothie")}
 	use {"voldikss/vim-floaterm", config = strap("floaterm")}
 	use {"pwntester/octo.nvim"}
-	-- use {"oberblastmeister/neuron.nvim", config = strap("neuron")}
+	use {"oberblastmeister/neuron.nvim", config = strap("neuron")}
 	use {"metakirby5/codi.vim", config = strap("codi")}
+	use "qpkorr/vim-bufkill"
+	use "dstein64/vim-startuptime"
+	use {"glepnir/dashboard-nvim", config = strap("dashboard")}
+	use {"kyazdani42/nvim-tree.lua", config = strap("nvimtree")}
+	-- use {"mbbill/undotree", config = strap("undotree")}
+	use {"~/git/undotree", config = strap("undotree")}
+	use {"cohama/lexima.vim"}
 	-- }}}
 
 	-- Aesthetic plugins {{{
-	use "itchyny/lightline.vim"
+	-- use "itchyny/lightline.vim"
+	use {"glepnir/galaxyline.nvim", config = strap("galaxyline")}
+	-- use {"~/git/galaxyline.nvim", config = strap("galaxyline")}
 	use "kyazdani42/nvim-web-devicons"
 	use {"akinsho/nvim-bufferline.lua", config = strap("bufferline")}
+	-- use {"romgrk/barbar.nvim", config = strap("barbar")}
 	use {"junegunn/goyo.vim", config = strap("goyo")}
 	-- }}}
 
@@ -55,43 +64,41 @@ return require("packer").startup(function()
 
 	-- Completion plugins {{{
 	use {"neovim/nvim-lspconfig", config = strap("lspconfig")}
-	-- use {"nvim-lua/completion-nvim", config = strap("completion")}
-	use "RishabhRD/nvim-lsputils"
-	-- use "tjdevries/nlua.nvim"
-	use "SirVer/ultisnips"
+	use {"hrsh7th/nvim-compe", config = strap("compe")}
 	use {"glepnir/lspsaga.nvim", config = strap("lspsaga")}
+	use {"kosayoda/nvim-lightbulb", config = strap("lightbulb")}
+	use {"hrsh7th/vim-vsnip", config = strap("vsnip")}
 	-- }}}
 
 	-- Language plugins {{{
 	use {"sheerun/vim-polyglot", config = strap("polyglot")}
 	use {"lervag/vimtex", config = strap("vimtex")}
-	use "skanehira/preview-uml.vim"
+	use "mattn/emmet-vim"
 	-- }}}
 
 	-- Colorschemes {{{
+	use {"rktjmp/lush.nvim"}
 	use "~/GitHub/glowbeam.vim"
 	-- }}}
 
 	-- Miscellaneous {{{
-	-- use "machakann/vim-swap"
-	use {"skywind3000/asynctasks.vim",
-		config = strap("asynctasks"),
-		requires = {"skywind3000/asyncrun.vim"}
-	}
 	use {"glacambre/firenvim",
 		config = strap("firenvim"),
 		run = function() vim.fn["firenvim#install"](0) end
 	}
-	-- use "kyazdani42/nvim-tree.lua"
+	use {"jbyuki/instant.nvim", config = strap("instant")}
 	-- }}}
 
 	-- Runner plugins {{{
 	use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", config = strap("markdownpreview")}
+	use {"rafcamlet/nvim-luapad", config = strap("luapad")}
 	-- }}}
 
 	-- Temporary plugins {{{
-	use {"~/git/tabi.nvim"}
-	use {"hrsh7th/nvim-compe", config = strap("compe")}
+	use {"~/git/tabi.nvim", config = strap("tabi")}
+	use {"~/git/telescope-packer.nvim"}
+	use {"~/git/indent-guides.nvim"}
+	use {"dbeniamine/cheat.sh-vim"}
 	-- }}}
 	-- luacheck: pop
 end)

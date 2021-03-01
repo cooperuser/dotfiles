@@ -6,21 +6,28 @@ Plugins[plugin.name] = plugin
 function plugin.settings()
 	Telescope = require("telescope")
 	Telescope.builtin = require("telescope.builtin")
+	Telescope.actions = require("telescope.actions")
 	local previewers = require("telescope.previewers")
 	require("telescope").setup{
 		defaults = {
 			-- TODO: Fix color change on blank line
-			-- winblend = 15,
+			winblend = 15,
 			file_ignore_patterns = {
 				"node_modules/*", ".git/*",
-				"%.png", "%.ico", "%.jpg", "%.map"
+				"%.png", "%.ico", "%.jpg", "%.icns", "%.map"
 			},
 			file_previewer = previewers.vim_buffer_cat.new,
 			grep_previewer = previewers.vim_buffer_vimgrep.new,
 			qflist_previewer = previewers.vim_buffer_qflist.new,
 			-- selection_strategy = "row",
 			show_line = false,
-			prompt_prefix = ' 🯁🯂🯃' --ᐳ
+			prompt_prefix = '    ',
+
+			mappings = {
+				i = {
+					["<C-q>"] = Telescope.actions.send_to_qflist
+				}
+			}
 		},
 		extensions = {
 			fzy_native = {
@@ -32,10 +39,16 @@ function plugin.settings()
 	require('telescope').load_extension('fzy_native')
 end
 
+local settings = {prompt_title="", results_title="", preview_title=""}
+
+function plugin.git_files() Telescope.builtin.git_files(settings) end
+function plugin.find_files() Telescope.builtin.find_files(settings) end
+
 function plugin.keybinds()
-	local settings = [[{prompt_title="", results_title="", preview_title=""}]]
-	K.sp('f', "<cmd>lua Telescope.builtin.git_files(" .. settings .. ")<CR>")
-	K.sp('F', ":lua Telescope.builtin.find_files(" .. settings .. ")<CR>")
+	-- local settings = [[{prompt_title="", results_title="", preview_title=""}]]
+	K.sp('f', "<cmd>lua Plugins.telescope.git_files()<CR>")
+	K.sp('F', "<cmd>lua Plugins.telescope.find_files()<CR>")
+	-- K.sp('F', ":lua Telescope.builtin.find_files(" .. settings .. ")<CR>")
 end
 
 return function()
