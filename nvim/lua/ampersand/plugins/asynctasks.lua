@@ -24,6 +24,6 @@ end
 
 return function()
 	Plugins.asynctasks.settings()
-	K.plugin(Plugins.asynctasks)
+	TEMPMAP.plugin(Plugins.asynctasks)
 end
 

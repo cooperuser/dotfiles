@@ -12,6 +12,6 @@ end
 
 return function()
 	Plugins.instant.settings()
-	K.plugin(Plugins.instant)
+	TEMPMAP.plugin(Plugins.instant)
 end
 

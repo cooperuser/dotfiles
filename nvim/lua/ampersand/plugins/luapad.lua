@@ -8,11 +8,11 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.sp("L", "<cmd>Luapad<CR>")
+	TEMPMAP.sp("L", "<cmd>Luapad<CR>")
 end
 
 return function()
 	Plugins.luapad.settings()
-	K.plugin(Plugins.luapad)
+	TEMPMAP.plugin(Plugins.luapad)
 end
 

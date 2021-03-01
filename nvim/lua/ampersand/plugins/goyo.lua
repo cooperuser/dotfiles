@@ -20,11 +20,11 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.sp("Z", "<cmd>Goyo<CR>")
+	TEMPMAP.sp("Z", "<cmd>Goyo<CR>")
 end
 
 return function()
 	Plugins.goyo.settings()
-	K.plugin(Plugins.goyo)
+	TEMPMAP.plugin(Plugins.goyo)
 end
 

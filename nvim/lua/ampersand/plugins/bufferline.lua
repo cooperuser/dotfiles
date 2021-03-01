@@ -200,17 +200,17 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.group([[Move between buffers using nvim-bufferline]], function()
-		K.n("<C-j>", "<cmd>BufferLineCyclePrev<CR>")
-		K.n("<C-k>", "<cmd>BufferLineCycleNext<CR>")
-		K.sp("J", "<cmd>BufferLineMovePrev<CR>")
-		K.sp("K", "<cmd>BufferLineMoveNext<CR>")
-		K.n("<CR>", "<cmd>BufferLinePick<CR>")
+	TEMPMAP.group([[Move between buffers using nvim-bufferline]], function()
+		TEMPMAP.n("<C-j>", "<cmd>BufferLineCyclePrev<CR>")
+		TEMPMAP.n("<C-k>", "<cmd>BufferLineCycleNext<CR>")
+		TEMPMAP.sp("J", "<cmd>BufferLineMovePrev<CR>")
+		TEMPMAP.sp("K", "<cmd>BufferLineMoveNext<CR>")
+		TEMPMAP.n("<CR>", "<cmd>BufferLinePick<CR>")
 	end)
 end
 
 return function()
 	Plugins.bufferline.settings()
-	K.plugin(Plugins.bufferline)
+	TEMPMAP.plugin(Plugins.bufferline)
 end
 

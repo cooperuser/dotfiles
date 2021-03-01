@@ -1,7 +1,7 @@
--- The K (keybind) namespace should be loaded globally
--- Set keybinds by using `K.<mode>(<key>, <cmd>, <opts>)`
+-- The TEMPMAP (keybind) namespace should be loaded globally
+-- Set keybinds by using `TEMPMAP.<mode>(<key>, <cmd>, <opts>)`
 -- The keybind can be annotated by adding a string:
---     K.i(...) [[This is an annotation]]
+--     TEMPMAP.i(...) [[This is an annotation]]
 
 -- Declarations {{{
 local binds = {}

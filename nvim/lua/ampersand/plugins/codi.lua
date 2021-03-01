@@ -14,11 +14,11 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.sp("C", "<cmd>let g:codi#filetype=&filetype<CR><cmd>Codi!!<CR>")
+	TEMPMAP.sp("C", "<cmd>let g:codi#filetype=&filetype<CR><cmd>Codi!!<CR>")
 end
 
 return function()
 	Plugins.codi.settings()
-	K.plugin(Plugins.codi)
+	TEMPMAP.plugin(Plugins.codi)
 end
 

@@ -11,6 +11,6 @@ end
 
 return function()
 	Plugins.tabi.settings()
-	K.plugin(Plugins.tabi)
+	TEMPMAP.plugin(Plugins.tabi)
 end
 

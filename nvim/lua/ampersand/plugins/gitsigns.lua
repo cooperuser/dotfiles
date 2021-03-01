@@ -14,15 +14,15 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.n("<Leader>gp", "<cmd>lua require('gitsigns').preview_hunk()<CR>")
-	K.n("<Leader>gb", "<cmd>lua require('gitsigns').blame_line()<CR>")
-	K.n("<Leader>gs", "<cmd>lua require('gitsigns').stage_hunk()<CR>")
-	K.n("<Leader>gu", "<cmd>lua require('gitsigns').undo_stage_hunk()<CR>")
-	K.n("<Leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>")
+	TEMPMAP.n("<Leader>gp", "<cmd>lua require('gitsigns').preview_hunk()<CR>")
+	TEMPMAP.n("<Leader>gb", "<cmd>lua require('gitsigns').blame_line()<CR>")
+	TEMPMAP.n("<Leader>gs", "<cmd>lua require('gitsigns').stage_hunk()<CR>")
+	TEMPMAP.n("<Leader>gu", "<cmd>lua require('gitsigns').undo_stage_hunk()<CR>")
+	TEMPMAP.n("<Leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>")
 end
 
 return function()
 	Plugins.gitsigns.settings()
-	K.plugin(Plugins.gitsigns)
+	TEMPMAP.plugin(Plugins.gitsigns)
 end
 

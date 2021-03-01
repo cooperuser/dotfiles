@@ -14,6 +14,6 @@ end
 
 return function()
 	Plugins.markdownpreview.settings()
-	K.plugin(Plugins.markdownpreview)
+	TEMPMAP.plugin(Plugins.markdownpreview)
 end
 

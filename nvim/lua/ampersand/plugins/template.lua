@@ -11,6 +11,6 @@ end
 
 return function()
 	Plugins.template.settings()
-	K.plugin(Plugins.template)
+	TEMPMAP.plugin(Plugins.template)
 end
 

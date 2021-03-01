@@ -43,16 +43,18 @@ local settings = {prompt_title="", results_title="", preview_title=""}
 
 function plugin.git_files() Telescope.builtin.git_files(settings) end
 function plugin.find_files() Telescope.builtin.find_files(settings) end
+function plugin.live_grep() Telescope.builtin.live_grep(settings) end
 
 function plugin.keybinds()
 	-- local settings = [[{prompt_title="", results_title="", preview_title=""}]]
-	K.sp('f', "<cmd>lua Plugins.telescope.git_files()<CR>")
-	K.sp('F', "<cmd>lua Plugins.telescope.find_files()<CR>")
-	-- K.sp('F', ":lua Telescope.builtin.find_files(" .. settings .. ")<CR>")
+	TEMPMAP.sp('f', "<cmd>lua Plugins.telescope.git_files()<CR>")
+	TEMPMAP.sp('F', "<cmd>lua Plugins.telescope.find_files()<CR>")
+	TEMPMAP.sp('l', "<cmd>lua Plugins.telescope.live_grep()<CR>")
+	-- TEMPMAP.sp('F', ":lua Telescope.builtin.find_files(" .. settings .. ")<CR>")
 end
 
 return function()
 	Plugins.telescope.settings()
-	K.plugin(Plugins.telescope)
+	TEMPMAP.plugin(Plugins.telescope)
 end
 

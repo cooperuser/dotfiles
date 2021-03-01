@@ -466,11 +466,11 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.sp("S", "<cmd>lua Plugins.galaxyline.toggle()<CR>")
+	TEMPMAP.sp("S", "<cmd>lua Plugins.galaxyline.toggle()<CR>")
 end
 
 return function()
 	Plugins.galaxyline.settings()
-	K.plugin(Plugins.galaxyline)
+	TEMPMAP.plugin(Plugins.galaxyline)
 end
 

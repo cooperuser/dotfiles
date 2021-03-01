@@ -17,12 +17,12 @@ function plugin.settings()
 	vim.cmd("autocmd FileType undotree lua Plugins.undotree.load()")
 end
 function plugin.keybinds()
-	K.sp("u", "<cmd>UndotreeToggle<CR>")
-	-- K.n("<Tab>", "<cmd>UndotreeToggle<CR>")
+	TEMPMAP.sp("u", "<cmd>UndotreeToggle<CR>")
+	-- TEMPMAP.n("<Tab>", "<cmd>UndotreeToggle<CR>")
 end
 
 return function()
 	Plugins.undotree.settings()
-	K.plugin(Plugins.undotree)
+	TEMPMAP.plugin(Plugins.undotree)
 end
 

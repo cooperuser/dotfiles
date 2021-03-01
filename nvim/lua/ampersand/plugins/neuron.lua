@@ -17,6 +17,6 @@ end
 
 return function()
 	Plugins.neuron.settings()
-	K.plugin(Plugins.neuron)
+	TEMPMAP.plugin(Plugins.neuron)
 end
 

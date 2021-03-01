@@ -53,6 +53,6 @@ end
 
 return function()
 	Plugins.compe.settings()
-	K.plugin(Plugins.compe)
+	TEMPMAP.plugin(Plugins.compe)
 end
 

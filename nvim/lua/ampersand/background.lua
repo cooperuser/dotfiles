@@ -30,7 +30,7 @@ function BGApply()
 	end
 end
 
-K.sp('X', "<cmd>lua BGToggle()<CR>")
+TEMPMAP.sp('X', "<cmd>lua BGToggle()<CR>")
 
 return {toggle = BGToggle, apply = BGApply}
 

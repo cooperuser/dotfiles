@@ -46,11 +46,11 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.sp("t", "<cmd>NvimTreeToggle<CR>")
+	TEMPMAP.sp("t", "<cmd>NvimTreeToggle<CR>")
 end
 
 return function()
 	Plugins.nvimtree.settings()
-	K.plugin(Plugins.nvimtree)
+	TEMPMAP.plugin(Plugins.nvimtree)
 end
 

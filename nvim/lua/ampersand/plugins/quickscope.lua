@@ -11,6 +11,6 @@ end
 
 return function()
 	Plugins.quickscope.settings()
-	K.plugin(Plugins.quickscope)
+	TEMPMAP.plugin(Plugins.quickscope)
 end
 

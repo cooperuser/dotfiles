@@ -12,6 +12,6 @@ end
 
 return function()
 	Plugins.smoothie.settings()
-	K.plugin(Plugins.smoothie)
+	TEMPMAP.plugin(Plugins.smoothie)
 end
 

@@ -14,6 +14,6 @@ end
 
 return function()
 	Plugins.vsnip.settings()
-	K.plugin(Plugins.vsnip)
+	TEMPMAP.plugin(Plugins.vsnip)
 end
 

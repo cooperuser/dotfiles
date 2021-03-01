@@ -9,8 +9,8 @@ local settings = {
 }
 
 local function bothNT(key, command)
-	K.n(key, command)
-	K.t(key, command)
+	TEMPMAP.n(key, command)
+	TEMPMAP.t(key, command)
 end
 
 function RunnerSend(command)
@@ -51,23 +51,23 @@ function plugin.keybinds()
 
 	local switch = "<C-\\><C-n><C-w><C-w>"
 	local run = "<cmd>AsyncTask run<CR>"
-	K.n("<Leader>r", run)
-	K.n("<Leader>l", "<C-w><C-w><C-l>" .. switch)
-	K.t("<Leader>l", "<C-l>")
-	K.n("<Leader>x", "<C-w><C-w><C-\\><C-n>")
-	K.t("<Leader>x", "<C-\\><C-n>")
+	TEMPMAP.n("<Leader>r", run)
+	TEMPMAP.n("<Leader>l", "<C-w><C-w><C-l>" .. switch)
+	TEMPMAP.t("<Leader>l", "<C-l>")
+	TEMPMAP.n("<Leader>x", "<C-w><C-w><C-\\><C-n>")
+	TEMPMAP.t("<Leader>x", "<C-\\><C-n>")
 
-	K.t("<Leader>w", "<C-w>")
+	TEMPMAP.t("<Leader>w", "<C-w>")
 
 	bothNT("<Leader>d", "<cmd>FloatermKill<CR>")
 	bothNT("<Leader>f", "<C-w><C-w>")
 
-	K.t("<Leader>c", "<cmd>FloatermUpdate " .. settings.floating .. "<CR>")
-	K.t("<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR>")
+	TEMPMAP.t("<Leader>c", "<cmd>FloatermUpdate " .. settings.floating .. "<CR>")
+	TEMPMAP.t("<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR>")
 end
 
 return function()
 	Plugins.floaterm.settings()
-	K.plugin(Plugins.floaterm)
+	TEMPMAP.plugin(Plugins.floaterm)
 end
 

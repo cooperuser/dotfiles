@@ -84,6 +84,6 @@ end
 
 return function()
 	Plugins.lspconfig.settings()
-	K.plugin(Plugins.lspconfig)
+	TEMPMAP.plugin(Plugins.lspconfig)
 end
 

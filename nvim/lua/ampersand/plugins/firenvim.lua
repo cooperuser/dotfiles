@@ -16,7 +16,7 @@ function plugin.onEnter()
 		vim.opt.wrap = true
 		vim.opt.linebreak = true
 
-		K.n("<C-h>", "<cmd>lua Plugins.firenvim.onHide()<CR>")
+		TEMPMAP.n("<C-h>", "<cmd>lua Plugins.firenvim.onHide()<CR>")
 		vim.cmd("autocmd VimLeave * lua Plugins.firenvim.onLeave()")
 	end
 end
@@ -58,6 +58,6 @@ end
 
 return function()
 	Plugins.firenvim.settings()
-	K.plugin(Plugins.firenvim)
+	TEMPMAP.plugin(Plugins.firenvim)
 end
 

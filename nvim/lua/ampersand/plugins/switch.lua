@@ -10,11 +10,11 @@ function plugin.settings()
 end
 
 function plugin.keybinds()
-	K.n("<C-s>", "<cmd>Switch<CR>")
+	TEMPMAP.n("<C-s>", "<cmd>Switch<CR>")
 end
 
 return function()
 	Plugins.switch.settings()
-	K.plugin(Plugins.switch)
+	TEMPMAP.plugin(Plugins.switch)
 end
 
