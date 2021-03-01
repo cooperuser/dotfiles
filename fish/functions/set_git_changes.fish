@@ -3,7 +3,10 @@ function set_git_changes
 	if test -n "$branch"
 		set remote (git config "branch.$branch.remote")
 		if test -n "$remote"
-			set merge_branch (git config branch.$branch.merge | cut -d / -f 3)
+			set merge_branch (git config branch.$branch.merge | cut -d / -f 3,4)
+			# echo -e "\tremote       $remote"
+			# echo -e "\tbranch       $branch"
+			# echo -e "\tmerge_       $merge_branch"
 			set rev_list (git rev-list --left-right --count "$branch"..."$remote/$merge_branch")
 			set changes (string split \t $rev_list)
 			if test $changes[1] -ne 0 -o $changes[2] -ne 0

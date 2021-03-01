@@ -52,3 +52,5 @@ end
 set_git_changes
 set fish_command_timer_enabled 0
 
+complete -c cht.sh -xa '(cat ~/.local/share/cheat.sh/list)'
+
