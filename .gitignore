@@ -11,6 +11,7 @@ nvim/.netrwhist
 nvim/plugin/packer_compiled.vim
 
 configstore/
+fish/fish_variables
 fish/functions/__*
 fish/functions/fish_user_key_bindings.fish
 fish/functions/fzf_key_bindings.fish
