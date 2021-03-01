@@ -6,13 +6,13 @@
         /_/  /_/                         /_ /
 
                                     --]]--
--- luacheck: new_globals K
+-- luacheck: new_globals TEMPMAP
 
 vim.g.mapleader = ","
 
 local keybinds = require("ampersand.keybinds")
 keybinds.keybinds()
-K = keybinds.map
+TEMPMAP = keybinds.map
 require("ampersand.plugins")
 require("ampersand.settings")
 
