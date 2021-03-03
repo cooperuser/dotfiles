@@ -24,4 +24,4 @@ keybinding:
     moveUpCommit: "<left>"
     moveDownCommit: "<right>"
 os:
-  openCommand: 'vim {{filename}}'
+  openCommand: 'nvim {{filename}}'
