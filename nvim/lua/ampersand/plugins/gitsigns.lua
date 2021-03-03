@@ -1,28 +1,45 @@
-local plugin = {name = "gitsigns"}
-Plugins[plugin.name] = plugin
+return function()
+	-- Utility {{{
+	local gitsigns = require("gitsigns")
+	-- }}}
 
-function plugin.settings()
+	-- Settings {{{
 	require('gitsigns').setup {
 		signs = {
-			add          = {hl = 'GitGutterAdd'   , text = '▎', numhl='GitSignsAddNr'},
-			change       = {hl = 'GitGutterChange', text = '▎', numhl='GitSignsChangeNr'},
-			delete       = {hl = 'GitGutterDelete', text = '‣', numhl='GitSignsDeleteNr'},
-			topdelete    = {hl = 'GitGutterDelete', text = '‾', numhl='GitSignsDeleteNr'},
-			changedelete = {hl = 'GitGutterChangeDelete', text = '~', numhl='GitSignsChangeNr'},
+			add = {
+				hl = "GitGutterAdd";
+				numhl = "GitSignsAddNr";
+				text = "▎";
+			};
+			change = {
+				hl = "GitGutterChange";
+				numhl = "GitSignsChangeNr";
+				text = "▎";
+			};
+			delete = {
+				hl = "GitGutterDelete";
+				numhl = "GitSignsDeleteNr";
+				text = "‣";
+			};
+			topdelete = {
+				hl = "GitGutterDelete";
+				numhl = "GitSignsDeleteNr";
+				text = "‾";
+			};
+			changedelete = {
+				hl = "GitGutterChangeDelete";
+				numhl = "GitSignsChangeNr";
+				text = "~";
+			};
 		}
 	}
-end
+	-- }}}
 
-function plugin.keybinds()
-	TEMPMAP.n("<Leader>gp", "<cmd>lua require('gitsigns').preview_hunk()<CR>")
-	TEMPMAP.n("<Leader>gb", "<cmd>lua require('gitsigns').blame_line()<CR>")
-	TEMPMAP.n("<Leader>gs", "<cmd>lua require('gitsigns').stage_hunk()<CR>")
-	TEMPMAP.n("<Leader>gu", "<cmd>lua require('gitsigns').undo_stage_hunk()<CR>")
-	TEMPMAP.n("<Leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>")
+	-- Keybinds {{{
+	K.n {"<Leader>gp", gitsigns.preview_hunk}
+	K.n {"<Leader>gb", gitsigns.blame_line}
+	K.n {"<Leader>gs", gitsigns.stage_hunk}
+	K.n {"<Leader>gu", gitsigns.undo_stage_hunk}
+	K.n {"<Leader>gr", gitsigns.reset_hunk}
+	-- }}}
 end
-
-return function()
-	Plugins.gitsigns.settings()
-	TEMPMAP.plugin(Plugins.gitsigns)
-end
-

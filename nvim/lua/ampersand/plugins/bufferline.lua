@@ -1,67 +1,68 @@
-local plugin = {name = "bufferline"}
-Plugins[plugin.name] = plugin
+return function()
+	-- Utility {{{
+	local bufferline = require("bufferline")
+	local colors = require("bufferline.colors")
 
-local settings = {
-	show_buffer_close_icons = false,
-	separator_style = {"▕", "▊"},
-	close_icon = '',
-	modified_icon = "",
-	tab_size = 0,
-	enforce_regular_tabs = false,
-	diagnostics = "nvim_lsp",
-	diagnostics_indicator = function(count, level)
-		return ''
-	end,
-	filter = function(buf_num)
-		if not vim.t.is_help_tab then return nil end
-		return vim.api.nvim_buf_get_option(buf_num, "buftype") == "help"
-	end
-}
+	local settings = {
+		show_buffer_close_icons = false,
+		separator_style = {"▕", "▊"},
+		close_icon = '',
+		modified_icon = "",
+		tab_size = 0,
+		enforce_regular_tabs = false,
+		diagnostics = "nvim_lsp",
+		diagnostics_indicator = function(count, level)
+			return ''
+		end,
+		filter = function(buf_num)
+			if not vim.t.is_help_tab then return nil end
+			return vim.api.nvim_buf_get_option(buf_num, "buftype") == "help"
+		end
+	}
 
-local function getStatusNumbers()
-	local error = vim.lsp.diagnostic.get_count(0, [[Error]])
-	local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
-	local information = vim.lsp.diagnostic.get_count(0, [[Information]])
-	local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
-	return {error, warning, information, hint}
-end
+	local function getStatusNumbers()
+		local error = vim.lsp.diagnostic.get_count(0, [[Error]])
+		local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
+		local information = vim.lsp.diagnostic.get_count(0, [[Information]])
+		local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+		return {error, warning, information, hint}
+	end
 
-function _G.nvim_copperline()
-	-- @type string
-	local bufferline = _G.nvim_bufferline()
-	bufferline = string.sub(bufferline, 1, #bufferline - 26)
-	local _, tabstart = string.find(bufferline, "#BufferLineFill#%%=")
-	local tabline = string.sub(bufferline, tabstart + 1)
-	bufferline = string.sub(bufferline, 1, tabstart)
-	local status = getStatusNumbers()
-	local theme = "%#TabLine"
-	local separator = " "
-	-- if #tabline ~= 0 then
-	-- 	theme = "%#Tabline"
-	-- 	separator = " %#Separator#▕"
-	-- end
-	local copperline = theme .. 'Separator# '
-	if status[4] ~= 0 then
-		copperline = copperline .. theme .. "Hint#  " .. status[4]
+	function _G.nvim_copperline()
+		-- @type string
+		local bufferline = _G.nvim_bufferline()
+		bufferline = string.sub(bufferline, 1, #bufferline - 26)
+		local _, tabstart = string.find(bufferline, "#BufferLineFill#%%=")
+		local tabline = string.sub(bufferline, tabstart + 1)
+		bufferline = string.sub(bufferline, 1, tabstart)
+		local status = getStatusNumbers()
+		local theme = "%#TabLine"
+		local separator = " "
+		-- if #tabline ~= 0 then
+		-- 	theme = "%#Tabline"
+		-- 	separator = " %#Separator#▕"
+		-- end
+		local copperline = theme .. 'Separator# '
+		if status[4] ~= 0 then
+			copperline = copperline .. theme .. "Hint#  " .. status[4]
+		end
+		if status[3] ~= 0 then
+			copperline = copperline .. theme .. "Info#  " .. status[3]
+		end
+		if status[2] ~= 0 then
+			copperline = copperline .. theme .. "Warning#  " .. status[2]
+		end
+		if status[1] ~= 0 then
+			copperline = copperline .. theme .. "Error#  " .. status[1]
+		end
+		if status[1] + status[2] + status[3] + status[4] == 0 then
+			copperline = copperline .. theme .. "Success# "
+		end
+		return bufferline .. copperline .. separator .. tabline
 	end
-	if status[3] ~= 0 then
-		copperline = copperline .. theme .. "Info#  " .. status[3]
-	end
-	if status[2] ~= 0 then
-		copperline = copperline .. theme .. "Warning#  " .. status[2]
-	end
-	if status[1] ~= 0 then
-		copperline = copperline .. theme .. "Error#  " .. status[1]
-	end
-	if status[1] + status[2] + status[3] + status[4] == 0 then
-		copperline = copperline .. theme .. "Success# "
-	end
-	return bufferline .. copperline .. separator .. tabline
-end
+	-- }}}
 
-function plugin.settings()
-	local colors = require "bufferline/colors"
-
+	-- Settings {{{
 	local c = {
 		fill_bg = colors.get_hex("TabLineFill", "bg"),
 		selected_bg = colors.get_hex("Normal", "bg"),
@@ -81,7 +82,7 @@ function plugin.settings()
 	}
 
 	local pick = "bold"
-	require("bufferline").setup{
+	bufferline.setup {
 		options = settings,
 		highlights = {
 			fill = {
@@ -197,20 +198,13 @@ function plugin.settings()
 	}
 
 	vim.o.tabline = "%!v:lua.nvim_copperline()"
-end
+	-- }}}
 
-function plugin.keybinds()
-	TEMPMAP.group([[Move between buffers using nvim-bufferline]], function()
-		TEMPMAP.n("<C-j>", "<cmd>BufferLineCyclePrev<CR>")
-		TEMPMAP.n("<C-k>", "<cmd>BufferLineCycleNext<CR>")
-		TEMPMAP.sp("J", "<cmd>BufferLineMovePrev<CR>")
-		TEMPMAP.sp("K", "<cmd>BufferLineMoveNext<CR>")
-		TEMPMAP.n("<CR>", "<cmd>BufferLinePick<CR>")
-	end)
+	-- Keybinds {{{
+	K.n {"<CR>", bufferline.pick_buffer}
+	K.n {"<C-j>", function() bufferline.cycle(-1) end}
+	K.n {"<C-k>", function() bufferline.cycle(1) end}
+	K.q {"J", function() bufferline.move(-1) end}
+	K.q {"K", function() bufferline.move(1) end}
+	-- }}}
 end
-
-return function()
-	Plugins.bufferline.settings()
-	TEMPMAP.plugin(Plugins.bufferline)
-end
-

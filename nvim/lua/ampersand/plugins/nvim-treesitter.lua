@@ -1,8 +1,6 @@
-local plugin = {name = "treesitter"}
-Plugins[plugin.name] = plugin
-
-function plugin.settings()
+return function()
 	local ts = require("nvim-treesitter.configs")
+
 	ts.setup {
 		ensure_installed = {
 			"javascript",
@@ -36,23 +34,7 @@ function plugin.settings()
 				node_incremental = "grn",
 				scope_incremental = "grc",
 				node_decremental = "grm",
-			},
-		},
-		-- textobjects = {
-		-- 	swap = {
-		-- 		enable = true,
-		-- 		swap_next = {
-		-- 			["<Leader>a"] = "@parameter.inner",
-		-- 		},
-		-- 		swap_previous = {
-		-- 			["<Leader>A"] = "@parameter.inner",
-		-- 		},
-		-- 	},
-		-- }
+			}
+		}
 	}
 end
-
-return function()
-	Plugins.treesitter.settings()
-end
-

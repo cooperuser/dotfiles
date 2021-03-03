@@ -1,11 +1,4 @@
-local plugin = {name = "undotree"}
-Plugins[plugin.name] = plugin
-
-function plugin.load()
-	-- vim.api.nvim_win_set_option(0, "winhl", "Constant:Normal")
-end
-
-function plugin.settings()
+return function()
 	vim.g.undotree_WindowLayout = 3
 	vim.g.undotree_DiffAutoOpen = false
 	vim.g.undotree_SetFocusWhenToggle = true
@@ -14,15 +7,5 @@ function plugin.settings()
 
 	vim.g.undotree_TreeNodeShape = '•'
 
-	vim.cmd("autocmd FileType undotree lua Plugins.undotree.load()")
+	K.q {"u", "<cmd>UndotreeToggle<CR>"}
 end
-function plugin.keybinds()
-	TEMPMAP.sp("u", "<cmd>UndotreeToggle<CR>")
-	-- TEMPMAP.n("<Tab>", "<cmd>UndotreeToggle<CR>")
-end
-
-return function()
-	Plugins.undotree.settings()
-	TEMPMAP.plugin(Plugins.undotree)
-end
-

@@ -1,104 +1,109 @@
-local plugin = {name = "galaxyline"}
-Plugins[plugin.name] = plugin
-local buffer = nil
-
-local ids = {
-	normal = 110,
-	insert = 105,
-	command = 99,
-	terminal = 116,
-	visual = 118,
-	v_block = 22,
-	v_line = 86,
-	replace = 82,
-	select = 115,
-	s_line = 83
-}
-
-local filetypes = {
-	TELESCOPE = {
-		icon = "T ",
-		name = "telescope"
-	},
-	UNDOTREE = {
-		icon = "",
-		name = "undotree"
-	},
-	NVIMTREE = {
-		icon = "",
-		name = "nvimtree"
-	},
-	PACKER = {
-		icon = "",
-		name = "packer"
-	},
-	HELP = {
-		icon = "",
-		name = "help"
-	},
-	FUGITIVE = {
-		icon = "",
-		name = "fugitive"
-	},
-	DASHBOARD = {
-		icon = "",
-		-- icon = "",
-		name = "dashboard"
-	}
-}
-
-local function new_hl(area, section)
-	return function(colors)
-		colors = colors or {}
-		local highlight = ""
-		if colors.fg then highlight = highlight .. " guifg=" .. colors.fg end
-		if colors.bg then highlight = highlight .. " guibg=" .. colors.bg end
-		if highlight == "" then return end
-		vim.cmd('hi Galaxy' .. area .. section .. highlight)
-	end
-end
-
-local function is_file()
-	return not filetypes[buffer.get_buffer_filetype()]
-end
-
-local function get_ft()
-	return filetypes[buffer.get_buffer_filetype()]
-end
-
-local function min_width(width)
-	return function() return vim.api.nvim_win_get_width(0) >= width end
-end
-
-local function max_width(width)
-	return function() return vim.api.nvim_win_get_width(0) < width end
-end
-
-local function comp_and(a, b)
-	return function() return a() and b() end
-end
-
-local function comp_or(a, b)
-	return function() return a() or b() end
-end
-
-local visible = true
-function plugin.toggle()
-	if visible then
-		require("galaxyline").disable_galaxyline()
-	else
-		require("galaxyline").load_galaxyline()
-	end
-	visible = not visible
-end
-
-function plugin.settings()
+return function()
+	-- Utility {{{
 	local gl = require("galaxyline")
 	local vcs = require('galaxyline.provider_vcs')
+	local buffer = require('galaxyline.provider_buffer')
 	local fileinfo = require('galaxyline.provider_fileinfo')
 	local diagnostic = require('galaxyline.provider_diagnostic')
-	buffer = require('galaxyline.provider_buffer')
 
+	local ids = {
+		normal = 110,
+		insert = 105,
+		command = 99,
+		terminal = 116,
+		visual = 118,
+		v_block = 22,
+		v_line = 86,
+		replace = 82,
+		select = 115,
+		s_line = 83
+	}
+
+	local filetypes = {
+		TELESCOPE = {
+			icon = "T ",
+			name = "telescope"
+		},
+		UNDOTREE = {
+			icon = "",
+			name = "undotree"
+		},
+		NVIMTREE = {
+			icon = "",
+			name = "nvimtree"
+		},
+		PACKER = {
+			icon = "",
+			name = "packer"
+		},
+		HELP = {
+			icon = "",
+			name = "help"
+		},
+		FUGITIVE = {
+			icon = "",
+			name = "fugitive"
+		},
+		DASHBOARD = {
+			icon = "",
+			-- icon = "",
+			name = "dashboard"
+		}
+	}
+
+	local function new_hl(area, section)
+		return function(colors)
+			colors = colors or {}
+			local highlight = ""
+			if colors.fg then highlight = highlight .. " guifg=" .. colors.fg end
+			if colors.bg then highlight = highlight .. " guibg=" .. colors.bg end
+			if highlight == "" then return end
+			vim.cmd('hi Galaxy' .. area .. section .. highlight)
+		end
+	end
+
+	local function is_file()
+		return not filetypes[buffer.get_buffer_filetype()]
+	end
+
+	local function get_ft()
+		return filetypes[buffer.get_buffer_filetype()]
+	end
+
+	local function min_width(width)
+		return function() return vim.api.nvim_win_get_width(0) >= width end
+	end
+
+	local function max_width(width)
+		return function() return vim.api.nvim_win_get_width(0) < width end
+	end
+
+	local function comp_and(a, b)
+		return function() return a() and b() end
+	end
+
+	local function comp_or(a, b)
+		return function() return a() or b() end
+	end
+
+	local visible = true
+	local function toggle()
+		if visible then
+			require("galaxyline").disable_galaxyline()
+		else
+			require("galaxyline").load_galaxyline()
+		end
+		visible = not visible
+	end
+
+	local function convert(area, area_name, section, index, original)
+		local hl = new_hl(area_name, section[1])
+		section[2].provider = function() return original(hl) end
+		area[index] = {[area_name .. section[1]] = section[2]}
+	end
+	-- }}}
+
+	-- Settings {{{
 	local colors = {
 		red = "#ff6c6b",
 		orange = "",
@@ -445,12 +450,6 @@ function plugin.settings()
 		-- }}}
 	}
 
-	local function convert(area, area_name, section, index, original)
-		local hl = new_hl(area_name, section[1])
-		section[2].provider = function() return original(hl) end
-		area[index] = {[area_name .. section[1]] = section[2]}
-	end
-
 	for area_name, sections in pairs(statusline) do
 		local area = gl.section[area_name]
 		if area then
@@ -458,19 +457,14 @@ function plugin.settings()
 				local original = section[2].provider
 				local t = type(original)
 				if t == "function" then
-						convert(area, area_name, section, index, original)
+					convert(area, area_name, section, index, original)
 				end
 			end
 		end
 	end
-end
+	-- }}}
 
-function plugin.keybinds()
-	TEMPMAP.sp("S", "<cmd>lua Plugins.galaxyline.toggle()<CR>")
+	-- Keybinds {{{
+	K.q {"S", toggle}
+	-- }}}
 end
-
-return function()
-	Plugins.galaxyline.settings()
-	TEMPMAP.plugin(Plugins.galaxyline)
-end
-

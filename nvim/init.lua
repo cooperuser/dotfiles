@@ -11,6 +11,7 @@
 vim.g.mapleader = ","
 
 local keybinds = require("ampersand.keybinds")
+K = require("ampersand.keymap")
 keybinds.keybinds()
 TEMPMAP = keybinds.map
 require("ampersand.plugins")

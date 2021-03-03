@@ -27,7 +27,6 @@ local Mapping = {}
 --   - Other keys can be arguments to |:map|. See |nvim_set_keymap()|
 function keymap.n(opts)
 	tj.nnoremap(opts)
-	print(opts.noremap)
 end
 
 -- }}}
