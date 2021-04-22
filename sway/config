@@ -9,8 +9,10 @@ input 1:1:AT_Translated_Set_2_keyboard repeat_rate 25
 input type:touchpad {
 	accel_profile adaptive
 	pointer_accel 0.40
-	dwt enabled
+	dwt disabled
 	middle_emulation disabled
+	scroll_button disable
+	click_method button_areas
 }
 
 output eDP-1 pos 0 0 res 1920x1080
@@ -66,6 +68,13 @@ bindsym $mod+Shift+minus opacity minus 0.1
 bindsym $mod+Shift+equal opacity plus 0.1
 bindsym $mod+Shift+backspace opacity set 1
 
+exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | ~/.config/wob/daemon
+bindsym XF86AudioRaiseVolume exec ~/.config/wob/volume 5%+
+bindsym XF86AudioLowerVolume exec ~/.config/wob/volume 5%-
+bindsym XF86AudioMute exec ~/.config/wob/volume toggle
+bindsym XF86MonBrightnessDown exec ~/.config/wob/brightness 5%-
+bindsym XF86MonBrightnessUp exec ~/.config/wob/brightness +5%
+
 include pip.conf
 
 mode "resize" {
@@ -96,11 +105,12 @@ mode "terminal" {
 	bindsym Escape mode "default"
 }
 
-default_border pixel 3
-default_floating_border pixel 3
-gaps inner 12
+default_border pixel 0
+default_floating_border pixel 0
+gaps inner 15
 gaps outer -5
-bindsym $mod+u border pixel 3
+bindsym $mod+u border pixel 0
+for_window [app_id=".*"] border pixel
 
 bindsym $mod+z move container to workspace 1; workspace 1
 bindsym $mod+x move container to workspace 2; workspace 2
@@ -113,6 +123,7 @@ for_window [app_id="js-benzer"] floating enable
 for_window [app_id="zathura"] resize set width 805 px
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="qemu"] floating enable
 
 set $kitty 1
 set $app 7
@@ -187,11 +198,21 @@ exec_always {
 }
 
 exec_always swayidle -w \
-		 timeout 300 'swaylock -f' \
-		 timeout 600 'swaymsg "output * dpms off"' \
-		 resume 'swaymsg "output * dpms on"' \
-		 before-sleep 'swaylock -f'
+	timeout 600 '~/.config/sway/idledim' \
+		resume 'brightnessctl -r >> /dev/null' \
+	timeout 900 'swaylock -f' \
+	timeout 1200 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -f'
 
 exec_always ydotoold
+exec_always caps2esc -t
+
+output "*" bg /home/ampersand/Downloads/bg.jpg fill
+
+border_images.focused ~/.config/sway/borders/blue.png
+border_images.focused_inactive ~/.config/sway/borders/yellow.png
+border_images.unfocused ~/.config/sway/borders/grey.png
+border_images.urgent ~/.config/sway/borders/red.png
 
 # vim: ft=i3config

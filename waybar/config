@@ -5,7 +5,7 @@
 		"sway/workspaces"
 	],
 	"modules-right": [
-		// "tray",
+		"tray",
 		"idle_inhibitor",
 		"backlight",
 		"pulseaudio",
@@ -61,9 +61,26 @@
 	},
 	"backlight": {
 		"format": "{percent} {icon}",
-		"format-icons": [" ", "", "", "", "", ""],
+		/* "format-icons": [" ", "", "", "", "", ""], */
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			""
+		],
 		"on-scroll-up": "brightnessctl set +1",
-		"on-scroll-down": "brightnessctl --min-value=10 set 1-"
+		"on-scroll-down": "brightnessctl --min-value=5 set 1-"
 	},
 	"idle_inhibitor": {
 		"format": "{icon}",

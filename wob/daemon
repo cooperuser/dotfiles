@@ -1,0 +1,9 @@
+#!/bin/bash
+
+wob \
+	--anchor bottom \
+	--margin -21 \
+	--border 0 \
+	--offset 0 \
+	--height 19 \
+	--padding 3 \

@@ -1,0 +1,13 @@
+#!/usr/bin/fish
+
+brightnessctl -s >> /dev/null
+
+set step 3
+set start (brightnessctl get)
+set start (math $start - $start % $step + 1)
+
+for i in (seq 0 $step $start)
+	brightnessctl set (math $start - $i) >> /dev/null
+	sleep 0.02
+end
+

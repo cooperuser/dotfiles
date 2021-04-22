@@ -1,0 +1,4 @@
+#!/usr/bin/fish
+
+set output (brightnessctl --min-value=5 set $argv[1] | sed -En 's/.*\(([0-9]+)%\).*/\1/p')
+echo "$output #20f2c68a #00000000 #a0f2c68a" > $SWAYSOCK.wob

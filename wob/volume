@@ -1,0 +1,9 @@
+#!/usr/bin/fish
+
+if test "$argv[1]" = "toggle"
+	set output (amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1)
+else
+	set output (amixer sset Master $argv[1] | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1)
+end
+
+echo "$output #2087afff #00000000 #a087afff" > $SWAYSOCK.wob
