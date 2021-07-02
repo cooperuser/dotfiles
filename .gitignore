@@ -10,6 +10,7 @@ lazygit/.config
 nvim/plugged/
 nvim/.netrwhist
 nvim/plugin/packer_compiled.vim
+nvim/plugin/packer_compiled.lua
 
 configstore/
 fish/fish_variables
@@ -39,6 +40,14 @@ inkscape/
 JetBrains/
 ncgopher/
 foot/
+Microsoft/
 asciinema/install-id
 gtk-3.0
+Notion/
+notion-nativefier*
+surfingkeys/builder/
+Guilded/
+Slack/
+Vieb/
+teams/
 
