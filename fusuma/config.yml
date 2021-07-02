@@ -1,0 +1,12 @@
+swipe:
+  3:
+    left:
+      sendkey: 'LEFTALT+RIGHT'
+    right:
+      sendkey: 'LEFTALT+LEFT'
+    up:
+      command: 'ydotool key XF86AudioRaiseVolume'
+      threshold: 0
+    down:
+      command: 'ydotool key XF86AudioLowerVolume'
+      threshold: 0
