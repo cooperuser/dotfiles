@@ -24,43 +24,45 @@ set modeLeft ""
 set modeRight ""
 
 function fish_mode_prompt
-	set error $status
-
+	return;
+	if test -n "$VIM"; return; end
 	set colorTime   $customOrange
 	set colorPath   $customBlue
-	set colorArrow  $customGreen
-	set colorError  $customRed
+	# set -g colorArrow  $customGreen
+	# set colorError  $customRed
 	set charArrow   $charArrowPass
 
-	set branch (git branch ^/dev/null | grep \* | sed 's/* //')
+	# set branch (git branch ^/dev/null | grep \* | sed 's/* //')
 
-	if test $error -eq 130
-		set error
-		set colorArrow $colorError
-		set charArrow $charArrowTerm
-	else if test $error -ne 0
-		set error $error\ ;
-		set colorArrow $customRed
-		if test $error -ne 130
-			set charArrow $charArrowFail
-		end
-	else if test -n "$branch"
-		set error
-		if test -n "$git_changes"
-			set colorArrow $customBlue
-		end
-	else
-		set error
-	end
+	# if test $error -eq 130
+	# 	set error
+	# 	set colorArrow $colorError
+	# 	set charArrow $charArrowTerm
+	# else if test $error -ne 0
+	# 	set error $error\ ;
+	# 	set colorArrow $customRed
+	# 	if test $error -ne 130
+	# 		set charArrow $charArrowFail
+	# 	end
+	# else if test -n "$branch"
+	# 	set error
+	# 	if test -n "$git_changes"
+	# 		set colorArrow $customBlue
+	# 	end
+	# else
+	# 	set error
+	# end
 
 	set_mode_indicator
 
 	echo -n -s \
-		$modeColor $modeLeft \
-		$modeBack $modeIcon \
-		(set_color normal) \
-		$modeColor $modeRight \
-		(get_cmd_timer);
+		$modeColor \
+		# $modeLeft \
+		# $modeBack \
+		$modeIcon \
+		(set_color normal);
+		# $modeColor $modeRight \
+		# (get_cmd_timer);
 end
 
 function set_mode_indicator

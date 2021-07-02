@@ -15,6 +15,7 @@ set customBlue   (set_color 87afff)
 set customPurple (set_color B7D)
 set customCopper (set_color FFAA22)
 set customMuted  (set_color aaa)
+set customTime   (set_color 73797e)
 
 function fish_prompt
 	set error $status
@@ -22,7 +23,7 @@ function fish_prompt
 
 	set colorTime   $customOrange
 	set colorPath   $customBlue
-	set colorArrow  $customGreen
+	set -g colorArrow  $customGreen
 	set colorChar   $customCopper
 	set colorError  $customRed
 	set colorBranch	$customPurple
@@ -68,12 +69,16 @@ function fish_prompt
 	# 	set colorChar $customRed
 	# end
 
+	set front "";
+	# if test -n "$VIM"
+		set front " $colorArrow┌ "
+	# end
 	echo -n -s \
-		\n \ \ \
-		$colorArrow├\  \
+		$front \
+		(get_cmd_timer) \
 		$colorTime (date "+%H:%M")\  \
-		$colorPath (prompt_pwd)\ \
-		\n \ \ \
+		$colorPath (get_prompt_pwd)\
+		\n \ \
 		$colorArrow └$charArrow \
 		$colorBranch $branch\  \
 		$colorError $error \
@@ -81,3 +86,17 @@ function fish_prompt
 		$colorNormal;
 end
 
+function get_cmd_timer
+	if test $CMD_DURATION -gt 9
+		echo -n -s $customTime "$CMD_DURATION ms "
+	end
+end
+
+function get_prompt_pwd
+	set start (string sub -e 31 (pwd))
+	if test $start = "/home/ampersand/ghq/github.com/"
+		echo -n -s " " (string sub -s 32 (pwd)) # 
+	else
+		echo -n -s (prompt_pwd)
+	end
+end

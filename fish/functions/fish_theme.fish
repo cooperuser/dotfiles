@@ -17,10 +17,11 @@ set customWordCopper "#FFAA22"
 set customWordGrey  "#aaa"
 set customWordDark  "#3f444a"
 set customWordMuted  "#aaa"
+set customWordCancel "#73797e"
 
 function fish_theme
 	set -u fish_color_autosuggestion $customWordGrey #555\x1ebrblack
-	set -u fish_color_cancel "-r" #\x2dr
+	set -u fish_color_cancel $customWordCancel
 	set -u fish_color_command $customWordPurple #005fd7
 	set -u fish_color_comment $customWordGrey #990000
 	# set -u fish_color_cwd $customWordMuted #green
