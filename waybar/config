@@ -5,7 +5,6 @@
 		"sway/workspaces"
 	],
 	"modules-right": [
-		"tray",
 		"idle_inhibitor",
 		"backlight",
 		"pulseaudio",
@@ -13,7 +12,8 @@
 		"clock"
 	],
 	"modules-center": [
-		"sway/mode"
+		"sway/mode",
+		"tray"
 	],
 	"sway/workspaces": {
 		"format": "{icon}",
@@ -22,7 +22,7 @@
 			"5": "<big></big>",
 			"2": "",
 			"3": "",
-			"4": "爵",
+			"4": "聯", //         爵 ﰍ
 			"11": "1",
 			"12": "2",
 			"13": "3",
@@ -48,7 +48,7 @@
 	},
 	"pulseaudio": {
 		"format": "{volume} {icon}",
-		"format-bluetooth": "{volume} {icon}",
+		"format-bluetooth": "{volume} bt",
 		"format-muted": "{volume} 婢",
 		"format-icons": {
 			"headphone": "",

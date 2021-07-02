@@ -28,16 +28,16 @@ window#waybar {
 }
 
 #tray > * > * {
-	background: rgba(242, 198, 138, 0.3);
+	/* background: rgba(242, 198, 138, 0.3); */
 	/* border-bottom: 3px solid rgba(242, 198, 138, 0.05); */
 	border-bottom: 3px solid rgba(0, 0, 0, 0.01);
 	margin-right: 4px;
 	padding: 0;
-	animation-delay: 0.3s;
-	animation-duration: 1.5s;
-	animation-name: blinkborder2;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
+	/* animation-delay: 0.3s; */
+	/* animation-duration: 1.5s; */
+	/* animation-name: blinkborder2; */
+	/* animation-timing-function: linear; */
+	/* animation-iteration-count: infinite; */
 }
 
 #tray * {
@@ -45,7 +45,7 @@ window#waybar {
 	padding-right: 5px;
 }
 
-#workspaces button:hover {
+#workspaces button:hover, #tray :hover {
 	background: rgba(255, 255, 255, 0.2);
 	border-radius: 10px 10px 3px 3px;
 	margin-top: 1.5px;
@@ -132,11 +132,6 @@ window#waybar {
 #battery.charging {
 	/* border-bottom: 3px solid RGBA(242, 198, 138, 0.75); */
 	background-color: RGBA(242, 198, 138, 0.5);
-	animation-duration: 1.0s;
-	animation-name: blink;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
 }
 
 @keyframes blink {
