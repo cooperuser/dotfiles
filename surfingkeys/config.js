@@ -6,7 +6,10 @@ settings.defaultSearchEngine = 'd';
 settings.hintAlign = "left";
 settings.omnibarSuggestion = true;
 settings.focusFirstCandidate = false;
-Hints.characters = "asdfgwertzxcvb";
+settings.startToShowEmoji = false;
+Hints.scrollKeys = "0jkhlG$<Ctrl-d><Ctrl-e>";
+Hints.characters = "asdfwertzxc";
+// Hints.characters = "asdfgwertzxcv";
 
 // map('F', 'af');
 let lastColor = 0;
@@ -15,8 +18,11 @@ mapkey('f', '#1Open a link', () => {
 	Hints.create("", Hints.dispatchMouseClick);
 });
 
+unmap('0');
 unmap('af');
 unmap('ab');
+iunmap(":");
+
 mapkey('F', '#1Open a link in new tab', () => {
 	setStyle(s.colors.green);
 	Hints.create("", Hints.dispatchMouseClick, {tabbed: true});
@@ -71,14 +77,29 @@ mapkey('ye', '#7Yank text of an element', function() {
 	Visual.toggle("y");
 });
 
+mapkey('yr', "#7Yank repository path of url", () => {
+	const url = window.location.href;
+	const match = "https://github.com/";
+	if (!url.startsWith(match)) return;
+	Clipboard.write(url.substr(match.length));
+});
+
 mapkey('p', "Open the clipboard's URL in the current tab", function() {
 	Clipboard.read(function(response) {
 		window.location.href = response.data;
 	});
 });
 
+mapkey(',', '#0enter PassThrough mode to temporarily suppress SurfingKeys', function() {
+	Normal.passThrough(1000);
+});
+
 mapkey('e', '#9Backward half page', function() { Normal.feedkeys('2k'); });
 mapkey('d', '#9Forward half page', function() { Normal.feedkeys('2j'); });
+mapkey('<Ctrl-e>', '#9Backward half page', function() { Normal.feedkeys('2k'); });
+mapkey('<Ctrl-d>', '#9Forward half page', function() { Normal.feedkeys('2j'); });
+// map('<Ctrl-d>', 'd');
+// map('<Ctrl-e>', 'e');
 map('u', 'e');
 
 map('<Ctrl-j>', 'E');
@@ -89,6 +110,21 @@ cmap('<Ctrl-p>', '<Shift-Tab>');
 cmap('<Ctrl-k>', '<Shift-Tab>');
 map('>', '>>');
 map('<', '<<');
+
+mapkey('J', '#4Go one tab history back', function() {
+	RUNTIME("historyTab", {backward: true});
+}, {repeatIgnore: true});
+mapkey('K', '#4Go one tab history forward', function() {
+	RUNTIME("historyTab", {backward: false});
+}, {repeatIgnore: true});
+
+mapkey('<Alt-r><Alt-r>', "Read with Readio", function() {
+	document.getElementById("sr-qa-trigger-read").click();
+})
+
+mapkey('<Alt-r><Alt-e>', "Open Readio editor", function() {
+	document.getElementById("sr-qa-trigger-edit").click();
+})
 
 // Unmap {{{
 // Proxy Stuff
@@ -114,8 +150,16 @@ unmap('od');
 unmap('oy');
 // }}}
 
-mapkey('A', 'Choose a tab with omnibar', function() {
-	Front.openOmnibar({type: "Tabs"});
+// mapkey('<Space>f', 'Choose a tab with omnibar', function() {
+// 	Front.openOmnibar({type: "Tabs"});
+// });
+
+// mapkey('<Space>F', "Choose a tab through the selector", () => {
+// 	Front.chooseTab();
+// });
+
+mapkey('<Shift-Space>', "Choose a tab through the selector", () => {
+	RUNTIME("goToLastTab");
 });
 
 // Search Aliases {{{
@@ -128,6 +172,24 @@ addSearchAlias('d', 'ddg', 'https://duckduckgo.com/?q=',
 
 addSearchAliasX('g', 'github', 'https://github.com/search?q=', 's',
 	'https://api.github.com/search/repositories?order=desc&q=', response => {
+		var res = JSON.parse(response.text)['items'];
+		return res ? res.map(r => {
+			return { title: r.description, url: r.html_url }
+		}) : [];
+	}
+);
+
+addSearchAliasX('r', 'repo', 'https://github.com/search?q=', 's',
+	'https://api.github.com/search/repositories?q=%20+fork:true+user:cooper-anderson+', response => {
+		var res = JSON.parse(response.text)['items'];
+		return res ? res.map(r => {
+			return { title: r.description, url: r.html_url }
+		}) : [];
+	}
+);
+
+addSearchAliasX('t', 'the-digital', 'https://github.com/search?q=org:the-digital+', 's',
+	'https://api.github.com/search/repositories?q=org:the-digital+', response => {
 		var res = JSON.parse(response.text)['items'];
 		return res ? res.map(r => {
 			return { title: r.description, url: r.html_url }
@@ -174,13 +236,14 @@ Visual.style('cursor', `
 `);
 
 const color = document.createElement("style");
-const style = document.createElement("style");
 color.innerHTML = `
 	:root {
 		--sk-color: ${s.colors.blue};
 	}
 `;
-style.innerHTML = `
+document.head.appendChild(color);
+
+let style = `
 	@keyframes sk-breathe {
 		0% { opacity: 0.8; }
 		100% { opacity: 0.35; }
@@ -196,19 +259,20 @@ style.innerHTML = `
 		100% { transform: scale(1) translateY(0px);; }
 	}
 
-	#sk_hints[mode="text"] div {
+	[mode="text"] div {
 		color: #424242e0 !important;
 		background-color: ${s.colors.grey} !important;
 		border: 1px solid ${s.colors.grey} !important;
 	}
 
-	#sk_hints[mode="text"] div.begin {
+	[mode="text"] div.begin {
 		color: #424242e0 !important;
 		background-color: ${s.colors.blue} !important;
 		border: 1px solid ${s.colors.blue} !important;
 	}
 
-	#sk_hints div {
+	div {
+		position: fixed;
 		background: initial !important;
 		background-color: var(--sk-color) !important;
 		border: 1px solid var(--sk-color);
@@ -229,8 +293,14 @@ style.innerHTML = `
 		transition: opacity 300ms;
 	}
 `;
-document.head.appendChild(color);
-document.head.appendChild(style);
+function loopStyle() {
+	let element = document.querySelector("div").shadowRoot.firstElementChild;
+	if (!element) requestAnimationFrame(loopStyle);
+	else {
+		element.innerHTML = style;
+	}
+}
+loopStyle();
 
 function setStyle(c) {
 	color.innerHTML = `:root {--sk-color: ${c};}`;
@@ -302,9 +372,20 @@ settings.theme = `
 	}
 
 	#sk_tabs .sk_tab {
+		animation: sk-enter;
+		width: 189px !important;
 		background: var(--bg-dark);
 		border: 1px solid var(--border);
 	}
+	#sk_tabs .sk_tab:nth-child(1) { animation-duration: 300ms; }
+	#sk_tabs .sk_tab:nth-child(2) { animation-duration: 400ms; }
+	#sk_tabs .sk_tab:nth-child(3) { animation-duration: 500ms; }
+	#sk_tabs .sk_tab:nth-child(4) { animation-duration: 600ms; }
+	#sk_tabs .sk_tab:nth-child(5) { animation-duration: 700ms; }
+	#sk_tabs .sk_tab:nth-child(6) { animation-duration: 800ms; }
+	#sk_tabs .sk_tab:nth-child(7) { animation-duration: 900ms; }
+
+
 	#sk_tabs .sk_tab_title {
 		color: var(--fg);
 	}
@@ -312,6 +393,7 @@ settings.theme = `
 		color: var(--main-fg);
 	}
 	#sk_tabs .sk_tab_hint {
+		text-transform: lowercase;
 		background: var(--bg);
 		border: 1px solid var(--border);
 		color: var(--accent-fg);
@@ -332,6 +414,7 @@ settings.theme = `
 		color: var(--accent-fg);
 	}
 	.sk_theme .omnibar_highlight {
+		text-decoration: underline;
 		color: var(--accent-fg);
 	}
 	.sk_theme .omnibar_timestamp {
@@ -484,31 +567,58 @@ settings.theme = `
 
 `;
 
-`
-	#sk_editor {
-		height: 50% !important; /*Remove this to restore the default editor size*/
-		background: var(--theme-ace-bg) !important;
+const API_KEY = '387833b7-267d-4836-ac8e-e95def67fce1';
+const API_URL = 'https://dictionaryapi.com/api/v3';
+
+Front.registerInlineQuery({
+	url: function(q) {
+		const url = `${API_URL}/references/learners/json/${q}?key=${API_KEY}`;
+		return url;
+	},
+	parseResult: function(res) {
+		try {
+			const [firstResult] = JSON.parse(res.text);
+			if (firstResult) {
+				let definitionsList = `<ul><li>No definitions found</li></ul>`;
+				let pronunciationsList = `<ul><li>No pronunciations found</li></ul>`;
+				if (firstResult.hasOwnProperty('shortdef')) {
+					const definitions = [];
+					for (let definition of firstResult.shortdef) {
+						definitions.push(`${definition}`);
+					}
+					const definitionListItems = definitions.map(function(definition) {
+						return `<li>${definition}</li>`;
+					});
+					definitionsList = `<ul>${definitionListItems.join('')}</ul>`;
+					//TODO: Separate this function if possible
+				}
+				if (firstResult.hasOwnProperty('hwi')) {
+					const pronunciations = [];
+					const resultPronunciationsArray = firstResult.hwi.prs;
+					if (resultPronunciationsArray && resultPronunciationsArray.length !== 0) {
+						for (let i=0; i < resultPronunciationsArray.length; i++) {
+							if (resultPronunciationsArray[i].l) {
+								pronunciations.push(`<li>${resultPronunciationsArray[i].l} -- ${resultPronunciationsArray[i].ipa}</li>`);
+							} else {
+								pronunciations.push(`<li>${resultPronunciationsArray[i].ipa}</li>`);
+							}
+						}
+
+						pronunciationsList = `<ul>${pronunciations.join('')}</ul>`;
+					}
+				}
+				return `
+					<h3>Pronunciations</h3>
+					${pronunciationsList}<hr/>
+					<h3>Definitions</h3>
+					${definitionsList}
+				`;
+			} else {
+				return `<h3>This is not the definition you were looking for...</h3>`;
+			}
+		} catch (e) {
+			console.log(e.message);
+			return 'Something bad happend... Look behind you, a three headed monkey!';
+		}
 	}
-	.ace_dialog-bottom{
-		border-top: 1px solid var(--theme-ace-bg) !important;
-	}
-	.ace-chrome .ace_print-margin, .ace_gutter, .ace_gutter-cell, .ace_dialog{
-		background: var(--theme-ace-bg-accent) !important;
-	}
-	.ace-chrome{
-		color: var(--theme-ace-fg) !important;
-	}
-	.ace_gutter, .ace_dialog {
-		color: var(--theme-ace-fg-accent) !important;
-	}
-	.ace_cursor{
-		color: var(--theme-ace-cursor) !important;
-	}
-	.normal-mode .ace_cursor{
-		background-color: var(--theme-ace-cursor) !important;
-		border: var(--theme-ace-cursor) !important;
-	}
-	.ace_marker-layer .ace_selection {
-		background: var(--theme-ace-select) !important;
-	}
-`;
+});
