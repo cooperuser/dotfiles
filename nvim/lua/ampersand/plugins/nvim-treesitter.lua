@@ -14,6 +14,12 @@ return function()
 		},
 		use_languagetree = true,
 		highlight = {
+			enable = true,
+			-- custom_captures = {
+			-- 	["declaration.declarator"] = "TSType"
+			-- }
+		},
+		indent = {
 			enable = true
 		},
 		playground = {
@@ -35,6 +41,27 @@ return function()
 				scope_incremental = "grc",
 				node_decremental = "grm",
 			}
+		},
+		autotag = {
+			enable = false,
+			filetypes = { "tsx", "typescriptreact", "html" , "xml" },
+		},
+		rainbow = {
+			enable = true,
+			extended_mode = true
+		},
+		textobjects = {
+			swap = {
+				enable = true,
+				swap_next = {
+					[",mj"] = "@function.outer",
+					[",ml"] = "@parameter.inner",
+				},
+				swap_previous = {
+					[",mk"] = "@function.outer",
+					[",mh"] = "@parameter.inner",
+				},
+			},
 		}
 	}
 end

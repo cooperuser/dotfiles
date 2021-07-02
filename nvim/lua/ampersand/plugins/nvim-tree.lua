@@ -1,9 +1,17 @@
 return function()
 	-- Settings {{{
-	vim.g.nvim_tree_ignore = {".git", "node_modules", "build", "dist"}
+	vim.g.nvim_tree_ignore = {
+		".git",
+		"node_modules",
+		"build",
+		"dist",
+		"target",
+		"__pycache__"
+	}
 	vim.g.nvim_tree_width = 26
 	vim.g.nvim_tree_indent_markers = 1
 	vim.g.nvim_tree_git_hl = 1
+	vim.g.nvim_tree_group_empty = 1
 	vim.g.nvim_tree_show_icons = {
 		git = 0,
 		folders = 1,

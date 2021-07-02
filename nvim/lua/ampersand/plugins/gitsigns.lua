@@ -4,7 +4,7 @@ return function()
 	-- }}}
 
 	-- Settings {{{
-	require('gitsigns').setup {
+	gitsigns.setup {
 		signs = {
 			add = {
 				hl = "GitGutterAdd";
@@ -41,5 +41,13 @@ return function()
 	K.n {"<Leader>gs", gitsigns.stage_hunk}
 	K.n {"<Leader>gu", gitsigns.undo_stage_hunk}
 	K.n {"<Leader>gr", gitsigns.reset_hunk}
+
+	K.n {"gsj", gitsigns.next_hunk}
+	K.n {"gsk", gitsigns.prev_hunk}
+	K.n {"gsp", gitsigns.preview_hunk}
+	K.n {"gsb", gitsigns.blame_line}
+	K.n {"gss", gitsigns.stage_hunk}
+	K.n {"gsu", gitsigns.undo_stage_hunk}
+	K.n {"gsr", gitsigns.reset_hunk}
 	-- }}}
 end

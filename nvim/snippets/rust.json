@@ -1,0 +1,23 @@
+{
+	"myfor": {
+		"prefix": "myfor",
+		"body": [
+			"for ${1:i} in ${2:blank} {$0}"
+		]
+	},
+	"myfunc": {
+		"prefix": "myfunc",
+		"body": [
+			"fn ${1:name}($2) -> $3 {$0}"
+		]
+	},
+	"chainmethod": {
+		"prefix": "_chain",
+		"body": [
+			"pub fn ${1:name}(&mut self, $2) -> &mut Self {",
+			"    $0",
+			"    self",
+			"}"
+		]
+	}
+}

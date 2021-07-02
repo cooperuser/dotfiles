@@ -56,7 +56,7 @@ vim.cmd("autocmd InsertLeave * normal `^")
 -- Indenting options {{{
 opt.autoindent = true
 opt.smartindent = true
-opt.expandtab = false
+opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.shiftround = true
@@ -79,6 +79,7 @@ opt.completeopt = "menuone,noselect"
 -- Timing options {{{
 opt.timeoutlen = 1000
 opt.ttimeoutlen = 0
+opt.updatetime = 1
 -- }}}
 
 -- Color options {{{

@@ -5,6 +5,7 @@ return function()
 	local buffer = require('galaxyline.provider_buffer')
 	local fileinfo = require('galaxyline.provider_fileinfo')
 	local diagnostic = require('galaxyline.provider_diagnostic')
+	gl.short_line_list = {"idk"}
 
 	local ids = {
 		normal = 110,
@@ -30,7 +31,7 @@ return function()
 		},
 		NVIMTREE = {
 			icon = "",
-			name = "nvimtree"
+			name = "tree"
 		},
 		PACKER = {
 			icon = "",
@@ -48,6 +49,14 @@ return function()
 			icon = "",
 			-- icon = "",
 			name = "dashboard"
+		},
+		TOGGLETERM = {
+			icon = "",
+			name = "toggleterm"
+		},
+		["DAP-REPL"] = {
+			icon = "",
+			name = "debug"
 		}
 	}
 
@@ -87,11 +96,12 @@ return function()
 	end
 
 	local visible = true
-	local function toggle()
+	Plugins.galaxyline = {}
+	function Plugins.galaxyline.toggle()
 		if visible then
-			require("galaxyline").disable_galaxyline()
+			gl.disable_galaxyline()
 		else
-			require("galaxyline").load_galaxyline()
+			gl.load_galaxyline()
 		end
 		visible = not visible
 	end
@@ -161,7 +171,7 @@ return function()
 							alias = mode.alias
 							color = mode.color
 						end
-						if ft then alias = ft.icon end
+						if ft then alias = vim.b.toggle_number or ft.icon end
 						hl({fg = colors.grey4, bg = color})
 						return "  " .. alias .. "  "
 					end
@@ -178,6 +188,9 @@ return function()
 			}},
 			{"FileName", {
 					provider = function()
+						if vim.g.started_by_firenvim then
+							return ""
+						end
 						local ft = get_ft()
 						if not ft then
 							local file = vim.fn.expand('%:t')
@@ -314,7 +327,7 @@ return function()
 						return ""
 					end,
 					condition = comp_or(get_ft, max_width(48)),
-					highlight = {colors.blue}
+					highlight = {colors.blue, colors.grey2}
 			}},
 			{"BubbleAClose", {
 					provider = function()
@@ -330,11 +343,11 @@ return function()
 					provider = function() return "   " end,
 					highlight = {colors.grey4}
 			}},
-			{"ViMode", {
+			{"ViMode2", {
 					provider = function()
 						local ft = get_ft()
 						local icon = "•"
-						if ft then icon = ft.icon end
+						if ft then icon = vim.b.toggle_number or ft.icon end
 						return "  " .. icon .. " ▕"
 					end,
 					highlight = {colors.grey6, colors.grey4}
@@ -462,9 +475,5 @@ return function()
 			end
 		end
 	end
-	-- }}}
-
-	-- Keybinds {{{
-	K.q {"S", toggle}
 	-- }}}
 end

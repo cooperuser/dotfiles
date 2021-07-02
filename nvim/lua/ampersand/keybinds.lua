@@ -127,7 +127,7 @@ local function keybinds()
 
 	map.group([[Create/delete buffers]], function()
 		map.sp("b", "<cmd>ene<CR>")
-		map.sp("B", "<cmd>bd<CR>")
+		map.sp("B", "<cmd>BD<CR>")
 	end)
 
 	map.group([[Create/delete tabs]], function()
@@ -160,7 +160,7 @@ local function keybinds()
 	map.sp("/", "<cmd>nohlsearch | echo<CR>") [[Clear search and cmd]]
 	map.n("yif", "ggyG``") [[Yank whole file]]
 	map.n("y0", "my^y$`y") [[Yank line without newline]]
-	map.n("=if", "gg=G``") [[Reindent whole file]]
+	map.n("=if", [[megg=G<cmd>%s/\s\+$//e<CR>`e]]) [[Reindent whole file]]
 	map.sp("N", "<cmd>set number! relativenumber!<CR>") [[Toggle line numbers]]
 	map.sp("<tab>", "<cmd>set noexpandtab tabstop=2 shiftwidth=2<CR>") [[Indents]]
 	map.n("<C-i>", "O<CR>") [[New line inbetween]]
@@ -171,8 +171,8 @@ local function keybinds()
 	map.i("<M-l>", "<C-o>$") [[Move to end of line]]
 	map.i("<M-j>", "<C-o>b") [[Move to last word]]
 	map.i("<M-k>", "<C-o>w") [[Move to next word]]
-	map.i("<M-o>", "<C-o>o") [[Move to end of line]]
-	map.i("<M-O>", "<C-o>O") [[Move to end of line]]
+	map.i("<M-o>", "<C-o>o") [[New line below]]
+	map.i("<M-O>", "<C-o>O") [[New line above]]
 
 	map.n("*", "*``", {map = true}) [[Highlight word without moving]]
 	map.c("%s", "%sm") [[Highlight word without moving]]
@@ -181,10 +181,17 @@ local function keybinds()
 
 	map.i("<C-q>", [[<Esc>F "qx"qpgi]])
 	map.i("<C-f>", [[<Esc>ge"qx"qpgi]])
+
+	map.n("gx", [["_xP]])
+
+	map.sp(";", [[msA;<Esc>`s]])
+	map.i(";;", [[<Esc>msA;<Esc>`si]])
+
+	map.i("<Leader><BS>", [[<C-o>"_x]])
 	-- }}}
 
 	-- Terminal {{{
-	map.t("<C-w>", [[<C-\><C-n><C-w>]]) [[Window movements in terminal mode]]
+	map.t("<Leader><C-w>", [[<C-\><C-n><C-w>]]) [[Window movements in terminal]]
 	map.t("<C-u>", [[<C-\><C-n><C-u>]], {map=true})
 	[[Quickly scroll up in terminal mode]]
 

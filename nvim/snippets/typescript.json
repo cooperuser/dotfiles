@@ -1,0 +1,12 @@
+{
+	"export class": {
+		"prefix": "expcl",
+		"body": [
+			"export ${2:default }class ${1:Name} {",
+			"\tconstructor() {",
+			"\t\t$0",
+			"\t}",
+			"}"
+		]
+	}
+}

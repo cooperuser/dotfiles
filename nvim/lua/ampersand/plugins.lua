@@ -1,7 +1,6 @@
 vim.cmd [[packadd packer.nvim]]
 local packer = require("packer")
 local use = packer.use
-local map = require("ampersand.keymap")
 
 Plugins = {}
 
@@ -31,6 +30,12 @@ local function wrap(opts)
 	use(opts)
 end
 
+local function pack(cmd) return function() vim.cmd("Packer" .. cmd) end end
+K.q {'PI', pack("Install")}
+K.q {'PX', pack("Clean")}
+K.q {'PC', pack("Compile")}
+K.q {'PU', pack("Update")}
+
 vim.cmd("autocmd BufWritePost */nvim/lua/ampersand/plugins* PackerCompile")
 local function strap(name) return require("ampersand.plugins." .. name) end
 
@@ -55,32 +60,31 @@ return packer.startup(function()
 	-- Utility plugins {{{
 	wrap {"tpope/vim-commentary", as = "commentary"}
 	wrap "machakann/vim-sandwich"
-	wrap "tpope/vim-fugitive"
-	wrap "junegunn/vim-peekaboo"
+	-- wrap "tpope/vim-fugitive"
 	wrap "junegunn/vim-easy-align"
 	wrap {"lewis6991/gitsigns.nvim"}
 	wrap {"AndrewRadev/switch.vim"}
 	wrap {"nvim-treesitter/nvim-treesitter"}
+	wrap {"nvim-treesitter/nvim-treesitter-textobjects"}
 	wrap "nvim-treesitter/playground"
 	wrap {"psliwka/vim-smoothie"}
-	wrap {"voldikss/vim-floaterm"}
-	wrap {"pwntester/octo.nvim"}
+	-- wrap {"voldikss/vim-floaterm"}
+	-- wrap {"pwntester/octo.nvim", disabled=true}
 	wrap {"metakirby5/codi.vim"}
 	wrap "qpkorr/vim-bufkill"
 	wrap "dstein64/vim-startuptime"
-	wrap {"glepnir/dashboard-nvim", as = "nvim-dashboard"}
+	-- wrap {"glepnir/dashboard-nvim", as = "nvim-dashboard"}
 	wrap {"kyazdani42/nvim-tree.lua"}
 	-- wrap {"mbbill/undotree"}
 	wrap {"~/git/undotree", as = "undotree"}
-	wrap {"cohama/lexima.vim"}
+	-- wrap {"cohama/lexima.vim"}
 	-- }}}
 
 	-- Aesthetic plugins {{{
 	wrap {"glepnir/galaxyline.nvim"}
 	-- wrap {"~/git/galaxyline.nvim"}
 	wrap "kyazdani42/nvim-web-devicons"
-	wrap {"akinsho/nvim-bufferline.lua", as = "bufferline"}
-	-- wrap {"romgrk/barbar.nvim"}
+	wrap {"akinsho/nvim-bufferline.lua", as = "bufferline", commit = "a7d82020f743cbe0489406a0d333c4bfc860696c"}
 	wrap {"junegunn/goyo.vim"}
 	-- }}}
 
@@ -99,25 +103,25 @@ return packer.startup(function()
 	wrap {"neovim/nvim-lspconfig"}
 	wrap {"hrsh7th/nvim-compe"}
 	wrap {"glepnir/lspsaga.nvim"}
-	wrap {"kosayoda/nvim-lightbulb"}
-	-- wrap {"hrsh7th/vim-vsnip"}
+	-- wrap {"kosayoda/nvim-lightbulb", disabled=true}
+	wrap {"hrsh7th/vim-vsnip"}
 	-- }}}
 
 	-- Language plugins {{{
+	wrap {"lervag/vimtex"}
 	wrap {"sheerun/vim-polyglot"}
---	wrap {"lervag/vimtex"}
-	wrap "mattn/emmet-vim"
 	-- }}}
 
 	-- Colorschemes {{{
 	wrap {"rktjmp/lush.nvim"}
 	wrap {"~/git/glowbeam.nvim", as = "glowbeam"}
+	wrap {"folke/tokyonight.nvim"}
 	-- }}}
 
 	-- Miscellaneous {{{
---	wrap {"glacambre/firenvim",
-		-- run = function() vim.fn["firenvim#install"](0) end
-	-- }
+	wrap {"glacambre/firenvim",
+		 run = function() vim.fn["firenvim#install"](0) end
+	}
 --	wrap {"jbyuki/instant.nvim"}
 	-- }}}
 
@@ -127,14 +131,40 @@ return packer.startup(function()
 	-- }}}
 
 	-- Temporary plugins {{{
-	wrap {"~/git/tabi.nvim", as = "tabi.nvim"}
+	-- wrap {"~/git/tabi.nvim", as = "tabi.nvim"}
 	wrap {"~/git/telescope-packer.nvim", as = "telescope-packer"}
+	-- wrap {"glepnir/indent-guides.nvim", as = "indent-guides"}
 	wrap {"~/git/indent-guides.nvim", as = "indent-guides"}
-	wrap {"dbeniamine/cheat.sh-vim"}
 	wrap {"nvim-telescope/telescope-ghq.nvim"}
 	-- wrap {"norcalli/snippets.nvim"}
 	-- wrap {"SirVer/ultisnips"}
+	wrap {"akinsho/nvim-toggleterm.lua"}
+	wrap {"windwp/nvim-ts-autotag"}
+	wrap {"wadackel/nvim-syntax-info"}
+	wrap {"tversteeg/registers.nvim", as = "registers"}
+	wrap {"mfussenegger/nvim-dap"}
+	wrap {"theHamsta/nvim-dap-virtual-text"}
+	wrap {"p00f/nvim-ts-rainbow"}
+	wrap {"ray-x/lsp_signature.nvim"}
+	wrap {"steelsojka/pears.nvim"}
+	-- wrap {"vimwiki/vimwiki"}
+	wrap {"oberblastmeister/neuron.nvim"}
+	wrap {"folke/lsp-trouble.nvim"}
+	wrap {"RRethy/vim-illuminate"}
+	wrap {"kevinhwang91/nvim-bqf"}
+	wrap {"AndrewRadev/splitjoin.vim"}
+	wrap {"dstein64/nvim-scrollview"}
+	wrap {"folke/todo-comments.nvim"}
+	wrap {"folke/lua-dev.nvim"}
+	wrap {"simrat39/symbols-outline.nvim"}
+	wrap {"dkarter/bullets.vim"}
+	-- wrap {"Julian/lean.nvim"}
+	-- wrap {"GoldsteinE/compe-latex-symbols"}
 	-- }}}
 	-- luacheck: pop
-end)
-
+end, {
+		display = {
+			open_fn = require('packer.util').float,
+		}
+	}
+)

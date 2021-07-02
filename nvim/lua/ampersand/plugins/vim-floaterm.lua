@@ -1,6 +1,7 @@
 return function()
 	-- Utility {{{
 	local settings = {
+		fullscreen = "--wintype=floating --position=center",
 		floating = "--wintype=floating --position=center --width=0.6 --height=0.6",
 		normal = "--wintype=vsplit --width=80"
 	}
@@ -23,9 +24,16 @@ return function()
 	-- }}}
 
 	-- Settings {{{
-	vim.g.floaterm_borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'}
+	-- vim.g.floaterm_borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'}
+	-- vim.g.floaterm_borderchars = {"🬭", "▌", "🬂", "▐", "🬞", "🬏", "🬀", "🬁"}
 
-	vim.cmd("hi FloatermBorder guifg=orange")
+	vim.g.floaterm_borderchars = {"▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼"}
+	-- vim.g.floaterm_borderchars = {"█", "█", "█", "█", "█", "█", "█", "█"}
+	vim.g.floaterm_title = ""
+
+	-- vim.cmd("hi FloatermBorder guifg=orange")
+	vim.cmd("hi FloatermBorder guifg=#3f444a guibg=#101010")
+	vim.cmd("hi Floaterm guibg=#101010")
 	vim.cmd("autocmd FileType floaterm setlocal winblend=0")
 
 	vim.g.project_commands = {
@@ -43,7 +51,7 @@ return function()
 	local both = {
 		toggle = {"<Leader><Leader>", "<cmd>FloatermToggle --name=runner<CR>"};
 		kill = {"<Leader>d", "<cmd>FloatermKill<CR>"};
-		swap = {"<Leader>f", "<C-w><C-w>"}
+		-- swap = {"<Leader>f", "<C-w><C-w>"}
 	}
 
 	for _, b in pairs(both) do
@@ -60,5 +68,6 @@ return function()
 
 	K.t {"<Leader>c", "<cmd>FloatermUpdate " .. settings.floating .. "<CR>"}
 	K.t {"<Leader>v", "<cmd>FloatermUpdate " .. settings.normal .. "<CR>"}
+	K.t {"<Leader>f", "<cmd>FloatermUpdate " .. settings.fullscreen .. "<CR>"}
 	-- }}}
 end

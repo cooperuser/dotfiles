@@ -1,4 +1,6 @@
 return function()
+	local finders = require("ampersand.finders")
+
 	local function get_plugin_count()
 		local plugins = -1
 		local loaded = 0
@@ -16,7 +18,7 @@ return function()
 	local version = vim.fn.matchstr(vim.fn.execute("version"), "NVIM v\z[^\n]*")
 	vim.g.dashboard_custom_shortcut = {
 		last_session = "SPC l",
-		find_history = "SPC h",
+		-- find_history = "SPC h",
 		find_file = "SPC f",
 		new_file = "SPC n",
 		change_colorscheme = "SPC c",
@@ -48,7 +50,7 @@ return function()
 	vim.g.dashboard_custom_footer = {get_plugin_count()}
 	local sections = {
 		{
-			description = {" Edit a config file                  space c"},
+			description = {" Edit a config file                  space v"},
 			command = "cd " .. vim.fn.stdpath("config") .. " | Telescope git_files"
 		},
 		{
@@ -60,13 +62,13 @@ return function()
 			command = ""
 		},
 		{
-			description = {" Open a class                        space s"},
+			description = {" Open a class                        space c"},
 			command = ""
 		},
-		{
-			description = {" Recently opened files               space h"},
-			command = "DashboardFindHistory"
-		},
+		-- {
+		-- 	description = {" Recently opened files               space h"},
+		-- 	command = "DashboardFindHistory"
+		-- },
 		{
 			description = {" Update plugins                      space u"},
 			command = "PackerUpdate"
@@ -100,11 +102,12 @@ return function()
 		end
 		vim.api.nvim_buf_set_keymap(0, "n", "i", "<cmd>enew | startinsert<CR>", {})
 		vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", {})
-		map("c", "cd " .. vim.fn.stdpath("config") .. " | Telescope git_files")
+		map("v", "cd " .. vim.fn.stdpath("config") .. " | Telescope git_files")
 		map("p", "echo 'open project'")
-		map("p", "echo 'open project'")
-		map("s", "echo 'open school project'")
-		map("h", "DashboardFindHistory")
+		K.q {"c", function()
+			finders.find_classes(obj, vim.fn["dashboard#change_to_dir"])
+		end}
+		-- map("h", "DashboardFindHistory")
 		map("u", "PackerUpdate")
 	end
 	-- }}}

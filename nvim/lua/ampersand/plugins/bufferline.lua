@@ -44,7 +44,7 @@ return function()
 		-- end
 		local copperline = theme .. 'Separator# '
 		if status[4] ~= 0 then
-			copperline = copperline .. theme .. "Hint#  " .. status[4]
+			copperline = copperline .. theme .. "Hint#  " .. status[4]
 		end
 		if status[3] ~= 0 then
 			copperline = copperline .. theme .. "Info#  " .. status[3]
@@ -84,120 +84,120 @@ return function()
 	local pick = "bold"
 	bufferline.setup {
 		options = settings,
-		highlights = {
-			fill = {
-				guibg = c.fill_bg
-			},
-			background = {
-				guifg = c.inactive_fg,
-				guibg = c.inactive_bg,
-				-- gui = "italic"
-			},
-			tab = {
-				guifg = c.inactive_fg,
-				guibg = c.selected_bg
-			},
-			tab_selected = {
-				guifg = c.selected_sign,
-				guibg = c.selected_bg
-			},
-			buffer_visible = {
-				guifg = c.visible_fg,
-				guibg = c.visible_bg
-			},
-			buffer_selected = {
-				guifg = c.selected_fg,
-				guibg = c.selected_bg,
-				gui = "none"
-			},
-			indicator_selected = {
-				guifg = c.selected_sign,
-				guibg = c.selected_bg
-			},
-			separator = {
-				guifg = c.fill_bg,
-				guibg = c.selected_bg
-			},
-			separator_selected = {
-				guifg = c.fill_bg,
-				guibg = c.selected_bg
-			},
-			modified = {
-				guifg = c.red,
-				guibg = c.inactive_bg
-			},
-			modified_visible = {
-				guifg = c.orange,
-				guibg = c.visible_bg
-			},
-			modified_selected = {
-				guifg = c.green,
-				guibg = c.selected_bg
-			},
-			duplicate_selected = {
-				guifg = c.selected_fg,
-				guibg = c.selected_bg,
-				gui = "none"
-			},
-			duplicate_visible = {
-				guifg = c.visible_fg,
-				guibg = c.visible_bg,
-				gui = "none"
-			},
-			duplicate = {
-				guifg = c.inactive_fg,
-				guibg = c.inactive_bg,
-				gui = "none"
-			},
-			pick_selected = {
-				guifg = c.inactive_fg,
-				guibg = c.selected_bg,
-				gui = pick
-			},
-			pick_visible = {
-				guifg = c.orange,
-				guibg = c.visible_bg,
-				gui = pick
-			},
-			pick = {
-				guifg = c.red,
-				guibg = c.inactive_bg,
-				gui = pick
-			},
-			error = {
-				guifg = c.inactive_fg,
-				guibg = c.inactive_bg,
-				gui = "none"
-			},
-			error_selected = {
-				guifg = c.red,
-				guibg = c.selected_bg,
-				gui = "none"
-			},
-			error_visible = {
-				guifg = c.red,
-				guibg = c.visible_bg,
-				gui = "none"
-			},
-			warning = {
-				guifg = c.inactive_fg,
-				guibg = c.inactive_bg,
-				gui = "none"
-			},
-			warning_selected = {
-				guifg = c.orange,
-				guibg = c.selected_bg,
-				gui = "none"
-			},
-			warning_visible = {
-				guifg = c.orange,
-				guibg = c.visible_bg,
-				gui = "none"
-			},
-		}
+		-- highlights = {
+		-- 	fill = {
+		-- 		guibg = c.fill_bg
+		-- 	},
+		-- 	background = {
+		-- 		guifg = c.inactive_fg,
+		-- 		guibg = c.inactive_bg,
+		-- 		-- gui = "italic"
+		-- 	},
+		-- 	tab = {
+		-- 		guifg = c.inactive_fg,
+		-- 		guibg = c.selected_bg
+		-- 	},
+		-- 	tab_selected = {
+		-- 		guifg = c.selected_sign,
+		-- 		guibg = c.selected_bg
+		-- 	},
+		-- 	buffer_visible = {
+		-- 		guifg = c.visible_fg,
+		-- 		guibg = c.visible_bg
+		-- 	},
+		-- 	buffer_selected = {
+		-- 		guifg = c.selected_fg,
+		-- 		guibg = c.selected_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	indicator_selected = {
+		-- 		guifg = c.selected_sign,
+		-- 		guibg = c.selected_bg
+		-- 	},
+		-- 	separator = {
+		-- 		guifg = c.fill_bg,
+		-- 		guibg = c.selected_bg
+		-- 	},
+		-- 	separator_selected = {
+		-- 		guifg = c.fill_bg,
+		-- 		guibg = c.selected_bg
+		-- 	},
+		-- 	modified = {
+		-- 		guifg = c.red,
+		-- 		guibg = c.inactive_bg
+		-- 	},
+		-- 	modified_visible = {
+		-- 		guifg = c.orange,
+		-- 		guibg = c.visible_bg
+		-- 	},
+		-- 	modified_selected = {
+		-- 		guifg = c.green,
+		-- 		guibg = c.selected_bg
+		-- 	},
+		-- 	duplicate_selected = {
+		-- 		guifg = c.selected_fg,
+		-- 		guibg = c.selected_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	duplicate_visible = {
+		-- 		guifg = c.visible_fg,
+		-- 		guibg = c.visible_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	duplicate = {
+		-- 		guifg = c.inactive_fg,
+		-- 		guibg = c.inactive_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	pick_selected = {
+		-- 		guifg = c.inactive_fg,
+		-- 		guibg = c.selected_bg,
+		-- 		gui = pick
+		-- 	},
+		-- 	pick_visible = {
+		-- 		guifg = c.orange,
+		-- 		guibg = c.visible_bg,
+		-- 		gui = pick
+		-- 	},
+		-- 	pick = {
+		-- 		guifg = c.red,
+		-- 		guibg = c.inactive_bg,
+		-- 		gui = pick
+		-- 	},
+		-- 	error = {
+		-- 		guifg = c.inactive_fg,
+		-- 		guibg = c.inactive_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	error_selected = {
+		-- 		guifg = c.red,
+		-- 		guibg = c.selected_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	error_visible = {
+		-- 		guifg = c.red,
+		-- 		guibg = c.visible_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	warning = {
+		-- 		guifg = c.inactive_fg,
+		-- 		guibg = c.inactive_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	warning_selected = {
+		-- 		guifg = c.orange,
+		-- 		guibg = c.selected_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- 	warning_visible = {
+		-- 		guifg = c.orange,
+		-- 		guibg = c.visible_bg,
+		-- 		gui = "none"
+		-- 	},
+		-- }
 	}
 
-	vim.o.tabline = "%!v:lua.nvim_copperline()"
+	-- vim.o.tabline = "%!v:lua.nvim_copperline()"
 	-- }}}
 
 	-- Keybinds {{{

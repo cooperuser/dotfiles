@@ -10,6 +10,7 @@
 
 vim.g.mapleader = ","
 
+function P(o) print(vim.inspect(o)) return o end
 local keybinds = require("ampersand.keybinds")
 K = require("ampersand.keymap")
 keybinds.keybinds()
@@ -17,6 +18,6 @@ TEMPMAP = keybinds.map
 require("ampersand.plugins")
 require("ampersand.settings")
 
-vim.cmd("source ~/.config/nvim/config/statusline.vim")
 vim.cmd("colorscheme glowbeam")
 
+vim.g.peekaboo_delay = 1000

@@ -1,0 +1,8 @@
+{
+	"quickfrac": {
+		"prefix": "_frac",
+		"body": [
+			"\\frac{$1}{$2}$0"
+		]
+	}
+}
