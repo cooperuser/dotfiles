@@ -20,6 +20,8 @@ keybinding:
     nextTab: "<c-l>"
     prevTab-alt: "h"
     nextTab-alt: "l"
+    quit: "<esc>"
+    return: "q"
   commits:
     moveUpCommit: "<left>"
     moveDownCommit: "<right>"
