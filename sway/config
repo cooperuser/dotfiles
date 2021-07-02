@@ -20,12 +20,12 @@ output eDP-1 pos 0 0 res 1920x1080
 workspace 20 output DP-1
 
 input * {
-	xkb_options compose:ralt,caps:none,middle_click:left_click
+	xkb_options compose:ralt,caps:none,middle_click:left_click,compose:menu
 }
 
 input "1:1:AT_Translated_Set_2_keyboard" {
 	xkb_layout "us,us"
-	xkb_options "grp:shifts_toggle, caps:escape"
+	xkb_options "grp:shifts_toggle, caps:escape, compose:menu"
 }
 
 bindsym $mod+Shift+r reload; exec makoctl reload
@@ -52,8 +52,8 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-bindsym Alt+Tab workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Grave focus tiling
 bindsym $mod+Ctrl+j workspace prev
 bindsym $mod+Ctrl+k workspace next
 
@@ -112,8 +112,10 @@ gaps outer -5
 bindsym $mod+u border pixel 0
 for_window [app_id=".*"] border pixel
 
-bindsym $mod+z move container to workspace 1; workspace 1
-bindsym $mod+x move container to workspace 2; workspace 2
+bindsym Multi_key+comma exec ~/.config/wob/volume 5%-
+bindsym Multi_key+period exec ~/.config/wob/volume 5%+
+bindsym Multi_key+less exec ~/.config/wob/brightness 5%-
+bindsym Multi_key+greater exec ~/.config/wob/brightness +5%
 
 bar {
 	swaybar_command waybar
@@ -124,6 +126,8 @@ for_window [app_id="zathura"] resize set width 805 px
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="qemu"] floating enable
+for_window [instance="crx_lgccchgfobnafomjndanbkhjgkgocdob"] floating enable, \
+	move down 13px, resize set 1030px 454px
 
 set $kitty 1
 set $app 7
@@ -131,26 +135,25 @@ set $spotify 2
 set $discord 3
 set $brave 4
 
-for_window [app_id="kitty"] {
-	move container to workspace $kitty
-	workspace $kitty
-}
-for_window [app_id="anticipainter"] {
-	floating enable
-}
-for_window [class="Spotify"] {
-	move container to workspace $spotify
-	workspace $spotify
-}
-for_window [class="discord"] {
-	move container to workspace $discord
-	workspace $discord
-}
-for_window [class="Brave-browser-beta"] {
-	move container to workspace $brave
-	workspace $brave
-}
-bindsym $mod+a workspace $kitty
+# for_window [app_id="kitty"] {
+# 	move container to workspace $kitty
+# 	workspace $kitty
+# }
+# for_window [app_id="anticipainter"] {
+# 	floating enable
+# }
+# for_window [class="Spotify"] {
+# 	move container to workspace $spotify
+# 	workspace $spotify
+# }
+# for_window [class="discord"] {
+# 	move container to workspace $discord
+# 	workspace $discord
+# }
+# for_window [class="Brave-browser-beta"] {
+# 	move container to workspace $brave
+# 	workspace $brave
+# }
 
 bindsym $mod+Shift+Escape move container to workspace $kitty
 bindsym $mod+Shift+f move container to workspace $brave
@@ -174,6 +177,11 @@ bindsym $mod+Shift+a move container to workspace $app
 # 	bindsym Alt+j exec ydotool key alt+down
 # 	bindsym Alt+k exec ydotool key alt+up
 # 	bindsym Alt+l exec ydotool key alt+right
+
+# 	bindsym Alt+f exec ydotool key ctrl+k
+
+# 	bindsym Alt+p exec ydotool key up
+# 	bindsym Alt+n exec ydotool key down
 # }
 
 bindsym $mod+Ctrl+d exec dmenu_run
@@ -182,6 +190,7 @@ bindsym $mod+Return [urgent="newest"] focus
 
 bindsym $mod+Shift+Return exec --no-startup-id kitty
 bindsym $mod+Escape exec --no-startup-id ~/.config/sway/sway-run-or-raise kitty
+bindsym $mod+a exec --no-startup-id ~/.config/sway/sway-run-or-raise kitty
 bindsym $mod+d exec --no-startup-id ~/.config/sway/sway-run-or-raise discord-canary discord
 bindsym $mod+f exec --no-startup-id ~/.config/sway/sway-run-or-raise brave Brave-browser-beta brave-beta
 bindsym $mod+s exec --no-startup-id ~/.config/sway/sway-run-or-raise spotify Spotify spotify
@@ -191,8 +200,10 @@ set $gnome-schema org.gnome.desktop.interface
 exec_always {
 	gsettings set $gnome-schema gtk-theme 'WhiteSur-dark'
 	gsettings set $gnome-schema gtk-icon-theme 'Arc'
-	gsettings set $gnome-schema cursor-theme 'default'
-	gsettings set $gnome-schema cursor-size 12
+	# gsettings set $gnome-schema cursor-theme 'default'
+	# gsettings set $gnome-schema cursor-theme 'GoogleDot'
+	# gsettings set $gnome-schema cursor-theme 'GoogleDot-Black'
+	gsettings set $gnome-schema cursor-size 22
 	gsettings set $gnome-schema monospace-font-name 'Iosevka Copper'
 	gsettings set $gnome-schema font-name 'Roboto'
 }
@@ -206,7 +217,8 @@ exec_always swayidle -w \
 	before-sleep 'swaylock -f'
 
 exec_always ydotoold
-exec_always caps2esc -t
+exec_always mako
+# exec_always caps2esc
 
 output "*" bg /home/ampersand/Downloads/bg.jpg fill
 
@@ -215,4 +227,10 @@ border_images.focused_inactive ~/.config/sway/borders/yellow.png
 border_images.unfocused ~/.config/sway/borders/grey.png
 border_images.urgent ~/.config/sway/borders/red.png
 
-# vim: ft=i3config
+bindsym --to-code $mod+m exec sway-marker mark
+bindsym --to-code Alt+space exec sway-marker goto
+
+# for_window [shell="xwayland"] title_format "%title [XWayland]"
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# vim: ft=sway
